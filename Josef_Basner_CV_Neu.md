@@ -2,7 +2,7 @@
 
 **Email:** josefbasner@proton.me  
 **Telefon:** +49 151 4495 7240  
-**GitHub:** github.com/MALICEMTP07  
+**GitHub:** github.com/JBMTP07  
 **Website:** malicemtp07.github.io  
 **Standort:** Deutschland · Remote weltweit möglich
 
@@ -54,12 +54,12 @@ Kali Linux, Ubuntu, Windows, grundlegende Active Directory-Umgebungen
 
 ### HackTheBox & Security Research Lab
 - Aktive Bearbeitung von Machines und Challenges auf HackTheBox
-- Dokumentierte Writeups für retired Machines (Deutsch) — github.com/MALICEMTP07/HTB-Writeups
+- Dokumentierte Writeups für retired Machines (Deutsch) — github.com/JBMTP07/HTB-Writeups
 - Betrieb eines lokalen Testlabors (Metasploitable, Vulnerable VMs) zur praktischen Methodikentwicklung
 - Eigene Methodik: Recon → Enumerate → Hypothesize → Validate → Escalate
 
 ### Persönliche Studienmaterialien
-- Strukturierte Notizen zu Linux Privilege Escalation, AD-Angriffen (Kerberoasting, AS-REP Roasting, BloodHound), Nmap-Enumeration und Burp-Methodik — github.com/MALICEMTP07/Study-Notes
+- Strukturierte Notizen zu Linux Privilege Escalation, AD-Angriffen (Kerberoasting, AS-REP Roasting, BloodHound), Nmap-Enumeration und Burp-Methodik — github.com/JBMTP07/Study-Notes
 
 ---
 
