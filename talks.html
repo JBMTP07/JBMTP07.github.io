@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Josef Basner – Kostenlose Vorträge zu KI & Cybersecurity für Schulen. Für Lehrkräfte und Schüler." />
+  <title>Schulvorträge – Josef Basner</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+
+/* ================================================================
+   BASE
+================================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+:root {
+  --bg:       #06060f;
+  --bg-2:     #0b0b18;
+  --card:     #0f0f1e;
+  --border:   #1c1c36;
+  --cyan:     #00e5ff;
+  --cyan-d:   rgba(0,229,255,0.1);
+  --purple:   #a855f7;
+  --purple-d: rgba(168,85,247,0.1);
+  --red:      #ff2d55;
+  --green:    #22c55e;
+  --green-d:  rgba(34,197,94,0.1);
+  --text:     #e2e2f0;
+  --dim:      #9898b8;
+  --muted:    #5e5e80;
+  --mono:     'JetBrains Mono', monospace;
+  --sans:     'Inter', sans-serif;
+  --ease:     0.25s cubic-bezier(0.4,0,0.2,1);
+  --r:        8px;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+a { text-decoration: none; color: inherit; }
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+/* ================================================================
+   NAV
+================================================================ */
+#navbar {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.1rem 2.5rem;
+  background: rgba(6,6,15,0.7);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid transparent;
+  transition: border-color var(--ease);
+}
+#navbar.scrolled { border-bottom-color: var(--border); }
+
+.nav-logo {
+  font-family: var(--mono);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--cyan);
+  letter-spacing: 3px;
+}
+.nav-logo span { animation: blink 1s step-end infinite; }
+
+.nav-links { display: flex; gap: 2rem; align-items: center; }
+.nav-links a {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--dim);
+  position: relative;
+  transition: color var(--ease);
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -3px; left: 0;
+  width: 0; height: 1px;
+  background: var(--cyan);
+  transition: width var(--ease);
+}
+.nav-links a:hover { color: var(--cyan); }
+.nav-links a:hover::after { width: 100%; }
+.nav-links a.active { color: var(--cyan); }
+.nav-links a.active::after { width: 100%; }
+
+.nav-cta {
+  background: var(--cyan);
+  color: var(--bg);
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.45rem 1.1rem;
+  border-radius: var(--r);
+  transition: all var(--ease);
+}
+.nav-cta:hover { box-shadow: 0 0 20px rgba(0,229,255,0.3); }
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+.hamburger span {
+  display: block;
+  width: 22px; height: 2px;
+  background: var(--dim);
+  border-radius: 2px;
+  transition: all var(--ease);
+}
+.hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
+.hamburger.active span:nth-child(2) { opacity: 0; }
+.hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
+
+.mobile-menu {
+  position: fixed;
+  top: 64px; left: 0; right: 0;
+  z-index: 99;
+  background: rgba(6,6,15,0.98);
+  border-bottom: 1px solid var(--border);
+  flex-direction: column;
+  padding: 1.2rem 2rem;
+  gap: 1.2rem;
+  transform: translateY(-110%);
+  transition: transform var(--ease);
+  display: flex;
+}
+.mobile-menu.open { transform: translateY(0); }
+.mobile-menu a { font-family: var(--mono); font-size: 0.9rem; color: var(--dim); }
+
+/* ================================================================
+   HERO
+================================================================ */
+#hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 8rem 2.5rem 5rem;
+  overflow: hidden;
+}
+
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,229,255,0.03) 1px, transparent 1px);
+  background-size: 55px 55px;
+}
+.hero-grid::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(168,85,247,0.06) 0%, transparent 70%);
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.hero-left {}
+
+.hero-tag {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--cyan);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.hero-tag::before {
+  content: '';
+  width: 24px; height: 1px;
+  background: var(--cyan);
+}
+
+.hero-title {
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -1px;
+  margin-bottom: 1.2rem;
+}
+.hero-title .c { color: var(--cyan); }
+.hero-title .p { color: var(--purple); }
+
+.hero-desc {
+  font-size: 1rem;
+  color: var(--dim);
+  line-height: 1.8;
+  max-width: 480px;
+  margin-bottom: 2.2rem;
+}
+
+.hero-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 2.5rem;
+}
+.chip {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 4px;
+  border: 1px solid;
+}
+.chip-cyan   { color: var(--cyan);   border-color: rgba(0,229,255,0.25);   background: var(--cyan-d); }
+.chip-purple { color: var(--purple); border-color: rgba(168,85,247,0.25); background: var(--purple-d); }
+.chip-green  { color: var(--green);  border-color: rgba(34,197,94,0.25);  background: var(--green-d); }
+
+.hero-cta {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.btn-primary {
+  background: var(--cyan);
+  color: var(--bg);
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--r);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all var(--ease);
+}
+.btn-primary:hover { box-shadow: 0 0 24px rgba(0,229,255,0.3); }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--dim);
+  border: 1px solid var(--border);
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--r);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all var(--ease);
+}
+.btn-ghost:hover { border-color: var(--dim); color: var(--text); }
+
+/* HERO RIGHT — AUDIENCE CARDS */
+.hero-right {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.audience-teaser {
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  background: var(--card);
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  transition: all var(--ease);
+  cursor: default;
+}
+.audience-teaser:hover {
+  transform: translateX(4px);
+}
+.audience-teaser.lehrer:hover { border-color: rgba(0,229,255,0.35); }
+.audience-teaser.schueler:hover { border-color: rgba(168,85,247,0.35); }
+
+.at-icon {
+  width: 52px; height: 52px;
+  border-radius: var(--r);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 1.3rem;
+}
+.at-icon.cyan   { background: var(--cyan-d);   color: var(--cyan); }
+.at-icon.purple { background: var(--purple-d); color: var(--purple); }
+
+.at-label {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 0.2rem;
+}
+.at-label.cyan   { color: var(--cyan); }
+.at-label.purple { color: var(--purple); }
+
+.at-title { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.2rem; }
+.at-sub   { font-size: 0.78rem; color: var(--muted); }
+
+.hero-free {
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--muted);
+  padding: 0.8rem;
+  border: 1px dashed var(--border);
+  border-radius: var(--r);
+}
+.hero-free span { color: var(--green); font-weight: 600; }
+
+/* ================================================================
+   SECTIONS
+================================================================ */
+section { padding: 6rem 2.5rem; }
+
+.section-inner { max-width: 1100px; margin: 0 auto; }
+
+.section-header { margin-bottom: 3.5rem; }
+.section-tag {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.section-tag::before { content: ''; width: 20px; height: 1px; }
+.section-tag.cyan   { color: var(--cyan); }
+.section-tag.cyan::before   { background: var(--cyan); }
+.section-tag.purple { color: var(--purple); }
+.section-tag.purple::before { background: var(--purple); }
+
+.section-title {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  line-height: 1.1;
+  margin-bottom: 0.8rem;
+}
+.section-sub {
+  font-size: 0.95rem;
+  color: var(--dim);
+  max-width: 560px;
+  line-height: 1.8;
+}
+
+/* FADE IN */
+.fade-in {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+/* ================================================================
+   LEHRER SECTION
+================================================================ */
+#lehrer { background: var(--bg-2); }
+
+.track-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+}
+
+.topic-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 1.6rem;
+  transition: all var(--ease);
+}
+.topic-card:hover { transform: translateY(-2px); }
+.topic-card.cyan:hover   { border-color: rgba(0,229,255,0.3); box-shadow: 0 8px 24px rgba(0,229,255,0.06); }
+.topic-card.purple:hover { border-color: rgba(168,85,247,0.3); box-shadow: 0 8px 24px rgba(168,85,247,0.06); }
+
+.tc-icon {
+  width: 44px; height: 44px;
+  border-radius: var(--r);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  margin-bottom: 1.1rem;
+}
+.tc-icon.cyan   { background: var(--cyan-d);   color: var(--cyan); }
+.tc-icon.purple { background: var(--purple-d); color: var(--purple); }
+
+.tc-title {
+  font-family: var(--mono);
+  font-size: 0.88rem;
+  font-weight: 500;
+  margin-bottom: 0.6rem;
+}
+.tc-desc {
+  font-size: 0.82rem;
+  color: var(--dim);
+  line-height: 1.7;
+}
+
+/* HIGHLIGHT BOX */
+.highlight-box {
+  border: 1px solid rgba(0,229,255,0.2);
+  background: rgba(0,229,255,0.04);
+  border-radius: var(--r);
+  padding: 1.5rem 2rem;
+  margin-top: 1.5rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+.highlight-box.purple {
+  border-color: rgba(168,85,247,0.2);
+  background: rgba(168,85,247,0.04);
+}
+.highlight-box i { font-size: 1.1rem; flex-shrink: 0; margin-top: 0.1rem; }
+.highlight-box.cyan i { color: var(--cyan); }
+.highlight-box.purple i { color: var(--purple); }
+.highlight-box p { font-size: 0.85rem; color: var(--dim); line-height: 1.7; }
+.highlight-box strong { color: var(--text); }
+
+/* ================================================================
+   FORMAT
+================================================================ */
+#format { background: var(--bg); }
+
+.format-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-top: 3rem;
+}
+.format-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 1.5rem;
+  text-align: center;
+  transition: all var(--ease);
+}
+.format-card:hover {
+  border-color: rgba(0,229,255,0.25);
+  transform: translateY(-2px);
+}
+.format-card i {
+  font-size: 1.5rem;
+  color: var(--cyan);
+  margin-bottom: 1rem;
+  display: block;
+}
+.format-card h3 {
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  font-weight: 500;
+  margin-bottom: 0.4rem;
+}
+.format-card p {
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+/* ================================================================
+   BOOKING / CONTACT
+================================================================ */
+#booking { background: var(--bg-2); }
+
+.booking-inner {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+}
+.booking-inner .section-header { text-align: center; }
+.booking-inner .section-sub { margin: 0 auto; }
+
+.booking-card {
+  margin-top: 3rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 2.5rem;
+}
+
+.booking-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.booking-option {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 1rem 1.2rem;
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  color: var(--dim);
+  transition: all var(--ease);
+}
+.booking-option:hover {
+  border-color: var(--cyan);
+  color: var(--cyan);
+  transform: translateX(3px);
+}
+.booking-option i { color: var(--cyan); width: 16px; text-align: center; }
+
+.booking-note {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-top: 1.5rem;
+  line-height: 1.7;
+}
+.booking-note span { color: var(--green); }
+
+/* ================================================================
+   FOOTER
+================================================================ */
+footer {
+  padding: 2rem 2.5rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.footer-logo {
+  font-family: var(--mono);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--cyan);
+  letter-spacing: 3px;
+}
+.footer-copy {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--muted);
+}
+.footer-back {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--dim);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: color var(--ease);
+}
+.footer-back:hover { color: var(--cyan); }
+
+/* ================================================================
+   ANIMATIONS
+================================================================ */
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+/* ================================================================
+   RESPONSIVE
+================================================================ */
+@media (max-width: 900px) {
+  .hero-inner { grid-template-columns: 1fr; gap: 3rem; }
+  .track-grid { grid-template-columns: 1fr; }
+  .booking-options { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+  .nav-links, .nav-cta { display: none; }
+  .hamburger { display: flex; }
+  #hero { padding: 7rem 1.5rem 4rem; }
+  section { padding: 4rem 1.5rem; }
+}
+
+@media (max-width: 480px) {
+  .hero-cta { flex-direction: column; align-items: flex-start; }
+  .format-grid { grid-template-columns: 1fr 1fr; }
+}
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <a href="index.html" class="nav-logo">JB<span>_</span></a>
+    <div class="nav-links">
+      <a href="index.html">Portfolio</a>
+      <a href="index.html#skills">Skills</a>
+      <a href="index.html#projects">Projekte</a>
+      <a href="talks.html" class="active">Talks</a>
+    </div>
+    <a href="mailto:josefbasner@proton.me" class="nav-cta">Vortrag anfragen</a>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </nav>
+
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="index.html">Portfolio</a>
+    <a href="index.html#skills">Skills</a>
+    <a href="index.html#projects">Projekte</a>
+    <a href="talks.html">Talks</a>
+    <a href="mailto:josefbasner@proton.me" class="nav-cta" style="align-self:flex-start;margin-top:.5rem">Vortrag anfragen</a>
+  </div>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-inner">
+
+      <div class="hero-left fade-in">
+        <div class="hero-tag">Schulvorträge · Kostenlos</div>
+        <h1 class="hero-title">
+          KI & Cyber&shy;security<br>
+          <span class="p">direkt</span> in die<br>
+          <span class="c">Schule.</span>
+        </h1>
+        <p class="hero-desc">
+          Ich bringe aktuelle Themen rund um Künstliche Intelligenz und digitale Sicherheit direkt ins Klassenzimmer — praxisnah, verständlich und kostenlos.
+        </p>
+        <div class="hero-chips">
+          <span class="chip chip-cyan">Datensicherheit</span>
+          <span class="chip chip-purple">KI im Unterricht</span>
+          <span class="chip chip-cyan">Social Media</span>
+          <span class="chip chip-purple">LLMs & ChatGPT</span>
+          <span class="chip chip-cyan">Deepfakes</span>
+          <span class="chip chip-purple">Medienkompetenz</span>
+        </div>
+        <div class="hero-cta">
+          <a href="#booking" class="btn-primary">
+            <i class="fa-solid fa-envelope"></i> Vortrag anfragen
+          </a>
+          <a href="#lehrer" class="btn-ghost">
+            Themen ansehen <i class="fa-solid fa-arrow-down"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-right fade-in">
+        <div class="audience-teaser lehrer">
+          <div class="at-icon cyan"><i class="fa-solid fa-chalkboard-user"></i></div>
+          <div>
+            <div class="at-label cyan">Für Lehrkräfte</div>
+            <div class="at-title">KI im Klassenzimmer verstehen</div>
+            <div class="at-sub">Chancen, Risiken & praktische Strategien</div>
+          </div>
+        </div>
+        <div class="audience-teaser schueler">
+          <div class="at-icon purple"><i class="fa-solid fa-users"></i></div>
+          <div>
+            <div class="at-label purple">Für Schülerinnen & Schüler</div>
+            <div class="at-title">Dein digitales Leben — sicher & selbstbestimmt</div>
+            <div class="at-sub">Datenschutz, Social Media & KI-Risiken</div>
+          </div>
+        </div>
+        <div class="hero-free">
+          Alle Vorträge sind <span>100% kostenlos</span> — Eigeninitiative, kein Auftrag
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- LEHRER -->
+  <section id="lehrer">
+    <div class="section-inner">
+      <div class="section-header fade-in">
+        <div class="section-tag cyan"><i class="fa-solid fa-chalkboard-user"></i> Für Lehrkräfte</div>
+        <h2 class="section-title">KI im Klassenzimmer —<br>Fluch oder Segen?</h2>
+        <p class="section-sub">Ein Vortrag für Lehrpersonen, der kein Technik-Vorwissen voraussetzt. Praxisnah, ehrlich und mit konkreten Strategien für den Schulalltag.</p>
+      </div>
+
+      <div class="track-grid fade-in">
+        <div class="topic-card cyan">
+          <div class="tc-icon cyan"><i class="fa-solid fa-brain"></i></div>
+          <div class="tc-title">Wie funktioniert KI wirklich?</div>
+          <p class="tc-desc">Verständliche Erklärung was hinter ChatGPT, Gemini & Co. steckt — ohne Fachchinesisch. Was kann KI, was kann sie nicht, und warum irrt sie sich manchmal einfach.</p>
+        </div>
+        <div class="topic-card cyan">
+          <div class="tc-icon cyan"><i class="fa-solid fa-lightbulb"></i></div>
+          <div class="tc-title">KI sinnvoll im Unterricht nutzen</div>
+          <p class="tc-desc">Konkrete Beispiele wie KI Lehrkräfte entlasten kann — Unterrichtsvorbereitung, Differenzierung, Feedback. Was funktioniert, was nicht.</p>
+        </div>
+        <div class="topic-card cyan">
+          <div class="tc-icon cyan"><i class="fa-solid fa-triangle-exclamation"></i></div>
+          <div class="tc-title">Wenn Schüler KI zum Schummeln nutzen</div>
+          <p class="tc-desc">Wie erkennt man KI-generierte Texte? Warum sind KI-Detektoren unzuverlässig? Und wie verändert man Aufgabenformate so, dass KI-Nutzung kein Vorteil mehr ist.</p>
+        </div>
+        <div class="topic-card cyan">
+          <div class="tc-icon cyan"><i class="fa-solid fa-shield-halved"></i></div>
+          <div class="tc-title">Strategien für den Schulalltag</div>
+          <p class="tc-desc">Klare Regeln formulieren, Schüler in den Dialog einbinden, KI als Lernwerkzeug statt Abkürzung etablieren. Gemeinsame Diskussion und Fragen.</p>
+        </div>
+      </div>
+
+      <div class="highlight-box fade-in">
+        <i class="fa-solid fa-circle-info"></i>
+        <p><strong>Format:</strong> 60–90 Minuten, interaktiv. Ideal für Lehrerkonferenzen, pädagogische Tage oder kleine Gruppen. Angepasst an das Vorwissen der Teilnehmenden.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCHÜLER -->
+  <section id="schueler" style="background: var(--bg)">
+    <div class="section-inner">
+      <div class="section-header fade-in">
+        <div class="section-tag purple"><i class="fa-solid fa-users"></i> Für Schülerinnen & Schüler</div>
+        <h2 class="section-title">Dein digitales Leben —<br>sicher & selbstbestimmt.</h2>
+        <p class="section-sub">Ein Vortrag der aufrüttelt ohne zu verängstigen. Echte Beispiele, interaktive Aufgaben und praktische Tipps die man sofort anwenden kann.</p>
+      </div>
+
+      <div class="track-grid fade-in">
+        <div class="topic-card purple">
+          <div class="tc-icon purple"><i class="fa-solid fa-database"></i></div>
+          <div class="tc-title">Datensicherheit</div>
+          <p class="tc-desc">Was weiß das Internet über dich? Wie funktionieren Passwörter und warum ist "123456" keine gute Idee. Datenschutz im Alltag — praktisch erklärt.</p>
+        </div>
+        <div class="topic-card purple">
+          <div class="tc-icon purple"><i class="fa-brands fa-instagram"></i></div>
+          <div class="tc-title">Social Media Gefahren</div>
+          <p class="tc-desc">Manipulation durch Algorithmen, Fake News erkennen, Cybermobbing und wie man sich schützt. Was passiert mit Daten die man einmal geteilt hat.</p>
+        </div>
+        <div class="topic-card purple">
+          <div class="tc-icon purple"><i class="fa-solid fa-robot"></i></div>
+          <div class="tc-title">KI im Alltag — was ist noch echt?</div>
+          <p class="tc-desc">Deepfakes, KI-generierte Bilder und Texte — wie erkenne ich was echt ist? Was bedeutet das für Nachrichten, Social Media und das eigene Bild im Netz.</p>
+        </div>
+        <div class="topic-card purple">
+          <div class="tc-icon purple"><i class="fa-solid fa-user-lock"></i></div>
+          <div class="tc-title">Verantwortung im Netz</div>
+          <p class="tc-desc">Digitaler Fußabdruck, Privatsphäre-Einstellungen, sichere Kommunikation. Konkrete Tipps die man noch heute umsetzen kann.</p>
+        </div>
+      </div>
+
+      <div class="highlight-box purple fade-in">
+        <i class="fa-solid fa-circle-info"></i>
+        <p><strong>Format:</strong> 45–60 Minuten, altersgerecht ab Klasse 5. Interaktiv mit Live-Demos und Mitmachaufgaben. Für ganze Klassen oder Jahrgangsstufen.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORMAT / INFOS -->
+  <section id="format" style="background: var(--bg-2)">
+    <div class="section-inner">
+      <div class="section-header fade-in">
+        <div class="section-tag cyan">Ablauf</div>
+        <h2 class="section-title">Was Sie erwartet</h2>
+      </div>
+      <div class="format-grid fade-in">
+        <div class="format-card">
+          <i class="fa-solid fa-euro-sign"></i>
+          <h3>Kostenlos</h3>
+          <p>Alle Vorträge sind und bleiben kostenlos — kein Haken.</p>
+        </div>
+        <div class="format-card">
+          <i class="fa-solid fa-clock"></i>
+          <h3>45–90 Min.</h3>
+          <p>Flexibel anpassbar an Schulstunde oder Block.</p>
+        </div>
+        <div class="format-card">
+          <i class="fa-solid fa-comments"></i>
+          <h3>Interaktiv</h3>
+          <p>Live-Demos, Fragen, echte Beispiele — kein Frontalvortrag.</p>
+        </div>
+        <div class="format-card">
+          <i class="fa-solid fa-location-dot"></i>
+          <h3>Vor Ort</h3>
+          <p>Ich komme zu Ihnen — Region Norddeutschland bevorzugt.</p>
+        </div>
+        <div class="format-card">
+          <i class="fa-solid fa-sliders"></i>
+          <h3>Individuell</h3>
+          <p>Inhalte werden auf die Klasse oder Gruppe abgestimmt.</p>
+        </div>
+        <div class="format-card">
+          <i class="fa-solid fa-graduation-cap"></i>
+          <h3>Ab Klasse 5</h3>
+          <p>Schülervorträge ab Jahrgang 5, Lehrervorträge für alle.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOKING -->
+  <section id="booking">
+    <div class="booking-inner">
+      <div class="section-header fade-in">
+        <div class="section-tag cyan" style="justify-content:center">Kontakt</div>
+        <h2 class="section-title">Vortrag anfragen</h2>
+        <p class="section-sub">Schreiben Sie mir einfach — ich melde mich innerhalb von 1–2 Werktagen zurück und wir besprechen alles Weitere.</p>
+      </div>
+      <div class="booking-card fade-in">
+        <div class="booking-options">
+          <a href="mailto:josefbasner@proton.me?subject=Schulvortrag%20Anfrage" class="booking-option">
+            <i class="fa-solid fa-envelope"></i> josefbasner@proton.me
+          </a>
+          <a href="https://github.com/JBMTP07" target="_blank" rel="noopener" class="booking-option">
+            <i class="fab fa-github"></i> github.com/JBMTP07
+          </a>
+        </div>
+        <a href="mailto:josefbasner@proton.me?subject=Schulvortrag%20Anfrage&body=Hallo%20Josef%2C%0A%0Awir%20w%C3%BCrden%20gerne%20einen%20Vortrag%20anfragen.%0A%0ASchule%2FEinrichtung%3A%20%0AZielgruppe%20(Lehrkr%C3%A4fte%2FKlasse)%3A%20%0AGewünschter%20Zeitraum%3A%20%0ASonstiges%3A%20%0A%0AVielen%20Dank!" class="btn-primary" style="width:100%;justify-content:center;font-size:0.88rem;padding:1rem">
+          <i class="fa-solid fa-paper-plane"></i> E-Mail schreiben
+        </a>
+        <p class="booking-note">
+          Alle Vorträge sind <span>kostenfrei</span>. Bitte Schule/Einrichtung, Zielgruppe und gewünschten Zeitraum angeben — ich komme zu Ihnen.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">JB_</div>
+    <div class="footer-copy">Josef Basner · 2026</div>
+    <a href="index.html" class="footer-back"><i class="fa-solid fa-arrow-left"></i> Zurück zum Portfolio</a>
+  </footer>
+
+  <script>
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 30);
+    }, { passive: true });
+
+    const hamburger  = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      mobileMenu.classList.toggle('open');
+    });
+    mobileMenu.querySelectorAll('a').forEach(a =>
+      a.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        mobileMenu.classList.remove('open');
+      })
+    );
+
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.07 });
+    document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+  </script>
+
+</body>
+</html>
