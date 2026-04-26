@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>GBH Gerüstbau Hühr – Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+
+/* ================================================================
+   BASE
+================================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+:root {
+  --bg:       #0f0e0c;
+  --site:     #181612;
+  --pole:     #b8903a;
+  --pole-hi:  #d4aa50;
+  --pole-sh:  #6b5020;
+  --orange:   #f59e0b;
+  --orange-d: #d4870a;
+  --white:    #f5f0e8;
+  --dark:     #1a1612;
+  --dim:      #8a8070;
+  --muted:    #4a4438;
+  --head:     'Oswald', sans-serif;
+  --sans:     'Inter', sans-serif;
+  --ease:     0.3s cubic-bezier(0.4,0,0.2,1);
+  --pole-w:   14px;
+  --pole-x:   54px;
+}
+
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: var(--sans);
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* ================================================================
+   SCAFFOLDING POLES — fixed, run full page height
+================================================================ */
+.scaffold {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.pole {
+  position: absolute;
+  top: 0; bottom: 0;
+  width: var(--pole-w);
+  background: linear-gradient(90deg, var(--pole-sh) 0%, var(--pole) 35%, var(--pole-hi) 50%, var(--pole) 65%, var(--pole-sh) 100%);
+  box-shadow: 2px 0 8px rgba(0,0,0,0.6), inset 1px 0 2px rgba(255,255,255,0.1);
+}
+.pole-l { left: var(--pole-x); }
+.pole-r { right: var(--pole-x); }
+
+/* Bolt details on poles */
+.pole::before, .pole::after {
+  content: '';
+  position: absolute;
+  left: 50%; transform: translateX(-50%);
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, var(--pole-hi), var(--pole-sh));
+  box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+.pole::before { top: 18%; }
+.pole::after  { top: 58%; }
+
+/* ================================================================
+   DEMO BANNER
+================================================================ */
+.demo-banner {
+  background: var(--orange);
+  color: #000;
+  text-align: center;
+  padding: 0.45rem 1rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  position: relative;
+  z-index: 200;
+}
+
+/* ================================================================
+   NAV
+================================================================ */
+#navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.9rem calc(var(--pole-x) + 36px);
+  background: rgba(15,14,12,0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--muted);
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+.nav-badge {
+  background: var(--orange);
+  color: #000;
+  font-family: var(--head);
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 0.15rem 0.55rem;
+  letter-spacing: 1px;
+}
+.nav-name {
+  font-family: var(--head);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  line-height: 1.15;
+}
+.nav-sub {
+  display: block;
+  font-size: 0.6rem;
+  font-family: var(--sans);
+  font-weight: 400;
+  letter-spacing: 2px;
+  color: var(--dim);
+  text-transform: uppercase;
+}
+
+.nav-links { display: flex; gap: 2rem; align-items: center; }
+.nav-links a {
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--dim);
+  letter-spacing: 0.5px;
+  transition: color var(--ease);
+}
+.nav-links a:hover { color: var(--orange); }
+
+.nav-cta {
+  background: var(--orange);
+  color: #000;
+  font-family: var(--head);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 0.55rem 1.3rem;
+  transition: background var(--ease);
+}
+.nav-cta:hover { background: var(--pole-hi); }
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+.hamburger span {
+  display: block;
+  width: 22px; height: 2px;
+  background: var(--dim);
+  border-radius: 2px;
+  transition: all var(--ease);
+}
+.hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
+.hamburger.active span:nth-child(2) { opacity: 0; }
+.hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
+
+.mobile-menu {
+  position: fixed;
+  top: 84px; left: 0; right: 0;
+  z-index: 99;
+  background: rgba(15,14,12,0.98);
+  border-bottom: 1px solid var(--muted);
+  flex-direction: column;
+  padding: 1.2rem calc(var(--pole-x) + 36px);
+  gap: 1rem;
+  transform: translateY(-110%);
+  transition: transform var(--ease);
+  display: flex;
+}
+.mobile-menu.open { transform: translateY(0); }
+.mobile-menu a { font-size: 0.9rem; color: var(--dim); }
+
+/* ================================================================
+   CROSSBAR
+================================================================ */
+.crossbar {
+  position: relative;
+  z-index: 2;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  padding: 0 var(--pole-x);
+}
+
+/* The horizontal tube */
+.crossbar::before {
+  content: '';
+  position: absolute;
+  left: calc(var(--pole-x) + var(--pole-w) / 2);
+  right: calc(var(--pole-x) + var(--pole-w) / 2);
+  height: 10px;
+  top: 50%; transform: translateY(-50%);
+  background: linear-gradient(180deg, var(--pole-hi) 0%, var(--pole) 40%, var(--pole-sh) 100%);
+  box-shadow: 0 3px 8px rgba(0,0,0,0.6);
+}
+
+/* Connector bolts at poles */
+.crossbar::after {
+  content: '';
+  position: absolute;
+  left: calc(var(--pole-x) - 4px);
+  right: calc(var(--pole-x) - 4px);
+  height: 22px;
+  top: 50%; transform: translateY(-50%);
+  background:
+    radial-gradient(circle at 50% 50%, var(--pole-hi) 40%, var(--pole-sh) 100%) left / 22px 22px no-repeat,
+    radial-gradient(circle at 50% 50%, var(--pole-hi) 40%, var(--pole-sh) 100%) right / 22px 22px no-repeat;
+  box-shadow:
+    2px 2px 4px rgba(0,0,0,0.5),
+    calc(100% - 2px) 2px 4px rgba(0,0,0,0.5);
+}
+
+/* Diagonal braces */
+.crossbar .brace {
+  position: absolute;
+  height: 2px;
+  background: linear-gradient(90deg, var(--pole-sh), var(--pole));
+  opacity: 0.6;
+  transform-origin: left center;
+}
+.crossbar .brace-l {
+  left: calc(var(--pole-x) + var(--pole-w));
+  width: 80px;
+  top: 30%;
+  transform: rotate(25deg);
+}
+.crossbar .brace-r {
+  right: calc(var(--pole-x) + var(--pole-w));
+  width: 80px;
+  top: 30%;
+  transform: rotate(-25deg);
+  transform-origin: right center;
+}
+
+/* ================================================================
+   ROPE — connects banner top to crossbar
+================================================================ */
+.rope {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  gap: 30%;
+  padding: 0 calc(var(--pole-x) + 36px);
+  height: 32px;
+  align-items: flex-start;
+}
+.rope::before, .rope::after {
+  content: '';
+  width: 3px;
+  height: 100%;
+  background: repeating-linear-gradient(180deg,
+    var(--pole) 0px, var(--pole) 4px,
+    var(--pole-sh) 4px, var(--pole-sh) 8px
+  );
+  opacity: 0.7;
+}
+
+/* ================================================================
+   CONTENT WRAPPER
+================================================================ */
+.page-content {
+  position: relative;
+  z-index: 2;
+  padding: 0 calc(var(--pole-x) + 36px);
+}
+
+/* ================================================================
+   BANNER BASE
+================================================================ */
+.banner {
+  position: relative;
+  border-radius: 2px;
+  transform-origin: top center;
+  animation: sway 6s ease-in-out infinite;
+  box-shadow:
+    0 12px 40px rgba(0,0,0,0.6),
+    0 2px 8px rgba(0,0,0,0.4),
+    inset 0 1px 0 rgba(255,255,255,0.1);
+}
+
+/* Hook clips at top of banners */
+.banner::before {
+  content: '';
+  position: absolute;
+  top: -18px; left: 18%;
+  width: 4px; height: 18px;
+  background: linear-gradient(180deg, var(--pole-hi), var(--pole));
+  box-shadow: 1px 0 3px rgba(0,0,0,0.4);
+}
+.banner::after {
+  content: '';
+  position: absolute;
+  top: -18px; right: 18%;
+  width: 4px; height: 18px;
+  background: linear-gradient(180deg, var(--pole-hi), var(--pole));
+  box-shadow: 1px 0 3px rgba(0,0,0,0.4);
+}
+
+@keyframes sway {
+  0%,100% { transform: rotate(-0.4deg) translateX(-2px); }
+  50%      { transform: rotate(0.4deg)  translateX(2px);  }
+}
+
+/* ================================================================
+   HERO BANNER
+================================================================ */
+.banner-hero {
+  background: var(--orange);
+  padding: 4rem 4rem 3.5rem;
+  margin-bottom: 0;
+}
+
+.hero-label {
+  font-family: var(--head);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: rgba(0,0,0,0.55);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+.hero-label::before {
+  content: '';
+  display: block;
+  width: 28px; height: 2px;
+  background: rgba(0,0,0,0.4);
+}
+
+.hero-title {
+  font-family: var(--head);
+  font-size: clamp(3.5rem, 9vw, 7rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 0.95;
+  letter-spacing: -1px;
+  color: #000;
+  margin-bottom: 1.8rem;
+}
+.hero-title .line2 {
+  color: var(--white);
+  -webkit-text-stroke: 2px #000;
+  display: block;
+}
+
+.hero-bottom {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+  padding-top: 1.8rem;
+  border-top: 3px solid rgba(0,0,0,0.2);
+}
+
+.hero-desc {
+  font-size: 1rem;
+  color: rgba(0,0,0,0.7);
+  max-width: 420px;
+  line-height: 1.7;
+}
+
+.hero-actions { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+
+.btn-dark {
+  background: #000;
+  color: var(--orange);
+  font-family: var(--head);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 0.85rem 1.8rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all var(--ease);
+}
+.btn-dark:hover { background: #1a1612; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,0,0,0.4); }
+
+.btn-outline-dark {
+  background: transparent;
+  color: #000;
+  border: 2px solid rgba(0,0,0,0.4);
+  font-family: var(--head);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 0.8rem 1.6rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all var(--ease);
+}
+.btn-outline-dark:hover { border-color: #000; background: rgba(0,0,0,0.08); }
+
+/* ================================================================
+   SERVICE BANNERS
+================================================================ */
+.services-rope {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 calc(var(--pole-x) + 36px);
+  height: 40px;
+  align-items: flex-start;
+  position: relative;
+  z-index: 2;
+}
+.services-rope span {
+  width: 3px;
+  height: 100%;
+  background: repeating-linear-gradient(180deg,
+    var(--pole) 0px, var(--pole) 4px,
+    var(--pole-sh) 4px, var(--pole-sh) 8px
+  );
+  opacity: 0.6;
+  display: block;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.2rem;
+  position: relative;
+  z-index: 2;
+  padding: 0 calc(var(--pole-x) + 36px);
+}
+
+.service-banner {
+  background: var(--dark);
+  border: 1px solid rgba(180,140,55,0.25);
+  border-top: 4px solid var(--orange);
+  padding: 2rem 1.5rem;
+  position: relative;
+  transform-origin: top center;
+  animation: sway 5s ease-in-out infinite;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.04);
+  transition: border-color var(--ease);
+}
+.service-banner:nth-child(2) { animation-delay: 0.4s; }
+.service-banner:nth-child(3) { animation-delay: 0.8s; }
+.service-banner:nth-child(4) { animation-delay: 1.2s; }
+.service-banner:hover { border-color: rgba(245,158,11,0.6); transform: translateY(-4px) !important; animation-play-state: paused; }
+
+/* small rope on each service banner */
+.service-banner::before {
+  content: '';
+  position: absolute;
+  top: -22px; left: 50%;
+  transform: translateX(-50%);
+  width: 3px; height: 22px;
+  background: repeating-linear-gradient(180deg,
+    var(--pole) 0px, var(--pole) 4px,
+    var(--pole-sh) 4px, var(--pole-sh) 8px
+  );
+}
+
+.sb-icon {
+  font-size: 1.6rem;
+  color: var(--orange);
+  margin-bottom: 1rem;
+  display: block;
+}
+.sb-title {
+  font-family: var(--head);
+  font-size: 1.05rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 0.7rem;
+  line-height: 1.2;
+}
+.sb-desc {
+  font-size: 0.78rem;
+  color: var(--dim);
+  line-height: 1.7;
+}
+
+/* ================================================================
+   USP BANNER
+================================================================ */
+.banner-usp {
+  background: var(--white);
+  padding: 3.5rem 4rem;
+  color: #000;
+}
+
+.usp-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.usp-heading {
+  font-family: var(--head);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1.05;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.5rem;
+}
+.usp-heading span { color: var(--orange-d); }
+
+.usp-sub {
+  font-size: 0.9rem;
+  color: #555;
+  margin-top: 1rem;
+  line-height: 1.7;
+  max-width: 380px;
+}
+
+.usp-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+.usp-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+.usp-num {
+  font-family: var(--head);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--orange);
+  line-height: 1;
+  flex-shrink: 0;
+  width: 2.5rem;
+  opacity: 0.35;
+}
+.usp-item h3 {
+  font-family: var(--head);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 0.2rem;
+  color: #000;
+}
+.usp-item p { font-size: 0.82rem; color: #555; line-height: 1.6; }
+
+/* ================================================================
+   CONTACT BANNER
+================================================================ */
+.banner-contact {
+  background: #000;
+  padding: 3.5rem 4rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.contact-heading {
+  font-family: var(--head);
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1;
+  letter-spacing: 0.5px;
+  color: var(--white);
+}
+.contact-heading span { color: var(--orange); }
+.contact-tagline {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: var(--dim);
+  line-height: 1.7;
+}
+
+.contact-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.2rem;
+  border: 1px solid rgba(180,140,55,0.2);
+  background: rgba(255,255,255,0.03);
+  transition: all var(--ease);
+}
+.contact-item:hover { border-color: rgba(245,158,11,0.5); background: rgba(245,158,11,0.04); }
+.contact-item i { color: var(--orange); width: 16px; text-align: center; }
+.contact-item-body {}
+.contact-item-label { font-size: 0.62rem; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 0.15rem; }
+.contact-item-val { font-size: 0.88rem; font-weight: 500; color: var(--white); }
+.contact-item-val a { color: var(--white); }
+
+.oz-grid {
+  margin-top: 1rem;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding-top: 1rem;
+}
+.oz-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  padding: 0.35rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.oz-day { color: var(--dim); }
+.oz-time { color: var(--white); font-weight: 500; }
+.oz-closed { color: var(--muted); }
+
+/* ================================================================
+   FOOTER
+================================================================ */
+.footer-crossbar {
+  position: relative;
+  z-index: 2;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  padding: 0 var(--pole-x);
+  margin-top: 2.5rem;
+}
+.footer-crossbar::before {
+  content: '';
+  position: absolute;
+  left: calc(var(--pole-x) + var(--pole-w)/2);
+  right: calc(var(--pole-x) + var(--pole-w)/2);
+  height: 10px;
+  top: 50%; transform: translateY(-50%);
+  background: linear-gradient(180deg, var(--pole-hi) 0%, var(--pole) 40%, var(--pole-sh) 100%);
+  box-shadow: 0 3px 8px rgba(0,0,0,0.6);
+}
+.footer-crossbar::after {
+  content: '';
+  position: absolute;
+  left: calc(var(--pole-x) - 4px);
+  right: calc(var(--pole-x) - 4px);
+  height: 22px;
+  top: 50%; transform: translateY(-50%);
+  background:
+    radial-gradient(circle at 50% 50%, var(--pole-hi) 40%, var(--pole-sh) 100%) left / 22px 22px no-repeat,
+    radial-gradient(circle at 50% 50%, var(--pole-hi) 40%, var(--pole-sh) 100%) right / 22px 22px no-repeat;
+}
+
+footer {
+  position: relative;
+  z-index: 2;
+  padding: 1.8rem calc(var(--pole-x) + 36px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  background: rgba(10,9,8,0.9);
+}
+.footer-logo { font-family: var(--head); font-size: 1rem; font-weight: 700; letter-spacing: 3px; color: var(--orange); }
+.footer-copy { font-size: 0.72rem; color: var(--muted); }
+.footer-links { display: flex; gap: 1.5rem; }
+.footer-links a { font-size: 0.72rem; color: var(--muted); transition: color var(--ease); }
+.footer-links a:hover { color: var(--orange); }
+
+/* ================================================================
+   FADE IN
+================================================================ */
+.fade-in {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+/* ================================================================
+   SECTION SPACING
+================================================================ */
+.gap { height: 3rem; position: relative; z-index: 2; }
+.gap-sm { height: 1.5rem; position: relative; z-index: 2; }
+
+/* ================================================================
+   RESPONSIVE
+================================================================ */
+@media (max-width: 1000px) {
+  .services-grid { grid-template-columns: repeat(2, 1fr); }
+  .usp-inner { grid-template-columns: 1fr; gap: 2rem; }
+  .banner-contact { grid-template-columns: 1fr; gap: 2rem; }
+}
+
+@media (max-width: 768px) {
+  :root { --pole-x: 24px; --pole-w: 10px; }
+
+  .nav-links, .nav-cta { display: none; }
+  .hamburger { display: flex; }
+  #navbar { padding: 0.9rem calc(var(--pole-x) + 24px); }
+
+  .page-content { padding: 0 calc(var(--pole-x) + 18px); }
+  .services-grid { grid-template-columns: 1fr 1fr; padding: 0 calc(var(--pole-x) + 18px); }
+  .services-rope { padding: 0 calc(var(--pole-x) + 18px); }
+
+  .banner-hero { padding: 2.5rem 1.8rem; }
+  .hero-title { font-size: clamp(2.5rem, 12vw, 4rem); }
+  .hero-bottom { flex-direction: column; align-items: flex-start; }
+
+  .banner-usp { padding: 2.5rem 1.8rem; }
+  .banner-contact { padding: 2.5rem 1.8rem; }
+
+  footer { padding: 1.5rem calc(var(--pole-x) + 18px); flex-direction: column; text-align: center; }
+  .footer-links { justify-content: center; }
+}
+
+@media (max-width: 520px) {
+  .services-grid { grid-template-columns: 1fr; }
+  .hero-actions { flex-direction: column; }
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- SCAFFOLDING POLES (fixed, full height) -->
+  <div class="scaffold" aria-hidden="true">
+    <div class="pole pole-l"></div>
+    <div class="pole pole-r"></div>
+  </div>
+
+  <!-- DEMO BANNER -->
+  <div class="demo-banner">⚠ Design-Demo — keine offizielle Website der GBH Gerüstbau Hühr GmbH</div>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <div class="nav-logo">
+      <div class="nav-badge">GBH</div>
+      <div class="nav-name">
+        Gerüstbau Hühr
+        <span class="nav-sub">Anklam · Vorpommern</span>
+      </div>
+    </div>
+    <div class="nav-links">
+      <a href="#leistungen">Leistungen</a>
+      <a href="#ueber-uns">Über uns</a>
+      <a href="#kontakt">Kontakt</a>
+    </div>
+    <a href="tel:+493971214515" class="nav-cta"><i class="fa-solid fa-phone"></i> Anrufen</a>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </nav>
+
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#leistungen">Leistungen</a>
+    <a href="#ueber-uns">Über uns</a>
+    <a href="#kontakt">Kontakt</a>
+    <a href="tel:+493971214515" style="color:var(--orange);font-weight:600">+49 3971 214515</a>
+  </div>
+
+  <!-- ============================================================
+       HERO
+  ============================================================ -->
+  <div class="crossbar"><span class="brace brace-l"></span><span class="brace brace-r"></span></div>
+  <div class="rope"></div>
+  <div class="page-content fade-in">
+    <div class="banner banner-hero">
+      <div class="hero-label">GBH Gerüstbau Hühr GmbH · Anklam</div>
+      <h1 class="hero-title">
+        Sicher hoch<br>
+        <span class="line2">hinaus.</span>
+      </h1>
+      <div class="hero-bottom">
+        <p class="hero-desc">Ihr zuverlässiger Partner für professionellen Gerüstbau in Anklam und der Region Vorpommern-Greifswald — vom Einfamilienhaus bis zur Industrieanlage.</p>
+        <div class="hero-actions">
+          <a href="#kontakt" class="btn-dark"><i class="fa-solid fa-hard-hat"></i> Angebot anfragen</a>
+          <a href="#leistungen" class="btn-outline-dark">Leistungen <i class="fa-solid fa-arrow-down"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       LEISTUNGEN
+  ============================================================ -->
+  <div class="gap"></div>
+  <div class="crossbar" id="leistungen"><span class="brace brace-l"></span><span class="brace brace-r"></span></div>
+
+  <!-- ropes above each service banner -->
+  <div class="services-rope fade-in" aria-hidden="true">
+    <span></span><span></span><span></span><span></span>
+  </div>
+
+  <div class="services-grid fade-in">
+    <div class="service-banner">
+      <i class="fa-solid fa-building sb-icon"></i>
+      <div class="sb-title">Fassaden&shy;gerüst</div>
+      <p class="sb-desc">Sichere Gerüste für Neubau, Sanierung und Renovierung — vom Einfamilienhaus bis zum Mehrfamiliengebäude.</p>
+    </div>
+    <div class="service-banner">
+      <i class="fa-solid fa-industry sb-icon"></i>
+      <div class="sb-title">Industrie&shy;gerüst</div>
+      <p class="sb-desc">Maßgeschneiderte Gerüstlösungen für Industrieanlagen, Wartung und komplexe Produktionsumgebungen.</p>
+    </div>
+    <div class="service-banner">
+      <i class="fa-solid fa-drafting-compass sb-icon"></i>
+      <div class="sb-title">Sonder&shy;konstruktionen</div>
+      <p class="sb-desc">Individuelle Gerüstkonstruktionen für besondere Anforderungen — wenn Standardlösungen nicht ausreichen.</p>
+    </div>
+    <div class="service-banner">
+      <i class="fa-solid fa-arrow-up sb-icon"></i>
+      <div class="sb-title">Höhen&shy;zugangstechnik</div>
+      <p class="sb-desc">Professionelle Höhenzugangslösungen für Dacharbeiten, Solaranlagen und Spezialmontagen.</p>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       ÜBER UNS / USP
+  ============================================================ -->
+  <div class="gap"></div>
+  <div class="crossbar" id="ueber-uns"><span class="brace brace-l"></span><span class="brace brace-r"></span></div>
+  <div class="rope"></div>
+  <div class="page-content fade-in">
+    <div class="banner banner-usp">
+      <div class="usp-inner">
+        <div>
+          <h2 class="usp-heading">Ihr Partner.<br><span>Seit Jahren.</span></h2>
+          <p class="usp-sub">Regional verwurzelt in Anklam und der Region Vorpommern-Greifswald — mit dem Anspruch, jedes Projekt sicher, pünktlich und passgenau abzuwickeln.</p>
+        </div>
+        <div class="usp-list">
+          <div class="usp-item">
+            <div class="usp-num">01</div>
+            <div>
+              <h3>Sicherheit zuerst</h3>
+              <p>Alle Gerüste werden nach aktuellen Normen errichtet. Ihre Sicherheit steht an erster Stelle.</p>
+            </div>
+          </div>
+          <div class="usp-item">
+            <div class="usp-num">02</div>
+            <div>
+              <h3>Termintreu</h3>
+              <p>Zuverlässige Planung und pünktliche Ausführung — damit Ihr Bauprojekt im Zeitplan bleibt.</p>
+            </div>
+          </div>
+          <div class="usp-item">
+            <div class="usp-num">03</div>
+            <div>
+              <h3>Alles aus einer Hand</h3>
+              <p>Von der Beratung bis zur Demontage übernehmen wir das komplette Projektmanagement.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       KONTAKT
+  ============================================================ -->
+  <div class="gap"></div>
+  <div class="crossbar" id="kontakt"><span class="brace brace-l"></span><span class="brace brace-r"></span></div>
+  <div class="rope"></div>
+  <div class="page-content fade-in">
+    <div class="banner banner-contact">
+      <div>
+        <h2 class="contact-heading">Wir sind<br><span>für Sie da.</span></h2>
+        <p class="contact-tagline">Rufen Sie uns an oder schreiben Sie uns — wir finden die passende Lösung für Ihr Projekt.</p>
+        <div style="margin-top:2rem">
+          <a href="tel:+493971214515" class="btn-dark"><i class="fa-solid fa-phone"></i> Jetzt anrufen</a>
+        </div>
+      </div>
+      <div>
+        <div class="contact-items">
+          <div class="contact-item">
+            <i class="fa-solid fa-phone"></i>
+            <div class="contact-item-body">
+              <div class="contact-item-label">Telefon</div>
+              <div class="contact-item-val"><a href="tel:+493971214515">+49 3971 214515</a></div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <i class="fa-solid fa-envelope"></i>
+            <div class="contact-item-body">
+              <div class="contact-item-label">E-Mail</div>
+              <div class="contact-item-val"><a href="mailto:huehr@t-online.de">huehr@t-online.de</a></div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <i class="fa-solid fa-location-dot"></i>
+            <div class="contact-item-body">
+              <div class="contact-item-label">Adresse</div>
+              <div class="contact-item-val">Bluthsluster Str. 25, 17389 Anklam</div>
+            </div>
+          </div>
+        </div>
+        <div class="oz-grid">
+          <div class="oz-row"><span class="oz-day">Mo – Mi</span><span class="oz-time">08:00 – 17:00</span></div>
+          <div class="oz-row"><span class="oz-day">Donnerstag</span><span class="oz-time">08:00 – 14:00</span></div>
+          <div class="oz-row"><span class="oz-day">Freitag</span><span class="oz-time">08:00 – 15:45</span></div>
+          <div class="oz-row"><span class="oz-day">Sa – So</span><span class="oz-closed">Geschlossen</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer-crossbar"></div>
+  <footer>
+    <div class="footer-logo">GBH · GERÜSTBAU HÜHR</div>
+    <div class="footer-copy">© 2026 GBH Gerüstbau Hühr GmbH · Anklam</div>
+    <div class="footer-links">
+      <a href="#">Impressum</a>
+      <a href="#">Datenschutz</a>
+    </div>
+  </footer>
+
+  <script>
+    // NAV scroll
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.style.borderBottomColor = window.scrollY > 20 ? 'rgba(180,140,55,0.3)' : 'rgba(74,68,56,1)';
+    }, { passive: true });
+
+    // Hamburger
+    const hamburger  = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      mobileMenu.classList.toggle('open');
+    });
+    mobileMenu.querySelectorAll('a').forEach(a =>
+      a.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        mobileMenu.classList.remove('open');
+      })
+    );
+
+    // Fade in on scroll
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.07 });
+    document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+  </script>
+
+</body>
+</html>
