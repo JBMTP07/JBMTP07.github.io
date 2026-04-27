@@ -120,6 +120,9 @@ function applyLang(l) {
 
   document.getElementById('lang-btn').textContent = l === 'de' ? 'EN' : 'DE';
 
+  const cvBtn = document.getElementById('cv-btn');
+  if (cvBtn) cvBtn.href = 'cv.html?lang=' + l;
+
   clearTimeout(typingTimer);
   charIdx = 0;
   deleting = false;

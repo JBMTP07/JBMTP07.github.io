@@ -3,12 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Josef Basner – CV</title>
+  <title>Josef Basner – Lebenslauf</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
-    /* ── SCREEN BASE ── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
@@ -30,7 +29,6 @@
       line-height: 1.6;
     }
 
-    /* ── PRINT BUTTON BAR (screen only) ── */
     .print-bar {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -77,7 +75,6 @@
     }
     .back-btn:hover { color: #e5e7eb; }
 
-    /* ── PAGE WRAPPER ── */
     .page {
       max-width: 800px;
       margin: 5rem auto 4rem;
@@ -87,7 +84,6 @@
       border-radius: 4px;
     }
 
-    /* ── HEADER ── */
     .cv-header {
       display: flex;
       justify-content: space-between;
@@ -117,7 +113,6 @@
     }
     .cv-contact a { color: var(--muted); text-decoration: none; }
 
-    /* ── SECTION ── */
     .cv-section { margin-bottom: 1.8rem; }
     .cv-section-title {
       font-family: var(--mono);
@@ -131,27 +126,21 @@
       border-bottom: 1px solid var(--border);
     }
 
-    /* ── PROFILE ── */
     .cv-profile {
       font-size: 0.875rem;
       color: #374151;
       line-height: 1.7;
     }
 
-    /* ── SKILLS GRID ── */
     .skills-grid {
       display: grid;
       grid-template-columns: 120px 1fr;
       gap: 0.4rem 1rem;
       font-size: 0.825rem;
     }
-    .skill-label {
-      font-weight: 600;
-      color: var(--text);
-    }
+    .skill-label { font-weight: 600; color: var(--text); }
     .skill-value { color: #374151; }
 
-    /* ── EXPERIENCE ── */
     .exp-item { margin-bottom: 1.2rem; }
     .exp-header {
       display: flex;
@@ -159,10 +148,7 @@
       align-items: baseline;
       margin-bottom: 0.2rem;
     }
-    .exp-title {
-      font-weight: 600;
-      font-size: 0.9rem;
-    }
+    .exp-title { font-weight: 600; font-size: 0.9rem; }
     .exp-date {
       font-family: var(--mono);
       font-size: 0.72rem;
@@ -174,10 +160,7 @@
       color: var(--muted);
       margin-bottom: 0.35rem;
     }
-    .exp-bullets {
-      list-style: none;
-      padding: 0;
-    }
+    .exp-bullets { list-style: none; padding: 0; }
     .exp-bullets li {
       font-size: 0.825rem;
       color: #374151;
@@ -192,12 +175,7 @@
       color: var(--muted);
     }
 
-    /* ── CERTS ── */
-    .certs-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
+    .certs-list { display: flex; flex-wrap: wrap; gap: 0.5rem; }
     .cert-chip {
       font-family: var(--mono);
       font-size: 0.72rem;
@@ -213,34 +191,16 @@
       color: var(--muted);
     }
 
-    /* ── LANGUAGES ── */
-    .lang-list {
-      font-size: 0.825rem;
-      color: #374151;
-    }
-
-    /* ── ACCENT LINE ── */
+    .lang-list { font-size: 0.825rem; color: #374151; }
     .accent { color: var(--cyan); }
 
-    /* ── PRINT STYLES ── */
     @media print {
       @page { margin: 18mm 20mm; size: A4; }
-
       body { background: #fff; font-size: 13px; }
       .print-bar { display: none !important; }
-
-      .page {
-        max-width: 100%;
-        margin: 0;
-        padding: 0;
-        box-shadow: none;
-        border-radius: 0;
-      }
-
+      .page { max-width: 100%; margin: 0; padding: 0; box-shadow: none; border-radius: 0; }
       .cv-name { font-size: 1.7rem; }
-
       a { color: inherit !important; }
-
       .exp-item { page-break-inside: avoid; }
       .cv-section { page-break-inside: avoid; }
     }
@@ -248,46 +208,37 @@
 </head>
 <body>
 
-  <!-- PRINT BAR (screen only) -->
   <div class="print-bar">
     <div style="display:flex;align-items:center;gap:1.2rem">
-      <a href="index.html" class="back-btn">← Zurück</a>
-      <span>Als <b>PDF</b> speichern: Strg+P → Ziel: "Als PDF speichern"</span>
+      <a href="index.html" class="back-btn" data-cv="back">← Zurück</a>
+      <span data-cv-html="hint">Als <b>PDF</b> speichern: Strg+P → Ziel: „Als PDF speichern"</span>
     </div>
-    <button class="print-btn" onclick="window.print()">
-      ⬇ Als PDF speichern
-    </button>
+    <button class="print-btn" onclick="window.print()" data-cv="printBtn">⬇ Als PDF speichern</button>
   </div>
 
-  <!-- CV PAGE -->
   <div class="page">
 
-    <!-- HEADER -->
     <div class="cv-header">
       <div>
         <div class="cv-name">Josef Roland Basner</div>
-        <div class="cv-role">Penetration Tester · Red Teamer · Security Researcher</div>
+        <div class="cv-role" data-cv="role">Penetration Tester · Red Teamer · Security Researcher</div>
       </div>
       <div class="cv-contact">
         <a href="mailto:josefbasner@proton.me">josefbasner@proton.me</a><br>
         +49 151 4495 7240<br>
         <a href="https://github.com/JBMTP07">github.com/JBMTP07</a><br>
         <a href="https://jbmtp07.github.io">jbmtp07.github.io</a><br>
-        Deutschland · Remote weltweit
+        <span data-cv="loc">Deutschland · Remote weltweit</span>
       </div>
     </div>
 
-    <!-- PROFIL -->
     <div class="cv-section">
-      <div class="cv-section-title">Profil</div>
-      <p class="cv-profile">
-        Penetration Tester mit praktischem Ansatz und breitem technischem Fundament. Seit 2020 aktiv in privaten Bug-Bounty-Programmen (HackerOne, Bugcrowd), regelmäßige Praxis auf HackTheBox und im eigenen Security Lab. Laufender Zertifizierungspfad über New Horizons. Hält ehrenamtliche Vorträge zu KI-Sicherheit und Cybersecurity an Schulen. Zusätzlicher Hintergrund in industriellen Steuerungssystemen (Siemens S7, SCADA) aus der Mechatronik-Ausbildung.
-      </p>
+      <div class="cv-section-title" data-cv="s_profile">Profil</div>
+      <p class="cv-profile" data-cv="profile">Penetration Tester mit praktischem Ansatz und breitem technischem Fundament. Seit 2020 aktiv in privaten Bug-Bounty-Programmen (HackerOne, Bugcrowd) — über 20 bestätigte Findings, darunter RCE, XSS und SQLi. Regelmäßige Praxis auf HackTheBox und im eigenen Security Lab. Laufender Zertifizierungspfad über New Horizons. Ehrenamtliche Vorträge zu KI-Sicherheit und Cybersecurity an Schulen. Hintergrund in industriellen Steuerungssystemen (Siemens S7, SCADA) aus der Mechatronik-Ausbildung.</p>
     </div>
 
-    <!-- TECHNISCHE SCHWERPUNKTE -->
     <div class="cv-section">
-      <div class="cv-section-title">Technische Schwerpunkte</div>
+      <div class="cv-section-title" data-cv="s_skills">Technische Schwerpunkte</div>
       <div class="skills-grid">
         <span class="skill-label">Offensive</span>
         <span class="skill-value">Penetration Testing, Web- &amp; API-Testing, Recon &amp; Enumeration, Privilege Escalation, AD Attacks</span>
@@ -295,74 +246,72 @@
         <span class="skill-value">Burp Suite, Metasploit, Nmap, Wireshark, Hydra, Nessus, BloodHound</span>
         <span class="skill-label">Scripting</span>
         <span class="skill-value">Python, Bash, JavaScript</span>
-        <span class="skill-label">Netzwerke</span>
-        <span class="skill-value">TCP/IP, DNS, DHCP, Subnetting, ARP</span>
+        <span class="skill-label" data-cv="sk_net_label">Netzwerke</span>
+        <span class="skill-value" data-cv="sk_net_val">TCP/IP, DNS, DHCP, Subnetting, ARP</span>
         <span class="skill-label">OS</span>
         <span class="skill-value">Kali Linux, Ubuntu, Windows, Active Directory</span>
         <span class="skill-label">Cloud</span>
-        <span class="skill-value">Docker, Terraform, CI/CD-Grundlagen</span>
+        <span class="skill-value" data-cv="sk_cloud_val">Docker, Terraform, CI/CD-Grundlagen</span>
         <span class="skill-label">OT/ICS</span>
-        <span class="skill-value">Siemens S7 (SPS), SCADA-Grundlagen, Industriesteuerungen</span>
+        <span class="skill-value" data-cv="sk_ot_val">Siemens S7 (SPS), SCADA-Grundlagen, Industriesteuerungen</span>
       </div>
     </div>
 
-    <!-- PRAKTISCHE SECURITY-ERFAHRUNG -->
     <div class="cv-section">
-      <div class="cv-section-title">Praktische Security-Erfahrung</div>
+      <div class="cv-section-title" data-cv="s_security">Praktische Security-Erfahrung</div>
 
       <div class="exp-item">
         <div class="exp-header">
-          <span class="exp-title">Bug Bounty Researcher</span>
-          <span class="exp-date">seit 2020</span>
+          <span class="exp-title" data-cv="bb_title">Bug Bounty Researcher</span>
+          <span class="exp-date" data-cv="bb_date">seit 2020</span>
         </div>
         <ul class="exp-bullets">
-          <li>Teilnahme an privaten / invite-only Programmen via HackerOne und Bugcrowd</li>
-          <li>Schwerpunkte: Recon, Enumeration, Web- und API-Schwachstellenanalyse</li>
-          <li>Einhaltung programmspezifischer NDAs und Responsible Disclosure Guidelines</li>
+          <li data-cv="bb_1">Teilnahme an privaten / invite-only Programmen via HackerOne und Bugcrowd</li>
+          <li data-cv="bb_2">Über 20 bestätigte Findings, darunter RCE, XSS und SQLi</li>
+          <li data-cv="bb_3">Schwerpunkte: Recon, Enumeration, Web- und API-Schwachstellenanalyse</li>
+          <li data-cv="bb_4">Einhaltung programmspezifischer NDAs und Responsible Disclosure Guidelines</li>
         </ul>
       </div>
 
       <div class="exp-item">
         <div class="exp-header">
-          <span class="exp-title">HackTheBox &amp; Security Research Lab</span>
+          <span class="exp-title" data-cv="htb_title">HackTheBox &amp; Security Research Lab</span>
         </div>
         <ul class="exp-bullets">
-          <li>Aktive Bearbeitung von Machines und Challenges auf HackTheBox</li>
-          <li>Dokumentierte Writeups für retired Machines — github.com/JBMTP07/HTB-Writeups</li>
-          <li>Betrieb eines lokalen Testlabors (Metasploitable, Vulnerable VMs)</li>
-          <li>Eigene Methodik: Recon → Enumerate → Hypothesize → Validate → Escalate</li>
+          <li data-cv="htb_1">Aktive Bearbeitung von Machines und Challenges auf HackTheBox</li>
+          <li data-cv="htb_2">Dokumentierte Writeups für retired Machines — github.com/JBMTP07/HTB-Writeups</li>
+          <li data-cv="htb_3">Betrieb eines lokalen Testlabors (Metasploitable, Vulnerable VMs)</li>
+          <li data-cv="htb_4">Eigene Methodik: Recon → Enumerate → Hypothesize → Validate → Escalate</li>
         </ul>
       </div>
 
       <div class="exp-item">
         <div class="exp-header">
-          <span class="exp-title">Studienmaterialien &amp; Methodik</span>
+          <span class="exp-title" data-cv="notes_title">Studienmaterialien &amp; Methodik</span>
         </div>
         <ul class="exp-bullets">
-          <li>Strukturierte Notizen zu Linux Privesc, AD-Angriffen (Kerberoasting, AS-REP Roasting, BloodHound), Nmap und Burp — github.com/JBMTP07/Study-Notes</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- SECURITY AWARENESS -->
-    <div class="cv-section">
-      <div class="cv-section-title">Security Awareness &amp; Bildung</div>
-      <div class="exp-item">
-        <div class="exp-header">
-          <span class="exp-title">Gastredner – KI &amp; Cybersecurity</span>
-          <span class="exp-date">seit 2024</span>
-        </div>
-        <ul class="exp-bullets">
-          <li>Ehrenamtliche Vorträge an bisher 5–10 Schulen für Schüler und Lehrkräfte</li>
-          <li>Themen: Large Language Models (LLMs), KI-Sicherheitsrisiken, Grundlagen Cybersecurity</li>
-          <li>Eigeninitiative, wachsendes Netzwerk an Schulkooperationen</li>
+          <li data-cv="notes_1">Strukturierte Notizen zu Linux Privesc, AD-Angriffen (Kerberoasting, AS-REP Roasting, BloodHound), Nmap und Burp — github.com/JBMTP07/Study-Notes</li>
         </ul>
       </div>
     </div>
 
-    <!-- ZERTIFIZIERUNGEN -->
     <div class="cv-section">
-      <div class="cv-section-title">Weiterbildung &amp; Zertifizierungen</div>
+      <div class="cv-section-title" data-cv="s_awareness">Security Awareness &amp; Bildung</div>
+      <div class="exp-item">
+        <div class="exp-header">
+          <span class="exp-title" data-cv="speak_title">Gastredner – KI &amp; Cybersecurity</span>
+          <span class="exp-date" data-cv="speak_date">seit 2024</span>
+        </div>
+        <ul class="exp-bullets">
+          <li data-cv="speak_1">Ehrenamtliche Vorträge an bisher 5–10 Schulen für Schüler und Lehrkräfte</li>
+          <li data-cv="speak_2">Themen: Large Language Models (LLMs), KI-Sicherheitsrisiken, Grundlagen Cybersecurity</li>
+          <li data-cv="speak_3">Eigeninitiative, wachsendes Netzwerk an Schulkooperationen</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="cv-section">
+      <div class="cv-section-title" data-cv="s_certs">Weiterbildung &amp; Zertifizierungen</div>
       <div class="certs-list">
         <span class="cert-chip">CompTIA Network+</span>
         <span class="cert-chip">CompTIA Security+</span>
@@ -370,64 +319,195 @@
         <span class="cert-chip">CompTIA PenTest+</span>
         <span class="cert-chip">EC-Council CEH v13</span>
       </div>
-      <p class="cert-note">Kurse abgeschlossen über New Horizons (zertifizierter Bildungsträger) · Prüfungen ab Mai 2026</p>
+      <p class="cert-note" data-cv="cert_note">Kurse abgeschlossen über New Horizons (zertifizierter Bildungsträger) · Prüfungen ab Mai 2026</p>
     </div>
 
-    <!-- BERUFSERFAHRUNG -->
     <div class="cv-section">
-      <div class="cv-section-title">Berufserfahrung</div>
+      <div class="cv-section-title" data-cv="s_work">Berufserfahrung</div>
 
       <div class="exp-item">
         <div class="exp-header">
-          <span class="exp-title">Selbstständiger Tätowierer</span>
-          <span class="exp-date">seit 01/2025</span>
+          <span class="exp-title" data-cv="w1_title">Selbstständiger Tätowierer</span>
+          <span class="exp-date" data-cv="w1_date">seit 01/2025</span>
         </div>
-        <p class="exp-company">Freiberuflich</p>
+        <p class="exp-company" data-cv="w1_company">Freiberuflich</p>
         <ul class="exp-bullets">
-          <li>Freiberufliche Tätigkeit parallel zur kontinuierlichen Weiterbildung in Cybersecurity und Bug-Bounty-Aktivitäten</li>
+          <li data-cv="w1_1">Freiberufliche Tätigkeit parallel zur kontinuierlichen Weiterbildung in Cybersecurity und Bug-Bounty-Aktivitäten</li>
         </ul>
       </div>
 
       <div class="exp-item">
         <div class="exp-header">
-          <span class="exp-title">Mechatroniker</span>
-          <span class="exp-date">2023</span>
+          <span class="exp-title" data-cv="w2_title">Mechatroniker</span>
+          <span class="exp-date" data-cv="w2_date">2023</span>
         </div>
-        <p class="exp-company">Rotan GmbH</p>
+        <p class="exp-company" data-cv="w2_company">Rotan GmbH</p>
         <ul class="exp-bullets">
-          <li>Wartung, Instandhaltung und Fehlerdiagnose industrieller Anlagen</li>
+          <li data-cv="w2_1">Wartung, Instandhaltung und Fehlerdiagnose industrieller Anlagen</li>
         </ul>
       </div>
 
       <div class="exp-item">
         <div class="exp-header">
-          <span class="exp-title">Stellvertretender Teamleiter</span>
-          <span class="exp-date">2023</span>
+          <span class="exp-title" data-cv="w3_title">Stellvertretender Teamleiter</span>
+          <span class="exp-date" data-cv="w3_date">2023</span>
         </div>
-        <p class="exp-company">Avedo Rostock</p>
+        <p class="exp-company" data-cv="w3_company">Avedo Rostock</p>
         <ul class="exp-bullets">
-          <li>Operative Führung, Teamkoordination und Qualitätssicherung</li>
+          <li data-cv="w3_1">Operative Führung, Teamkoordination und Qualitätssicherung</li>
         </ul>
       </div>
 
       <div class="exp-item">
         <div class="exp-header">
-          <span class="exp-title">Ausbildung Mechatroniker</span>
-          <span class="exp-date">2018–2022</span>
+          <span class="exp-title" data-cv="w4_title">Ausbildung Mechatroniker</span>
+          <span class="exp-date" data-cv="w4_date">2018–2022</span>
         </div>
-        <p class="exp-company">Consun Beet Company</p>
+        <p class="exp-company" data-cv="w4_company">Consun Beet Company</p>
         <ul class="exp-bullets">
-          <li>Schwerpunkte: SPS-Programmierung (Siemens S7), SCADA-Systeme, Industrieautomation, Elektroanlagen</li>
+          <li data-cv="w4_1">Schwerpunkte: SPS-Programmierung (Siemens S7), SCADA-Systeme, Industrieautomation, Elektroanlagen</li>
         </ul>
       </div>
     </div>
 
-    <!-- SPRACHEN -->
     <div class="cv-section">
-      <div class="cv-section-title">Sprachen</div>
-      <p class="lang-list">Deutsch (Muttersprache) · Englisch (fließend, technisch) · Russisch (Grundkenntnisse) · Japanisch (Grundkenntnisse)</p>
+      <div class="cv-section-title" data-cv="s_lang">Sprachen</div>
+      <p class="lang-list" data-cv="lang_list">Deutsch (Muttersprache) · Englisch (fließend, technisch) · Russisch (Grundkenntnisse) · Japanisch (Grundkenntnisse)</p>
     </div>
 
   </div>
+
+  <script>
+    const cv = {
+      de: {
+        title:      'Josef Basner – Lebenslauf',
+        back:       '← Zurück',
+        hint:       'Als <b>PDF</b> speichern: Strg+P → Ziel: „Als PDF speichern"',
+        printBtn:   '⬇ Als PDF speichern',
+        role:       'Penetration Tester · Red Teamer · Security Researcher',
+        loc:        'Deutschland · Remote weltweit',
+        s_profile:  'Profil',
+        profile:    'Penetration Tester mit praktischem Ansatz und breitem technischem Fundament. Seit 2020 aktiv in privaten Bug-Bounty-Programmen (HackerOne, Bugcrowd) — über 20 bestätigte Findings, darunter RCE, XSS und SQLi. Regelmäßige Praxis auf HackTheBox und im eigenen Security Lab. Laufender Zertifizierungspfad über New Horizons. Ehrenamtliche Vorträge zu KI-Sicherheit und Cybersecurity an Schulen. Hintergrund in industriellen Steuerungssystemen (Siemens S7, SCADA) aus der Mechatronik-Ausbildung.',
+        s_skills:   'Technische Schwerpunkte',
+        sk_net_label: 'Netzwerke',
+        sk_net_val:   'TCP/IP, DNS, DHCP, Subnetting, ARP',
+        sk_cloud_val: 'Docker, Terraform, CI/CD-Grundlagen',
+        sk_ot_val:    'Siemens S7 (SPS), SCADA-Grundlagen, Industriesteuerungen',
+        s_security: 'Praktische Security-Erfahrung',
+        bb_title:   'Bug Bounty Researcher',
+        bb_date:    'seit 2020',
+        bb_1:       'Teilnahme an privaten / invite-only Programmen via HackerOne und Bugcrowd',
+        bb_2:       'Über 20 bestätigte Findings, darunter RCE, XSS und SQLi',
+        bb_3:       'Schwerpunkte: Recon, Enumeration, Web- und API-Schwachstellenanalyse',
+        bb_4:       'Einhaltung programmspezifischer NDAs und Responsible Disclosure Guidelines',
+        htb_title:  'HackTheBox & Security Research Lab',
+        htb_1:      'Aktive Bearbeitung von Machines und Challenges auf HackTheBox',
+        htb_2:      'Dokumentierte Writeups für retired Machines — github.com/JBMTP07/HTB-Writeups',
+        htb_3:      'Betrieb eines lokalen Testlabors (Metasploitable, Vulnerable VMs)',
+        htb_4:      'Eigene Methodik: Recon → Enumerate → Hypothesize → Validate → Escalate',
+        notes_title:'Studienmaterialien & Methodik',
+        notes_1:    'Strukturierte Notizen zu Linux Privesc, AD-Angriffen (Kerberoasting, AS-REP Roasting, BloodHound), Nmap und Burp — github.com/JBMTP07/Study-Notes',
+        s_awareness:'Security Awareness & Bildung',
+        speak_title:'Gastredner – KI & Cybersecurity',
+        speak_date: 'seit 2024',
+        speak_1:    'Ehrenamtliche Vorträge an bisher 5–10 Schulen für Schüler und Lehrkräfte',
+        speak_2:    'Themen: Large Language Models (LLMs), KI-Sicherheitsrisiken, Grundlagen Cybersecurity',
+        speak_3:    'Eigeninitiative, wachsendes Netzwerk an Schulkooperationen',
+        s_certs:    'Weiterbildung & Zertifizierungen',
+        cert_note:  'Kurse abgeschlossen über New Horizons (zertifizierter Bildungsträger) · Prüfungen ab Mai 2026',
+        s_work:     'Berufserfahrung',
+        w1_title:   'Selbstständiger Tätowierer',
+        w1_date:    'seit 01/2025',
+        w1_company: 'Freiberuflich',
+        w1_1:       'Freiberufliche Tätigkeit parallel zur kontinuierlichen Weiterbildung in Cybersecurity und Bug-Bounty-Aktivitäten',
+        w2_title:   'Mechatroniker',
+        w2_date:    '2023',
+        w2_company: 'Rotan GmbH',
+        w2_1:       'Wartung, Instandhaltung und Fehlerdiagnose industrieller Anlagen',
+        w3_title:   'Stellvertretender Teamleiter',
+        w3_date:    '2023',
+        w3_company: 'Avedo Rostock',
+        w3_1:       'Operative Führung, Teamkoordination und Qualitätssicherung',
+        w4_title:   'Ausbildung Mechatroniker',
+        w4_date:    '2018–2022',
+        w4_company: 'Consun Beet Company',
+        w4_1:       'Schwerpunkte: SPS-Programmierung (Siemens S7), SCADA-Systeme, Industrieautomation, Elektroanlagen',
+        s_lang:     'Sprachen',
+        lang_list:  'Deutsch (Muttersprache) · Englisch (fließend, technisch) · Russisch (Grundkenntnisse) · Japanisch (Grundkenntnisse)',
+      },
+      en: {
+        title:      'Josef Basner – Resume',
+        back:       '← Back',
+        hint:       'Save as <b>PDF</b>: Ctrl+P → Destination: "Save as PDF"',
+        printBtn:   '⬇ Save as PDF',
+        role:       'Penetration Tester · Red Teamer · Security Researcher',
+        loc:        'Germany · Remote worldwide',
+        s_profile:  'Profile',
+        profile:    'Penetration tester with a hands-on approach and broad technical foundation. Actively participating in private bug bounty programs (HackerOne, Bugcrowd) since 2020 — 20+ valid findings including RCE, XSS, and SQLi vulnerabilities. Regular practice on HackTheBox and in a personal security lab. Ongoing certification path via New Horizons. Delivers voluntary talks on AI security and cybersecurity at schools. Background in industrial control systems (Siemens S7, SCADA) from mechatronics training.',
+        s_skills:   'Technical Skills',
+        sk_net_label: 'Networks',
+        sk_net_val:   'TCP/IP, DNS, DHCP, Subnetting, ARP',
+        sk_cloud_val: 'Docker, Terraform, CI/CD basics',
+        sk_ot_val:    'Siemens S7 (PLC), SCADA basics, industrial control systems',
+        s_security: 'Practical Security Experience',
+        bb_title:   'Bug Bounty Researcher',
+        bb_date:    'since 2020',
+        bb_1:       'Active participation in private / invite-only programs via HackerOne and Bugcrowd',
+        bb_2:       '20+ valid findings including RCE, XSS, and SQLi vulnerabilities',
+        bb_3:       'Focus: recon, enumeration, web and API vulnerability analysis',
+        bb_4:       'Adherence to program-specific NDAs and responsible disclosure guidelines',
+        htb_title:  'HackTheBox & Security Research Lab',
+        htb_1:      'Actively working through machines and challenges on HackTheBox',
+        htb_2:      'Documented writeups for retired machines — github.com/JBMTP07/HTB-Writeups',
+        htb_3:      'Running a local test lab (Metasploitable, Vulnerable VMs)',
+        htb_4:      'Own methodology: Recon → Enumerate → Hypothesize → Validate → Escalate',
+        notes_title:'Study Materials & Methodology',
+        notes_1:    'Structured notes on Linux PrivEsc, AD attacks (Kerberoasting, AS-REP Roasting, BloodHound), Nmap and Burp — github.com/JBMTP07/Study-Notes',
+        s_awareness:'Security Awareness & Education',
+        speak_title:'Guest Speaker – AI & Cybersecurity',
+        speak_date: 'since 2024',
+        speak_1:    'Voluntary talks at 5–10 schools for students and teachers',
+        speak_2:    'Topics: Large Language Models (LLMs), AI security risks, cybersecurity fundamentals',
+        speak_3:    'Self-initiated, growing network of school partnerships',
+        s_certs:    'Training & Certifications',
+        cert_note:  'Courses completed via New Horizons (certified training provider) · Exams from May 2026',
+        s_work:     'Work Experience',
+        w1_title:   'Freelance Tattoo Artist',
+        w1_date:    'since 01/2025',
+        w1_company: 'Self-employed',
+        w1_1:       'Freelance work running alongside ongoing cybersecurity training and bug bounty activity',
+        w2_title:   'Mechatronics Technician',
+        w2_date:    '2023',
+        w2_company: 'Rotan GmbH',
+        w2_1:       'Maintenance, troubleshooting and repair of industrial machinery and systems',
+        w3_title:   'Deputy Team Leader',
+        w3_date:    '2023',
+        w3_company: 'Avedo Rostock',
+        w3_1:       'Operational coordination, team management and quality assurance',
+        w4_title:   'Mechatronics Apprentice',
+        w4_date:    '2018–2022',
+        w4_company: 'Consun Beet Company',
+        w4_1:       'Focus: PLC programming (Siemens S7), SCADA systems, industrial automation, electrical systems',
+        s_lang:     'Languages',
+        lang_list:  'German (native) · English (fluent, technical) · Russian (basic) · Japanese (basic)',
+      }
+    };
+
+    const urlLang = new URLSearchParams(window.location.search).get('lang');
+    const lang = urlLang || localStorage.getItem('lang') || 'de';
+    const d = cv[lang] || cv.de;
+
+    document.title = d.title;
+    document.documentElement.lang = lang;
+
+    document.querySelectorAll('[data-cv]').forEach(el => {
+      const key = el.getAttribute('data-cv');
+      if (d[key] !== undefined) el.textContent = d[key];
+    });
+    document.querySelectorAll('[data-cv-html]').forEach(el => {
+      const key = el.getAttribute('data-cv-html');
+      if (d[key] !== undefined) el.innerHTML = d[key];
+    });
+  </script>
 </body>
 </html>
