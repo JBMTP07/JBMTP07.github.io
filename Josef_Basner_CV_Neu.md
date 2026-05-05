@@ -3,7 +3,8 @@
 **Email:** josefbasner@proton.me  
 **Telefon:** +49 151 4495 7240  
 **GitHub:** github.com/JBMTP07  
-**Website:** malicemtp07.github.io  
+**LinkedIn:** linkedin.com/in/josef-basner-23a3173b2  
+**Website:** jbmtp07.github.io  
 **Standort:** Deutschland · Remote weltweit möglich
 
 ---
@@ -89,7 +90,7 @@ Kali Linux, Ubuntu, Windows, grundlegende Active Directory-Umgebungen
 ## Berufserfahrung
 
 **Selbstständiger Tätowierer** *(seit 01/2025)*
-Freiberufliche Tätigkeit parallel zur kontinuierlichen Weiterbildung in Cybersecurity und Bug-Bounty-Aktivitäten.
+Selbstständige Tätigkeit mit eigenem Kundenstamm — parallel zur kontinuierlichen Weiterbildung in Cybersecurity und laufenden Bug-Bounty-Aktivitäten.
 
 **Mechatroniker | Rotan GmbH** *(2023)*
 Wartung, Instandhaltung und Fehlerdiagnose industrieller Anlagen.

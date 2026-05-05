@@ -3,19 +3,49 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Josef Basner – Penetration Tester & Bug Bounty Researcher" />
-  <title>Josef Basner | Penetration Tester</title>
+  <meta name="description" content="Josef Basner — Penetration Tester, Bug Bounty Researcher. 20+ confirmed findings since 2020. Verfügbar für Junior- und Trainee-Rollen." />
+  <meta name="theme-color" content="#0a0a0c" />
+
+  <title>Josef Basner — Penetration Tester</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700;900&family=JetBrains+Mono:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml" />
 </head>
 <body>
 
-  <!-- NAV -->
+  <!-- ======= AMBIENT LAYERS ======= -->
+  <canvas id="reishi" aria-hidden="true"></canvas>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
+  <div class="cursor-dot" id="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-ring" id="cursor-ring" aria-hidden="true"></div>
+
+  <!-- vertical kanji column (decorative, like manga panel margin) -->
+  <aside class="kanji-column" aria-hidden="true">
+    <span>真</span><span>打</span><span>·</span>
+    <span>浸</span><span>透</span><span>試</span><span>験</span>
+  </aside>
+
+  <!-- scroll progress rail -->
+  <div class="scroll-rail" aria-hidden="true"><span class="scroll-fill"></span></div>
+
+  <!-- ======= NAV ======= -->
   <nav id="navbar">
-    <a href="#hero" class="nav-logo">JB<span class="cursor-blink">_</span></a>
+    <a href="#hero" class="nav-logo" aria-label="Josef Basner — home">
+      <svg viewBox="0 0 120 120" width="36" height="36" aria-hidden="true">
+        <circle cx="60" cy="60" r="54" fill="none" stroke="currentColor" stroke-width="1.6"/>
+        <circle cx="60" cy="60" r="48" fill="none" stroke="currentColor" stroke-width="0.6" stroke-dasharray="2.2 3" opacity="0.45"/>
+        <line x1="93" y1="22" x2="106" y2="9" stroke="#a8001a" stroke-width="2.4" stroke-linecap="round"/>
+        <text x="60" y="74" text-anchor="middle" font-family="Noto Serif JP" font-size="48" font-weight="700" fill="currentColor" letter-spacing="-3">JB</text>
+        <line x1="47" y1="86" x2="73" y2="86" stroke="#a8001a" stroke-width="2.4" stroke-linecap="round"/>
+      </svg>
+      <span class="nav-mono">JB<span class="cursor-blink">_</span></span>
+    </a>
+
     <div class="nav-links">
       <a href="#about" data-i18n="nav_about">Über mich</a>
       <a href="#skills" data-i18n="nav_skills">Skills</a>
@@ -23,7 +53,14 @@
       <a href="talks.html" data-i18n="nav_talks">Talks</a>
       <a href="#contact" data-i18n="nav_contact">Kontakt</a>
     </div>
+
     <div class="nav-right">
+      <button id="audio-btn" class="icon-btn" aria-label="Toggle ambient sound" title="Sound">
+        <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+          <path class="snd-on" d="M5 9v6h4l5 5V4L9 9H5zm11.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4z" fill="currentColor"/>
+          <path class="snd-off" d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.21.05-.42.05-.63zM4.27 3 3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25-2.25 1.18v2.06a8.99 8.99 0 0 0 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3z" fill="currentColor"/>
+        </svg>
+      </button>
       <button id="lang-btn" aria-label="Switch language">EN</button>
       <button class="hamburger" id="hamburger" aria-label="Menu">
         <span></span><span></span><span></span>
@@ -31,7 +68,7 @@
     </div>
   </nav>
 
-  <!-- MOBILE MENU -->
+  <!-- mobile menu -->
   <div class="mobile-menu" id="mobile-menu">
     <a href="#about" data-i18n="nav_about">Über mich</a>
     <a href="#skills" data-i18n="nav_skills">Skills</a>
@@ -40,201 +77,237 @@
     <a href="#contact" data-i18n="nav_contact">Kontakt</a>
   </div>
 
-  <!-- HERO -->
+  <!-- ======= HERO ======= -->
   <section id="hero">
-    <div class="hero-bg-grid"></div>
-    <div class="hero-content fade-in">
-      <div class="hero-tag">// security researcher</div>
-      <h1 class="hero-name">Josef Basner</h1>
-      <div class="hero-role">
-        <span class="typing-text"></span><span class="typing-cursor">_</span>
+    <div class="hero-bg-kanji" aria-hidden="true">真</div>
+
+    <div class="hero-inner">
+      <div class="hero-meta">
+        <span class="meta-line"></span>
+        <span class="meta-text" data-i18n="hero_meta">SECURITY · RESEARCHER</span>
+        <span class="meta-line"></span>
       </div>
+
+      <h1 class="hero-name" id="hero-name">
+        <span class="name-part">Josef</span>
+        <span class="name-part">Basner</span>
+      </h1>
+
+      <p class="hero-role">
+        <span class="role-jp">浸透試験者 ·</span>
+        <span class="typing-text"></span><span class="typing-cursor">_</span>
+      </p>
+
       <p class="hero-tagline" data-i18n="hero_tagline">Ich breche Systeme. Bevor es andere tun.</p>
+
       <div class="hero-cta">
-        <a href="https://github.com/JBMTP07" target="_blank" rel="noopener" class="btn btn-primary">
-          <i class="fab fa-github"></i> GitHub
-        </a>
-        <a href="#contact" class="btn btn-outline" data-i18n="cta_contact">Kontakt</a>
-        <a href="cv.html" target="_blank" class="btn btn-ghost" id="cv-btn">
+        <a href="#contact" class="btn btn-primary" data-sound="bell" data-i18n="cta_contact">Kontakt</a>
+        <a href="cv.html" target="_blank" class="btn btn-outline" id="cv-btn" data-sound="tick">
           <i class="fa-solid fa-file-arrow-down"></i> <span data-i18n="cta_cv">Lebenslauf</span>
         </a>
+        <a href="https://github.com/JBMTP07" target="_blank" rel="noopener" class="btn btn-ghost" data-sound="tick">
+          <i class="fab fa-github"></i> GitHub
+        </a>
+      </div>
+
+      <div class="hero-quick">
+        <a href="https://www.linkedin.com/in/josef-basner-23a3173b2/" target="_blank" rel="noopener" class="quick-link" aria-label="LinkedIn">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+        <a href="https://github.com/JBMTP07" target="_blank" rel="noopener" class="quick-link" aria-label="GitHub">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="mailto:josefbasner@proton.me" class="quick-link" aria-label="Email">
+          <i class="fa-solid fa-envelope"></i>
+        </a>
       </div>
     </div>
-    <div class="hero-scroll">
-      <span>scroll</span>
+
+    <div class="hero-scroll" aria-hidden="true">
+      <span data-i18n="hero_scroll">SCROLL</span>
       <div class="scroll-bar"></div>
     </div>
+
+    <!-- decorative katana SVG — left edge (desktop only) -->
+    <svg class="hero-katana" viewBox="0 0 30 600" aria-hidden="true">
+      <line x1="15" y1="20" x2="15" y2="500" stroke="#3a3640" stroke-width="1.5"/>
+      <line x1="15" y1="20" x2="15" y2="500" stroke="#a8001a" stroke-width="0.4" opacity="0.5"/>
+      <rect x="11" y="500" width="8" height="4" fill="#5a4a2a"/>
+      <rect x="9" y="504" width="12" height="46" fill="#1a1a1c" stroke="#5a4a2a" stroke-width="0.6"/>
+      <circle cx="15" cy="528" r="2.5" fill="#a8001a"/>
+    </svg>
   </section>
 
-  <!-- ABOUT -->
+  <!-- ======= ABOUT ======= -->
   <section id="about">
+    <div class="ghost-kanji">紀</div>
     <div class="section-inner fade-in">
       <div class="section-header">
-        <span class="section-num">01.</span>
-        <h2 data-i18n="about_title">Über mich</h2>
-        <div class="section-line"></div>
+        <span class="section-num">壱 · I</span>
+        <h2 class="slash-in" data-i18n="about_title">Über mich</h2>
       </div>
-      <div class="terminal-card">
-        <div class="terminal-bar">
-          <div class="terminal-dots">
-            <span class="dot dot-red"></span>
-            <span class="dot dot-yellow"></span>
-            <span class="dot dot-green"></span>
+
+      <div class="about-grid">
+        <div class="terminal-card">
+          <div class="terminal-bar">
+            <div class="terminal-dots">
+              <span class="dot dot-red"></span>
+              <span class="dot dot-yellow"></span>
+              <span class="dot dot-green"></span>
+            </div>
+            <span class="terminal-title">~/whoami.sh</span>
           </div>
-          <span class="terminal-title">~/about.sh</span>
+          <div class="terminal-body">
+            <div class="terminal-line">
+              <span class="t-prompt">❯</span>
+              <span class="t-cmd">whoami</span>
+            </div>
+            <p class="t-output" data-i18n="about_whoami"></p>
+            <div class="terminal-line mt">
+              <span class="t-prompt">❯</span>
+              <span class="t-cmd">cat focus.txt</span>
+            </div>
+            <p class="t-output" data-i18n="about_focus"></p>
+            <div class="terminal-line mt">
+              <span class="t-prompt">❯</span>
+              <span class="blink-cursor">█</span>
+            </div>
+          </div>
         </div>
-        <div class="terminal-body">
-          <div class="terminal-line">
-            <span class="t-prompt">❯</span>
-            <span class="t-cmd">whoami</span>
+
+        <!-- stats column (vertical) -->
+        <div class="stats-vertical">
+          <div class="vstat">
+            <span class="vstat-num" data-count="20">20</span><span class="vstat-plus">+</span>
+            <span class="vstat-label" data-i18n="stat_findings">Bestätigte Findings</span>
           </div>
-          <p class="t-output" data-i18n="about_whoami"></p>
-          <div class="terminal-line mt">
-            <span class="t-prompt">❯</span>
-            <span class="t-cmd">cat focus.txt</span>
+          <div class="vstat">
+            <span class="vstat-num" data-count="2020">2020</span>
+            <span class="vstat-label" data-i18n="stat_since">Aktiv seit</span>
           </div>
-          <p class="t-output" data-i18n="about_focus"></p>
-          <div class="terminal-line mt">
-            <span class="t-prompt">❯</span>
-            <span class="blink-cursor">█</span>
+          <div class="vstat">
+            <span class="vstat-num accent">RCE · XSS · SQLi</span>
+            <span class="vstat-label" data-i18n="stat_classes">Vuln-Klassen</span>
+          </div>
+          <div class="vstat">
+            <span class="vstat-num">NDA</span>
+            <span class="vstat-label" data-i18n="stat_programs">Private Programme</span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- STATS -->
-  <div class="stats-wrapper">
-    <div class="stats-strip fade-in">
-      <div class="stat-item">
-        <span class="stat-num">20+</span>
-        <span class="stat-label" data-i18n="stat_findings">Bestätigte Findings</span>
-      </div>
-      <div class="stat-divider"></div>
-      <div class="stat-item">
-        <span class="stat-num stat-vuln">RCE · XSS · SQLi</span>
-        <span class="stat-label" data-i18n="stat_classes">Vuln-Klassen</span>
-      </div>
-      <div class="stat-divider"></div>
-      <div class="stat-item">
-        <span class="stat-num">2020</span>
-        <span class="stat-label" data-i18n="stat_since">Aktiv seit</span>
-      </div>
-      <div class="stat-divider"></div>
-      <div class="stat-item">
-        <span class="stat-num stat-red">NDA</span>
-        <span class="stat-label" data-i18n="stat_programs">Private Programme</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- SKILLS -->
+  <!-- ======= SKILLS / ARSENAL ======= -->
   <section id="skills">
+    <div class="ghost-kanji">刃</div>
     <div class="section-inner fade-in">
       <div class="section-header">
-        <span class="section-num">02.</span>
-        <h2 data-i18n="skills_title">Skills</h2>
-        <div class="section-line"></div>
+        <span class="section-num">弐 · II</span>
+        <h2 class="slash-in" data-i18n="skills_title">Skills</h2>
       </div>
+
       <div class="skills-grid">
 
-        <div class="skill-card">
+        <article class="skill-card" data-tilt>
           <div class="skill-card-header">
             <i class="fa-solid fa-crosshairs"></i>
             <h3 data-i18n="sk_offensive">Offensive Security</h3>
           </div>
-          <div class="skill-tags">
-            <span>Penetration Testing</span>
-            <span>Web &amp; API Testing</span>
-            <span>Bug Bounty</span>
-            <span>Recon &amp; Enumeration</span>
-            <span>Privilege Escalation</span>
-            <span>AD Attacks</span>
-          </div>
-        </div>
+          <ul class="skill-tags">
+            <li>Penetration Testing</li>
+            <li>Web &amp; API Testing</li>
+            <li>Bug Bounty</li>
+            <li>Recon &amp; Enumeration</li>
+            <li>Privilege Escalation</li>
+            <li>AD Attacks</li>
+          </ul>
+        </article>
 
-        <div class="skill-card">
+        <article class="skill-card" data-tilt>
           <div class="skill-card-header">
             <i class="fa-solid fa-toolbox"></i>
             <h3 data-i18n="sk_tools">Tools</h3>
           </div>
-          <div class="skill-tags">
-            <span>Burp Suite</span>
-            <span>Metasploit</span>
-            <span>Nmap</span>
-            <span>Wireshark</span>
-            <span>Hydra</span>
-            <span>Nessus</span>
-            <span>BloodHound</span>
-          </div>
-        </div>
+          <ul class="skill-tags">
+            <li>Burp Suite</li>
+            <li>Metasploit</li>
+            <li>Nmap</li>
+            <li>Wireshark</li>
+            <li>Hydra</li>
+            <li>Nessus</li>
+            <li>BloodHound</li>
+          </ul>
+        </article>
 
-        <div class="skill-card">
+        <article class="skill-card" data-tilt>
           <div class="skill-card-header">
             <i class="fa-solid fa-code"></i>
             <h3 data-i18n="sk_scripting">Scripting</h3>
           </div>
-          <div class="skill-tags">
-            <span>Python</span>
-            <span>Bash</span>
-            <span>JavaScript</span>
-          </div>
-        </div>
+          <ul class="skill-tags">
+            <li>Python</li>
+            <li>Bash</li>
+            <li>JavaScript</li>
+            <li>PowerShell</li>
+          </ul>
+        </article>
 
-        <div class="skill-card">
+        <article class="skill-card" data-tilt>
           <div class="skill-card-header">
             <i class="fa-solid fa-network-wired"></i>
             <h3 data-i18n="sk_networks">Netzwerke</h3>
           </div>
-          <div class="skill-tags">
-            <span>TCP/IP</span>
-            <span>DNS</span>
-            <span>DHCP</span>
-            <span>Subnetting</span>
-            <span>ARP</span>
-          </div>
-        </div>
+          <ul class="skill-tags">
+            <li>TCP/IP</li>
+            <li>DNS</li>
+            <li>DHCP</li>
+            <li>Subnetting</li>
+            <li>ARP</li>
+          </ul>
+        </article>
 
-        <div class="skill-card">
+        <article class="skill-card" data-tilt>
           <div class="skill-card-header">
             <i class="fa-brands fa-linux"></i>
             <h3 data-i18n="sk_os">Betriebssysteme</h3>
           </div>
-          <div class="skill-tags">
-            <span>Kali Linux</span>
-            <span>Ubuntu</span>
-            <span>Windows</span>
-            <span>Active Directory</span>
-          </div>
-        </div>
+          <ul class="skill-tags">
+            <li>Kali Linux</li>
+            <li>Ubuntu</li>
+            <li>Windows</li>
+            <li>Active Directory</li>
+          </ul>
+        </article>
 
-        <div class="skill-card">
+        <article class="skill-card" data-tilt>
           <div class="skill-card-header">
-            <i class="fa-solid fa-cloud"></i>
-            <h3 data-i18n="sk_cloud">Cloud &amp; DevOps</h3>
+            <i class="fa-solid fa-industry"></i>
+            <h3 data-i18n="sk_ot">OT / ICS</h3>
           </div>
-          <div class="skill-tags">
-            <span>Docker</span>
-            <span>Terraform</span>
-            <span>CI/CD</span>
-          </div>
-        </div>
+          <ul class="skill-tags">
+            <li>Siemens S7</li>
+            <li>SCADA</li>
+            <li>Industriesteuerungen</li>
+            <li>Feldbusse</li>
+          </ul>
+        </article>
 
       </div>
     </div>
   </section>
 
-  <!-- PROJECTS -->
+  <!-- ======= PROJECTS ======= -->
   <section id="projects">
+    <div class="ghost-kanji">戦</div>
     <div class="section-inner fade-in">
       <div class="section-header">
-        <span class="section-num">03.</span>
-        <h2 data-i18n="projects_title">Projekte</h2>
-        <div class="section-line"></div>
+        <span class="section-num">参 · III</span>
+        <h2 class="slash-in" data-i18n="projects_title">Projekte</h2>
       </div>
-      <div class="projects-grid">
 
-        <a href="https://github.com/JBMTP07/HTB-Writeups" target="_blank" rel="noopener" class="project-card">
+      <div class="projects-grid">
+        <a href="https://github.com/JBMTP07/HTB-Writeups" target="_blank" rel="noopener" class="project-card" data-tilt data-sound="tick">
           <div class="project-card-top">
             <i class="fa-solid fa-file-code"></i>
             <i class="fab fa-github project-github-icon"></i>
@@ -242,13 +315,11 @@
           <h3 data-i18n="proj_htb_title">HTB Writeups</h3>
           <p data-i18n="proj_htb_desc">Deutsche Writeups für retired HackTheBox Machines. Dokumentierte Methodik von Recon bis Post-Exploitation.</p>
           <div class="project-tags">
-            <span>Markdown</span>
-            <span>HackTheBox</span>
-            <span>Pentest</span>
+            <span>Markdown</span><span>HackTheBox</span><span>Pentest</span>
           </div>
         </a>
 
-        <a href="https://github.com/JBMTP07/Study-Notes" target="_blank" rel="noopener" class="project-card">
+        <a href="https://github.com/JBMTP07/Study-Notes" target="_blank" rel="noopener" class="project-card" data-tilt data-sound="tick">
           <div class="project-card-top">
             <i class="fa-solid fa-book-skull"></i>
             <i class="fab fa-github project-github-icon"></i>
@@ -256,102 +327,98 @@
           <h3 data-i18n="proj_notes_title">Study Notes</h3>
           <p data-i18n="proj_notes_desc">Strukturierte Methodik-Sammlung: Linux Privesc, AD-Angriffe, Nmap-Enumeration, Burp-Workflow und mehr.</p>
           <div class="project-tags">
-            <span>AD Attacks</span>
-            <span>Linux Privesc</span>
-            <span>Methodology</span>
+            <span>AD Attacks</span><span>Linux Privesc</span><span>Methodology</span>
           </div>
         </a>
 
-        <div class="project-card">
+        <div class="project-card" data-tilt>
           <div class="project-card-top">
             <i class="fa-solid fa-flask-vial"></i>
           </div>
           <h3 data-i18n="proj_lab_title">Security Homelab</h3>
           <p data-i18n="proj_lab_desc">Raspberry Pi-basiertes Testlabor mit Metasploitable und weiteren Vulnerable-Machine-Umgebungen für praktische Übungen.</p>
           <div class="project-tags">
-            <span>Raspberry Pi</span>
-            <span>Metasploitable</span>
-            <span>Lab</span>
+            <span>Raspberry Pi</span><span>Metasploitable</span><span>Lab</span>
           </div>
         </div>
 
-        <div class="project-card">
+        <div class="project-card" data-tilt>
           <div class="project-card-top">
             <i class="fa-solid fa-bug"></i>
           </div>
           <h3 data-i18n="proj_bb_title">Bug Bounty</h3>
           <p data-i18n="proj_bb_desc">Über 20 bestätigte Findings in privaten / invite-only Programmen via HackerOne und Bugcrowd seit 2020. Details unter NDA.</p>
           <div class="project-tags">
-            <span>HackerOne</span>
-            <span>Bugcrowd</span>
-            <span>Private</span>
-            <span class="tag-red">RCE</span>
-            <span class="tag-red">XSS</span>
-            <span class="tag-red">SQLi</span>
+            <span>HackerOne</span><span>Bugcrowd</span><span>Private</span>
+            <span class="tag-red">RCE</span><span class="tag-red">XSS</span><span class="tag-red">SQLi</span>
           </div>
         </div>
-
       </div>
     </div>
   </section>
 
-  <!-- TALKS -->
+  <!-- ======= TALKS ======= -->
   <section id="talks">
+    <div class="ghost-kanji">教</div>
     <div class="section-inner fade-in">
       <div class="section-header">
-        <span class="section-num">04.</span>
-        <h2 data-i18n="talks_title">Talks &amp; Bildung</h2>
-        <div class="section-line"></div>
+        <span class="section-num">肆 · IV</span>
+        <h2 class="slash-in" data-i18n="talks_title">Talks &amp; Bildung</h2>
       </div>
-      <div class="talks-card">
+
+      <a href="talks.html" class="talks-card" data-sound="tick">
         <div class="talks-icon">
           <i class="fa-solid fa-chalkboard-user"></i>
         </div>
         <div class="talks-content">
           <h3 data-i18n="talks_heading">Gastredner – KI &amp; Cybersecurity</h3>
-          <p data-i18n="talks_desc">Ehrenamtliche Vorträge an bisher 5–10 Schulen für Schüler und Lehrkräfte. Themen: Large Language Models (LLMs), KI-Sicherheitsrisiken und Grundlagen der Cybersecurity. Eigeninitiative, wachsendes Netzwerk an Schulkooperationen.</p>
+          <p data-i18n="talks_desc">Ehrenamtliche Vorträge an Schulen für Schüler und Lehrkräfte. Themen: Large Language Models (LLMs), KI-Sicherheitsrisiken und Grundlagen der Cybersecurity. Eigeninitiative, wachsendes Netzwerk an Schulkooperationen.</p>
           <div class="talks-tags">
-            <span data-i18n="talks_tag1">5–10 Schulen</span>
+            <span data-i18n="talks_tag1">Schulvorträge</span>
             <span>LLMs</span>
             <span data-i18n="talks_tag2">KI-Sicherheit</span>
             <span data-i18n="talks_tag3">Ehrenamtlich</span>
           </div>
+          <span class="talks-arrow">
+            <span data-i18n="talks_more">Mehr erfahren</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </span>
         </div>
-      </div>
+      </a>
     </div>
   </section>
 
-  <!-- CERTS -->
+  <!-- ======= CERTS ======= -->
   <section id="certs">
+    <div class="ghost-kanji">証</div>
     <div class="section-inner fade-in">
       <div class="section-header">
-        <span class="section-num">05.</span>
-        <h2 data-i18n="certs_title">Zertifizierungen</h2>
-        <div class="section-line"></div>
+        <span class="section-num">伍 · V</span>
+        <h2 class="slash-in" data-i18n="certs_title">Zertifizierungen</h2>
       </div>
       <p class="certs-sub" data-i18n="certs_sub">Kurse abgeschlossen über New Horizons (zertifizierter Bildungsträger). Prüfungen ab Mai 2026.</p>
       <div class="certs-grid">
-        <div class="cert-card">
+        <div class="cert-card" data-tilt>
           <div class="cert-logo">CompTIA</div>
           <div class="cert-name">Network+</div>
           <span class="cert-badge" data-i18n="cert_status">In Vorbereitung</span>
         </div>
-        <div class="cert-card">
+        <div class="cert-card" data-tilt>
           <div class="cert-logo">CompTIA</div>
           <div class="cert-name">Security+</div>
           <span class="cert-badge" data-i18n="cert_status">In Vorbereitung</span>
         </div>
-        <div class="cert-card">
+        <div class="cert-card" data-tilt>
           <div class="cert-logo">CompTIA</div>
           <div class="cert-name">Linux+</div>
           <span class="cert-badge" data-i18n="cert_status">In Vorbereitung</span>
         </div>
-        <div class="cert-card">
+        <div class="cert-card" data-tilt>
           <div class="cert-logo">CompTIA</div>
           <div class="cert-name">PenTest+</div>
           <span class="cert-badge" data-i18n="cert_status">In Vorbereitung</span>
         </div>
-        <div class="cert-card">
+        <div class="cert-card" data-tilt>
           <div class="cert-logo">EC-Council</div>
           <div class="cert-name">CEH v13</div>
           <span class="cert-badge" data-i18n="cert_status">In Vorbereitung</span>
@@ -360,35 +427,74 @@
     </div>
   </section>
 
-  <!-- CONTACT -->
+  <!-- ======= CONTACT ======= -->
   <section id="contact">
+    <div class="ghost-kanji">縁</div>
     <div class="section-inner fade-in">
       <div class="section-header">
-        <span class="section-num">06.</span>
-        <h2 data-i18n="contact_title">Kontakt</h2>
-        <div class="section-line"></div>
+        <span class="section-num">陸 · VI</span>
+        <h2 class="slash-in" data-i18n="contact_title">Kontakt</h2>
       </div>
       <p class="contact-sub" data-i18n="contact_sub">Offen für Junior-Positionen, Trainee-Programme und Security-Projekte.</p>
-      <div class="contact-links">
-        <a href="mailto:josefbasner@proton.me" class="contact-item">
+
+      <div class="contact-grid">
+        <a href="mailto:josefbasner@proton.me?subject=Bewerbung%20%2F%20Inquiry" class="contact-card" data-sound="bell">
+          <span class="cc-num">01</span>
           <i class="fa-solid fa-envelope"></i>
-          <span>josefbasner@proton.me</span>
+          <div>
+            <span class="cc-label">EMAIL</span>
+            <span class="cc-val">josefbasner@proton.me</span>
+          </div>
         </a>
-        <a href="https://github.com/JBMTP07" target="_blank" rel="noopener" class="contact-item">
+
+        <a href="https://www.linkedin.com/in/josef-basner-23a3173b2/" target="_blank" rel="noopener" class="contact-card" data-sound="tick">
+          <span class="cc-num">02</span>
+          <i class="fa-brands fa-linkedin-in"></i>
+          <div>
+            <span class="cc-label">LINKEDIN</span>
+            <span class="cc-val">in/josef-basner</span>
+          </div>
+        </a>
+
+        <a href="https://github.com/JBMTP07" target="_blank" rel="noopener" class="contact-card" data-sound="tick">
+          <span class="cc-num">03</span>
           <i class="fab fa-github"></i>
-          <span>github.com/JBMTP07</span>
+          <div>
+            <span class="cc-label">GITHUB</span>
+            <span class="cc-val">JBMTP07</span>
+          </div>
         </a>
-        <div class="contact-item contact-location">
+
+        <div class="contact-card static">
+          <span class="cc-num">04</span>
           <i class="fa-solid fa-location-dot"></i>
-          <span data-i18n="contact_location">Deutschland · Remote weltweit</span>
+          <div>
+            <span class="cc-label" data-i18n="contact_loc_label">STANDORT</span>
+            <span class="cc-val" data-i18n="contact_location">Deutschland · Remote weltweit</span>
+          </div>
         </div>
+      </div>
+
+      <div class="contact-langs">
+        <span class="cl-label" data-i18n="lang_label">SPRACHEN</span>
+        <span class="cl-list" data-i18n="lang_list">DE · EN · RU (Grundkenntnisse) · JP (Grundkenntnisse)</span>
       </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
+  <!-- ======= FOOTER ======= -->
   <footer>
-    <p>Josef Basner · 2026 · <span data-i18n="footer_text">Gebaut mit HTML, CSS &amp; JS</span></p>
+    <div class="footer-inner">
+      <div class="footer-mark" aria-hidden="true">
+        <svg viewBox="0 0 120 120" width="42" height="42">
+          <circle cx="60" cy="60" r="54" fill="none" stroke="currentColor" stroke-width="1.6" opacity="0.5"/>
+          <text x="60" y="74" text-anchor="middle" font-family="Noto Serif JP" font-size="48" font-weight="700" fill="currentColor" letter-spacing="-3" opacity="0.7">JB</text>
+          <line x1="47" y1="86" x2="73" y2="86" stroke="#a8001a" stroke-width="2.4" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <p class="footer-line">Josef Basner · <span id="year"></span> · <span data-i18n="footer_text">Mit Geduld erschaffen</span></p>
+      <p class="footer-quote" data-i18n="footer_quote">「強さとは、刃に出会わぬ刃のこと」</p>
+    </div>
   </footer>
 
   <script src="script.js"></script>

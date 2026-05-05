@@ -6,246 +6,401 @@
   <title>Josef Basner – Lebenslauf</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --cyan: #00c8e0;
-      --red:  #e8274b;
-      --text: #111827;
-      --muted: #6b7280;
-      --border: #e5e7eb;
-      --bg: #f9fafb;
-      --mono: 'JetBrains Mono', monospace;
-      --sans: 'Inter', sans-serif;
+      --crimson: #a8001a;
+      --ink:     #0a0a0c;
+      --text:    #1a1a1c;
+      --muted:   #6b6b72;
+      --dim:     #9a9aa2;
+      --border:  #e4e2dd;
+      --bg:      #f7f5ee;
+      --paper:   #fdfcf7;
+      --mono:    'JetBrains Mono', monospace;
+      --jp:      'Noto Serif JP', serif;
+      --sans:    'Inter', sans-serif;
     }
 
     body {
       background: var(--bg);
       font-family: var(--sans);
       color: var(--text);
-      font-size: 15px;
+      font-size: 14.5px;
       line-height: 1.6;
     }
 
+    /* ===== TOP BAR ===== */
     .print-bar {
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 99;
-      background: #111827;
+      background: var(--ink);
       padding: 0.7rem 2rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      box-shadow: 0 2px 14px rgba(0,0,0,0.15);
+    }
+    .print-bar-left {
+      display: flex; align-items: center; gap: 1.2rem;
     }
     .print-bar span {
       font-family: var(--mono);
-      font-size: 0.75rem;
-      color: #9ca3af;
+      font-size: 0.74rem;
+      color: #9a9aa2;
     }
-    .print-bar span b { color: var(--cyan); }
+    .print-bar span b { color: #e8e3d6; }
+
     .print-btn {
-      background: var(--cyan);
-      color: #111827;
-      border: none;
-      padding: 0.45rem 1.2rem;
-      border-radius: 6px;
+      background: var(--crimson);
+      color: #f7f5ee;
+      border: 1px solid var(--crimson);
+      padding: 0.5rem 1.3rem;
+      border-radius: 4px;
       font-family: var(--mono);
-      font-size: 0.78rem;
+      font-size: 0.74rem;
       font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
       cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 0.4rem;
-      transition: opacity 0.2s;
+      gap: 0.45rem;
+      transition: all 0.25s ease;
     }
-    .print-btn:hover { opacity: 0.85; }
+    .print-btn:hover { background: transparent; color: #f7f5ee; box-shadow: 0 0 16px rgba(168,0,26,0.4); }
+
     .back-btn {
       background: transparent;
-      color: #6b7280;
-      border: 1px solid #374151;
-      padding: 0.4rem 1rem;
-      border-radius: 6px;
+      color: #9a9aa2;
+      border: 1px solid #2a2a30;
+      padding: 0.42rem 1rem;
+      border-radius: 4px;
       font-family: var(--mono);
-      font-size: 0.75rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
       cursor: pointer;
       text-decoration: none;
-      transition: color 0.2s;
+      transition: all 0.25s ease;
     }
-    .back-btn:hover { color: #e5e7eb; }
+    .back-btn:hover { color: #e8e3d6; border-color: #e8e3d6; }
 
+    /* ===== PAGE ===== */
     .page {
-      max-width: 800px;
+      max-width: 820px;
       margin: 5rem auto 4rem;
-      background: #fff;
-      padding: 3.5rem 4rem;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 8px 32px rgba(0,0,0,0.06);
+      background: var(--paper);
+      padding: 3.6rem 4rem 4rem;
+      box-shadow:
+        0 1px 3px rgba(0,0,0,0.05),
+        0 12px 40px rgba(0,0,0,0.08);
       border-radius: 4px;
+      position: relative;
+      overflow: hidden;
+    }
+    /* paper subtle texture */
+    .page::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(rgba(0,0,0,0.012) 1px, transparent 1px),
+        radial-gradient(rgba(0,0,0,0.008) 1px, transparent 1px);
+      background-size: 4px 4px, 7px 7px;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .page > * { position: relative; z-index: 1; }
+
+    /* big watermark kanji */
+    .page::after {
+      content: '真';
+      position: absolute;
+      right: -20px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: var(--jp);
+      font-weight: 900;
+      font-size: 460px;
+      color: var(--crimson);
+      opacity: 0.025;
+      line-height: 1;
+      pointer-events: none;
+      z-index: 0;
+      user-select: none;
     }
 
+    /* ===== HEADER ===== */
     .cv-header {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      margin-bottom: 2rem;
+      margin-bottom: 2.2rem;
       padding-bottom: 1.5rem;
       border-bottom: 2px solid var(--text);
+      position: relative;
     }
+    .cv-header::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 0;
+      width: 80px; height: 2px;
+      background: var(--crimson);
+    }
+    .cv-header-left { display: flex; align-items: flex-start; gap: 1.2rem; }
+
+    .cv-mark { flex-shrink: 0; }
+    .cv-mark svg {
+      width: 56px; height: 56px;
+      color: var(--text);
+    }
+
     .cv-name {
+      font-family: var(--jp);
       font-size: 2rem;
       font-weight: 700;
       letter-spacing: -0.5px;
-      line-height: 1.1;
+      line-height: 1.05;
+      color: var(--text);
     }
     .cv-role {
       font-family: var(--mono);
-      font-size: 0.78rem;
-      color: var(--cyan);
-      margin-top: 0.35rem;
-      letter-spacing: 1px;
+      font-size: 0.74rem;
+      color: var(--crimson);
+      margin-top: 0.45rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-weight: 500;
     }
     .cv-contact {
       text-align: right;
-      font-size: 0.8rem;
-      color: var(--muted);
-      line-height: 1.9;
-    }
-    .cv-contact a { color: var(--muted); text-decoration: none; }
-
-    .cv-section { margin-bottom: 1.8rem; }
-    .cv-section-title {
       font-family: var(--mono);
-      font-size: 0.68rem;
-      font-weight: 500;
-      letter-spacing: 2px;
-      text-transform: uppercase;
+      font-size: 0.72rem;
       color: var(--muted);
-      margin-bottom: 0.8rem;
-      padding-bottom: 0.35rem;
+      line-height: 1.85;
+      letter-spacing: 0.02em;
+    }
+    .cv-contact a { color: var(--text); text-decoration: none; }
+    .cv-contact a:hover { color: var(--crimson); }
+    .cv-contact .ic {
+      display: inline-block;
+      width: 12px;
+      color: var(--crimson);
+      margin-right: 4px;
+    }
+
+    /* ===== SECTION ===== */
+    .cv-section { margin-bottom: 1.7rem; }
+    .cv-section-title {
+      display: flex;
+      align-items: baseline;
+      gap: 0.7rem;
+      margin-bottom: 0.85rem;
+      padding-bottom: 0.4rem;
       border-bottom: 1px solid var(--border);
+    }
+    .cv-section-title .num {
+      font-family: var(--jp);
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--crimson);
+      letter-spacing: 0.14em;
+    }
+    .cv-section-title .label {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text);
     }
 
     .cv-profile {
-      font-size: 0.875rem;
-      color: #374151;
-      line-height: 1.7;
+      font-size: 0.88rem;
+      color: #2c2c30;
+      line-height: 1.75;
     }
 
     .skills-grid {
       display: grid;
-      grid-template-columns: 120px 1fr;
-      gap: 0.4rem 1rem;
-      font-size: 0.825rem;
+      grid-template-columns: 110px 1fr;
+      gap: 0.5rem 1rem;
+      font-size: 0.83rem;
     }
-    .skill-label { font-weight: 600; color: var(--text); }
-    .skill-value { color: #374151; }
+    .skill-label {
+      font-family: var(--mono);
+      font-weight: 500;
+      font-size: 0.75rem;
+      color: var(--crimson);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .skill-value { color: #2c2c30; }
 
-    .exp-item { margin-bottom: 1.2rem; }
+    /* ===== EXP ===== */
+    .exp-item { margin-bottom: 1.1rem; }
     .exp-header {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
       margin-bottom: 0.2rem;
+      gap: 1rem;
     }
-    .exp-title { font-weight: 600; font-size: 0.9rem; }
+    .exp-title {
+      font-weight: 600;
+      font-size: 0.92rem;
+      color: var(--text);
+    }
     .exp-date {
       font-family: var(--mono);
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       color: var(--muted);
+      letter-spacing: 0.1em;
       flex-shrink: 0;
+      white-space: nowrap;
     }
     .exp-company {
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       color: var(--muted);
-      margin-bottom: 0.35rem;
+      margin-bottom: 0.4rem;
+      font-style: italic;
     }
     .exp-bullets { list-style: none; padding: 0; }
     .exp-bullets li {
-      font-size: 0.825rem;
-      color: #374151;
+      font-size: 0.83rem;
+      color: #2c2c30;
       padding-left: 1rem;
       position: relative;
-      line-height: 1.6;
+      line-height: 1.7;
     }
     .exp-bullets li::before {
       content: '–';
       position: absolute;
       left: 0;
-      color: var(--muted);
+      color: var(--crimson);
+      font-weight: 600;
     }
 
-    .certs-list { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    /* ===== CERTS ===== */
+    .certs-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+    }
     .cert-chip {
       font-family: var(--mono);
       font-size: 0.72rem;
-      padding: 0.25rem 0.65rem;
-      border-radius: 4px;
+      padding: 0.28rem 0.7rem;
+      border-radius: 3px;
       border: 1px solid var(--border);
       color: var(--text);
       background: var(--bg);
+      letter-spacing: 0.04em;
     }
     .cert-note {
       margin-top: 0.6rem;
-      font-size: 0.78rem;
+      font-family: var(--mono);
+      font-size: 0.74rem;
       color: var(--muted);
     }
 
-    .lang-list { font-size: 0.825rem; color: #374151; }
-    .accent { color: var(--cyan); }
+    .lang-list { font-size: 0.84rem; color: #2c2c30; }
+    .accent { color: var(--crimson); }
 
+    /* ===== PRINT ===== */
     @media print {
-      @page { margin: 18mm 20mm; size: A4; }
-      body { background: #fff; font-size: 13px; }
+      @page { margin: 16mm 18mm; size: A4; }
+      body { background: #fff; font-size: 10.5pt; }
       .print-bar { display: none !important; }
-      .page { max-width: 100%; margin: 0; padding: 0; box-shadow: none; border-radius: 0; }
-      .cv-name { font-size: 1.7rem; }
-      a { color: inherit !important; }
-      .exp-item { page-break-inside: avoid; }
-      .cv-section { page-break-inside: avoid; }
+      .page {
+        max-width: 100%;
+        margin: 0;
+        padding: 0;
+        box-shadow: none;
+        border-radius: 0;
+        background: #fff;
+      }
+      .page::before, .page::after { display: none; }
+      .cv-name { font-size: 22pt; }
+      .cv-mark svg { width: 44px; height: 44px; }
+      a { color: inherit !important; text-decoration: none; }
+      .exp-item, .cv-section { page-break-inside: avoid; }
+      .cv-section { margin-bottom: 0.9rem; }
+    }
+
+    @media (max-width: 720px) {
+      .page { padding: 2rem 1.6rem; margin: 4rem 0.8rem 2rem; }
+      .cv-header { flex-direction: column; gap: 1rem; }
+      .cv-contact { text-align: left; }
+      .cv-name { font-size: 1.5rem; }
+      .skills-grid { grid-template-columns: 1fr; gap: 0.2rem 1rem; }
+      .skills-grid .skill-label { margin-top: 0.4rem; }
+      .print-bar { padding: 0.6rem 1rem; flex-wrap: wrap; gap: 0.6rem; }
+      .print-bar-left { gap: 0.7rem; }
+      .print-bar span { display: none; }
     }
   </style>
 </head>
 <body>
 
   <div class="print-bar">
-    <div style="display:flex;align-items:center;gap:1.2rem">
+    <div class="print-bar-left">
       <a href="index.html" class="back-btn" data-cv="back">← Zurück</a>
-      <span data-cv-html="hint">Als <b>PDF</b> speichern: Strg+P → Ziel: „Als PDF speichern"</span>
+      <span data-cv-html="hint">Auch als <b>fertiges PDF</b> verfügbar — direkt herunterladen.</span>
     </div>
-    <button class="print-btn" onclick="window.print()" data-cv="printBtn">⬇ Als PDF speichern</button>
+    <a class="print-btn" href="Josef_Basner_CV_DE.pdf" download id="pdf-link" data-cv="printBtn">⬇ PDF</a>
   </div>
 
   <div class="page">
 
     <div class="cv-header">
-      <div>
-        <div class="cv-name">Josef Roland Basner</div>
-        <div class="cv-role" data-cv="role">Penetration Tester · Red Teamer · Security Researcher</div>
+      <div class="cv-header-left">
+        <div class="cv-mark" aria-hidden="true">
+          <svg viewBox="0 0 120 120">
+            <circle cx="60" cy="60" r="54" fill="none" stroke="currentColor" stroke-width="1.8"/>
+            <circle cx="60" cy="60" r="48" fill="none" stroke="currentColor" stroke-width="0.6" stroke-dasharray="2.2 3" opacity="0.4"/>
+            <line x1="93" y1="22" x2="106" y2="9" stroke="#a8001a" stroke-width="2.4" stroke-linecap="round"/>
+            <text x="60" y="74" text-anchor="middle" font-family="Noto Serif JP" font-size="48" font-weight="700" fill="currentColor" letter-spacing="-3">JB</text>
+            <line x1="47" y1="86" x2="73" y2="86" stroke="#a8001a" stroke-width="2.4" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div>
+          <div class="cv-name">Josef Roland Basner</div>
+          <div class="cv-role" data-cv="role">Penetration Tester · Red Teamer · Security Researcher</div>
+        </div>
       </div>
       <div class="cv-contact">
-        <a href="mailto:josefbasner@proton.me">josefbasner@proton.me</a><br>
-        +49 151 4495 7240<br>
-        <a href="https://github.com/JBMTP07">github.com/JBMTP07</a><br>
-        <a href="https://jbmtp07.github.io">jbmtp07.github.io</a><br>
-        <span data-cv="loc">Deutschland · Remote weltweit</span>
+        <a href="mailto:josefbasner@proton.me"><span class="ic">✉</span>josefbasner@proton.me</a><br>
+        <span><span class="ic">☎</span>+49 151 4495 7240</span><br>
+        <a href="https://github.com/JBMTP07"><span class="ic">⌥</span>github.com/JBMTP07</a><br>
+        <a href="https://www.linkedin.com/in/josef-basner-23a3173b2/"><span class="ic">in</span>linkedin.com/in/josef-basner</a><br>
+        <a href="https://jbmtp07.github.io"><span class="ic">⌂</span>jbmtp07.github.io</a><br>
+        <span><span class="ic">◉</span><span data-cv="loc">Deutschland · Remote weltweit</span></span>
       </div>
     </div>
 
     <div class="cv-section">
-      <div class="cv-section-title" data-cv="s_profile">Profil</div>
+      <div class="cv-section-title">
+        <span class="num">壱</span><span class="label" data-cv="s_profile">Profil</span>
+      </div>
       <p class="cv-profile" data-cv="profile">Penetration Tester mit praktischem Ansatz und breitem technischem Fundament. Seit 2020 aktiv in privaten Bug-Bounty-Programmen (HackerOne, Bugcrowd) — über 20 bestätigte Findings, darunter RCE, XSS und SQLi. Regelmäßige Praxis auf HackTheBox und im eigenen Security Lab. Laufender Zertifizierungspfad über New Horizons. Ehrenamtliche Vorträge zu KI-Sicherheit und Cybersecurity an Schulen. Hintergrund in industriellen Steuerungssystemen (Siemens S7, SCADA) aus der Mechatronik-Ausbildung.</p>
     </div>
 
     <div class="cv-section">
-      <div class="cv-section-title" data-cv="s_skills">Technische Schwerpunkte</div>
+      <div class="cv-section-title">
+        <span class="num">弐</span><span class="label" data-cv="s_skills">Technische Schwerpunkte</span>
+      </div>
       <div class="skills-grid">
         <span class="skill-label">Offensive</span>
         <span class="skill-value">Penetration Testing, Web- &amp; API-Testing, Recon &amp; Enumeration, Privilege Escalation, AD Attacks</span>
         <span class="skill-label">Tools</span>
         <span class="skill-value">Burp Suite, Metasploit, Nmap, Wireshark, Hydra, Nessus, BloodHound</span>
         <span class="skill-label">Scripting</span>
-        <span class="skill-value">Python, Bash, JavaScript</span>
+        <span class="skill-value">Python, Bash, JavaScript, PowerShell</span>
         <span class="skill-label" data-cv="sk_net_label">Netzwerke</span>
         <span class="skill-value" data-cv="sk_net_val">TCP/IP, DNS, DHCP, Subnetting, ARP</span>
         <span class="skill-label">OS</span>
@@ -258,7 +413,9 @@
     </div>
 
     <div class="cv-section">
-      <div class="cv-section-title" data-cv="s_security">Praktische Security-Erfahrung</div>
+      <div class="cv-section-title">
+        <span class="num">参</span><span class="label" data-cv="s_security">Praktische Security-Erfahrung</span>
+      </div>
 
       <div class="exp-item">
         <div class="exp-header">
@@ -296,14 +453,16 @@
     </div>
 
     <div class="cv-section">
-      <div class="cv-section-title" data-cv="s_awareness">Security Awareness &amp; Bildung</div>
+      <div class="cv-section-title">
+        <span class="num">肆</span><span class="label" data-cv="s_awareness">Security Awareness &amp; Bildung</span>
+      </div>
       <div class="exp-item">
         <div class="exp-header">
           <span class="exp-title" data-cv="speak_title">Gastredner – KI &amp; Cybersecurity</span>
           <span class="exp-date" data-cv="speak_date">seit 2024</span>
         </div>
         <ul class="exp-bullets">
-          <li data-cv="speak_1">Ehrenamtliche Vorträge an bisher 5–10 Schulen für Schüler und Lehrkräfte</li>
+          <li data-cv="speak_1">Ehrenamtliche Vorträge an Schulen für Schüler und Lehrkräfte</li>
           <li data-cv="speak_2">Themen: Large Language Models (LLMs), KI-Sicherheitsrisiken, Grundlagen Cybersecurity</li>
           <li data-cv="speak_3">Eigeninitiative, wachsendes Netzwerk an Schulkooperationen</li>
         </ul>
@@ -311,7 +470,9 @@
     </div>
 
     <div class="cv-section">
-      <div class="cv-section-title" data-cv="s_certs">Weiterbildung &amp; Zertifizierungen</div>
+      <div class="cv-section-title">
+        <span class="num">伍</span><span class="label" data-cv="s_certs">Weiterbildung &amp; Zertifizierungen</span>
+      </div>
       <div class="certs-list">
         <span class="cert-chip">CompTIA Network+</span>
         <span class="cert-chip">CompTIA Security+</span>
@@ -323,7 +484,9 @@
     </div>
 
     <div class="cv-section">
-      <div class="cv-section-title" data-cv="s_work">Berufserfahrung</div>
+      <div class="cv-section-title">
+        <span class="num">陸</span><span class="label" data-cv="s_work">Berufserfahrung</span>
+      </div>
 
       <div class="exp-item">
         <div class="exp-header">
@@ -332,7 +495,7 @@
         </div>
         <p class="exp-company" data-cv="w1_company">Freiberuflich</p>
         <ul class="exp-bullets">
-          <li data-cv="w1_1">Freiberufliche Tätigkeit parallel zur kontinuierlichen Weiterbildung in Cybersecurity und Bug-Bounty-Aktivitäten</li>
+          <li data-cv="w1_1">Selbstständige Tätigkeit mit eigenem Kundenstamm — parallel zur kontinuierlichen Weiterbildung in Cybersecurity und laufenden Bug-Bounty-Aktivitäten</li>
         </ul>
       </div>
 
@@ -371,7 +534,9 @@
     </div>
 
     <div class="cv-section">
-      <div class="cv-section-title" data-cv="s_lang">Sprachen</div>
+      <div class="cv-section-title">
+        <span class="num">漆</span><span class="label" data-cv="s_lang">Sprachen</span>
+      </div>
       <p class="lang-list" data-cv="lang_list">Deutsch (Muttersprache) · Englisch (fließend, technisch) · Russisch (Grundkenntnisse) · Japanisch (Grundkenntnisse)</p>
     </div>
 
@@ -380,37 +545,37 @@
   <script>
     const cv = {
       de: {
-        title:      'Josef Basner – Lebenslauf',
-        back:       '← Zurück',
-        hint:       'Als <b>PDF</b> speichern: Strg+P → Ziel: „Als PDF speichern"',
-        printBtn:   '⬇ Als PDF speichern',
-        role:       'Penetration Tester · Red Teamer · Security Researcher',
-        loc:        'Deutschland · Remote weltweit',
-        s_profile:  'Profil',
-        profile:    'Penetration Tester mit praktischem Ansatz und breitem technischem Fundament. Seit 2020 aktiv in privaten Bug-Bounty-Programmen (HackerOne, Bugcrowd) — über 20 bestätigte Findings, darunter RCE, XSS und SQLi. Regelmäßige Praxis auf HackTheBox und im eigenen Security Lab. Laufender Zertifizierungspfad über New Horizons. Ehrenamtliche Vorträge zu KI-Sicherheit und Cybersecurity an Schulen. Hintergrund in industriellen Steuerungssystemen (Siemens S7, SCADA) aus der Mechatronik-Ausbildung.',
-        s_skills:   'Technische Schwerpunkte',
+        title:    'Josef Basner – Lebenslauf',
+        back:     '← Zurück',
+        hint:     'Auch als <b>fertiges PDF</b> verfügbar — direkt herunterladen.',
+        printBtn: '⬇ PDF',
+        role:     'Penetration Tester · Red Teamer · Security Researcher',
+        loc:      'Deutschland · Remote weltweit',
+        s_profile:'Profil',
+        profile:  'Penetration Tester mit praktischem Ansatz und breitem technischem Fundament. Seit 2020 aktiv in privaten Bug-Bounty-Programmen (HackerOne, Bugcrowd) — über 20 bestätigte Findings, darunter RCE, XSS und SQLi. Regelmäßige Praxis auf HackTheBox und im eigenen Security Lab. Laufender Zertifizierungspfad über New Horizons. Ehrenamtliche Vorträge zu KI-Sicherheit und Cybersecurity an Schulen. Hintergrund in industriellen Steuerungssystemen (Siemens S7, SCADA) aus der Mechatronik-Ausbildung.',
+        s_skills: 'Technische Schwerpunkte',
         sk_net_label: 'Netzwerke',
         sk_net_val:   'TCP/IP, DNS, DHCP, Subnetting, ARP',
         sk_cloud_val: 'Docker, Terraform, CI/CD-Grundlagen',
         sk_ot_val:    'Siemens S7 (SPS), SCADA-Grundlagen, Industriesteuerungen',
-        s_security: 'Praktische Security-Erfahrung',
-        bb_title:   'Bug Bounty Researcher',
-        bb_date:    'seit 2020',
-        bb_1:       'Teilnahme an privaten / invite-only Programmen via HackerOne und Bugcrowd',
-        bb_2:       'Über 20 bestätigte Findings, darunter RCE, XSS und SQLi',
-        bb_3:       'Schwerpunkte: Recon, Enumeration, Web- und API-Schwachstellenanalyse',
-        bb_4:       'Einhaltung programmspezifischer NDAs und Responsible Disclosure Guidelines',
-        htb_title:  'HackTheBox & Security Research Lab',
-        htb_1:      'Aktive Bearbeitung von Machines und Challenges auf HackTheBox',
-        htb_2:      'Dokumentierte Writeups für retired Machines — github.com/JBMTP07/HTB-Writeups',
-        htb_3:      'Betrieb eines lokalen Testlabors (Metasploitable, Vulnerable VMs)',
-        htb_4:      'Eigene Methodik: Recon → Enumerate → Hypothesize → Validate → Escalate',
+        s_security:'Praktische Security-Erfahrung',
+        bb_title: 'Bug Bounty Researcher',
+        bb_date:  'seit 2020',
+        bb_1:     'Teilnahme an privaten / invite-only Programmen via HackerOne und Bugcrowd',
+        bb_2:     'Über 20 bestätigte Findings, darunter RCE, XSS und SQLi',
+        bb_3:     'Schwerpunkte: Recon, Enumeration, Web- und API-Schwachstellenanalyse',
+        bb_4:     'Einhaltung programmspezifischer NDAs und Responsible Disclosure Guidelines',
+        htb_title:'HackTheBox & Security Research Lab',
+        htb_1:    'Aktive Bearbeitung von Machines und Challenges auf HackTheBox',
+        htb_2:    'Dokumentierte Writeups für retired Machines — github.com/JBMTP07/HTB-Writeups',
+        htb_3:    'Betrieb eines lokalen Testlabors (Metasploitable, Vulnerable VMs)',
+        htb_4:    'Eigene Methodik: Recon → Enumerate → Hypothesize → Validate → Escalate',
         notes_title:'Studienmaterialien & Methodik',
         notes_1:    'Strukturierte Notizen zu Linux Privesc, AD-Angriffen (Kerberoasting, AS-REP Roasting, BloodHound), Nmap und Burp — github.com/JBMTP07/Study-Notes',
         s_awareness:'Security Awareness & Bildung',
         speak_title:'Gastredner – KI & Cybersecurity',
         speak_date: 'seit 2024',
-        speak_1:    'Ehrenamtliche Vorträge an bisher 5–10 Schulen für Schüler und Lehrkräfte',
+        speak_1:    'Ehrenamtliche Vorträge an Schulen für Schüler und Lehrkräfte',
         speak_2:    'Themen: Large Language Models (LLMs), KI-Sicherheitsrisiken, Grundlagen Cybersecurity',
         speak_3:    'Eigeninitiative, wachsendes Netzwerk an Schulkooperationen',
         s_certs:    'Weiterbildung & Zertifizierungen',
@@ -419,7 +584,7 @@
         w1_title:   'Selbstständiger Tätowierer',
         w1_date:    'seit 01/2025',
         w1_company: 'Freiberuflich',
-        w1_1:       'Freiberufliche Tätigkeit parallel zur kontinuierlichen Weiterbildung in Cybersecurity und Bug-Bounty-Aktivitäten',
+        w1_1:       'Selbstständige Tätigkeit mit eigenem Kundenstamm — parallel zur kontinuierlichen Weiterbildung in Cybersecurity und laufenden Bug-Bounty-Aktivitäten',
         w2_title:   'Mechatroniker',
         w2_date:    '2023',
         w2_company: 'Rotan GmbH',
@@ -436,37 +601,37 @@
         lang_list:  'Deutsch (Muttersprache) · Englisch (fließend, technisch) · Russisch (Grundkenntnisse) · Japanisch (Grundkenntnisse)',
       },
       en: {
-        title:      'Josef Basner – Resume',
-        back:       '← Back',
-        hint:       'Save as <b>PDF</b>: Ctrl+P → Destination: "Save as PDF"',
-        printBtn:   '⬇ Save as PDF',
-        role:       'Penetration Tester · Red Teamer · Security Researcher',
-        loc:        'Germany · Remote worldwide',
-        s_profile:  'Profile',
-        profile:    'Penetration tester with a hands-on approach and broad technical foundation. Actively participating in private bug bounty programs (HackerOne, Bugcrowd) since 2020 — 20+ valid findings including RCE, XSS, and SQLi vulnerabilities. Regular practice on HackTheBox and in a personal security lab. Ongoing certification path via New Horizons. Delivers voluntary talks on AI security and cybersecurity at schools. Background in industrial control systems (Siemens S7, SCADA) from mechatronics training.',
-        s_skills:   'Technical Skills',
+        title:    'Josef Basner – Resume',
+        back:     '← Back',
+        hint:     'Available as a <b>ready-made PDF</b> — direct download.',
+        printBtn: '⬇ PDF',
+        role:     'Penetration Tester · Red Teamer · Security Researcher',
+        loc:      'Germany · Remote worldwide',
+        s_profile:'Profile',
+        profile:  'Penetration tester with a hands-on approach and broad technical foundation. Active in private bug bounty programs (HackerOne, Bugcrowd) since 2020 — 20+ valid findings including RCE, XSS, and SQLi vulnerabilities. Regular practice on HackTheBox and a personal security lab. Ongoing certification path via New Horizons. Voluntary talks on AI security and cybersecurity at schools. Background in industrial control systems (Siemens S7, SCADA) from mechatronics training.',
+        s_skills: 'Technical Skills',
         sk_net_label: 'Networks',
         sk_net_val:   'TCP/IP, DNS, DHCP, Subnetting, ARP',
         sk_cloud_val: 'Docker, Terraform, CI/CD basics',
         sk_ot_val:    'Siemens S7 (PLC), SCADA basics, industrial control systems',
-        s_security: 'Practical Security Experience',
-        bb_title:   'Bug Bounty Researcher',
-        bb_date:    'since 2020',
-        bb_1:       'Active participation in private / invite-only programs via HackerOne and Bugcrowd',
-        bb_2:       '20+ valid findings including RCE, XSS, and SQLi vulnerabilities',
-        bb_3:       'Focus: recon, enumeration, web and API vulnerability analysis',
-        bb_4:       'Adherence to program-specific NDAs and responsible disclosure guidelines',
-        htb_title:  'HackTheBox & Security Research Lab',
-        htb_1:      'Actively working through machines and challenges on HackTheBox',
-        htb_2:      'Documented writeups for retired machines — github.com/JBMTP07/HTB-Writeups',
-        htb_3:      'Running a local test lab (Metasploitable, Vulnerable VMs)',
-        htb_4:      'Own methodology: Recon → Enumerate → Hypothesize → Validate → Escalate',
+        s_security:'Practical Security Experience',
+        bb_title: 'Bug Bounty Researcher',
+        bb_date:  'since 2020',
+        bb_1:     'Active participation in private / invite-only programs via HackerOne and Bugcrowd',
+        bb_2:     '20+ valid findings including RCE, XSS, and SQLi vulnerabilities',
+        bb_3:     'Focus: recon, enumeration, web and API vulnerability analysis',
+        bb_4:     'Adherence to program-specific NDAs and responsible disclosure guidelines',
+        htb_title:'HackTheBox & Security Research Lab',
+        htb_1:    'Actively working through machines and challenges on HackTheBox',
+        htb_2:    'Documented writeups for retired machines — github.com/JBMTP07/HTB-Writeups',
+        htb_3:    'Running a local test lab (Metasploitable, Vulnerable VMs)',
+        htb_4:    'Own methodology: Recon → Enumerate → Hypothesize → Validate → Escalate',
         notes_title:'Study Materials & Methodology',
         notes_1:    'Structured notes on Linux PrivEsc, AD attacks (Kerberoasting, AS-REP Roasting, BloodHound), Nmap and Burp — github.com/JBMTP07/Study-Notes',
         s_awareness:'Security Awareness & Education',
         speak_title:'Guest Speaker – AI & Cybersecurity',
         speak_date: 'since 2024',
-        speak_1:    'Voluntary talks at 5–10 schools for students and teachers',
+        speak_1:    'Voluntary talks at schools for students and teachers',
         speak_2:    'Topics: Large Language Models (LLMs), AI security risks, cybersecurity fundamentals',
         speak_3:    'Self-initiated, growing network of school partnerships',
         s_certs:    'Training & Certifications',
@@ -475,11 +640,11 @@
         w1_title:   'Freelance Tattoo Artist',
         w1_date:    'since 01/2025',
         w1_company: 'Self-employed',
-        w1_1:       'Freelance work running alongside ongoing cybersecurity training and bug bounty activity',
+        w1_1:       'Independent freelance work with own client base — running alongside continuous cybersecurity training and ongoing bug bounty activity',
         w2_title:   'Mechatronics Technician',
         w2_date:    '2023',
         w2_company: 'Rotan GmbH',
-        w2_1:       'Maintenance, troubleshooting and repair of industrial machinery and systems',
+        w2_1:       'Maintenance, troubleshooting and repair of industrial machinery',
         w3_title:   'Deputy Team Leader',
         w3_date:    '2023',
         w3_company: 'Avedo Rostock',
@@ -508,6 +673,10 @@
       const key = el.getAttribute('data-cv-html');
       if (d[key] !== undefined) el.innerHTML = d[key];
     });
+
+    // Lang-aware PDF download link
+    const pdfLink = document.getElementById('pdf-link');
+    if (pdfLink) pdfLink.href = lang === 'en' ? 'Josef_Basner_CV_EN.pdf' : 'Josef_Basner_CV_DE.pdf';
   </script>
 </body>
 </html>
