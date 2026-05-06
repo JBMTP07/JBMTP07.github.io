@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Josef Basner – Lebenslauf</title>
+<style>
+  @page { size: A4; margin: 14mm 14mm 14mm 14mm; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    color: #1a1f2e;
+    font-size: 10.2pt;
+    line-height: 1.45;
+    background: #fff;
+  }
+  body { padding: 0; }
+
+  /* HEADER */
+  .header {
+    border-bottom: 2px solid #0a2540;
+    padding-bottom: 10px;
+    margin-bottom: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .header-left h1 {
+    font-size: 22pt;
+    font-weight: 700;
+    color: #0a2540;
+    letter-spacing: -0.4px;
+    line-height: 1.05;
+  }
+  .header-left .role {
+    font-size: 10.5pt;
+    color: #2563a8;
+    font-weight: 500;
+    margin-top: 4px;
+    letter-spacing: 0.3px;
+  }
+  .header-right {
+    text-align: right;
+    font-size: 8.8pt;
+    color: #2c3e50;
+    line-height: 1.55;
+  }
+  .header-right .label {
+    color: #6b7785;
+    display: inline-block;
+    width: 70px;
+    text-align: right;
+    margin-right: 6px;
+    font-size: 8pt;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+  .header-right a { color: #2563a8; text-decoration: none; }
+
+  /* SECTIONS */
+  h2 {
+    font-size: 10.5pt;
+    color: #0a2540;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    border-bottom: 1px solid #d0d7de;
+    padding-bottom: 3px;
+    margin-top: 14px;
+    margin-bottom: 8px;
+    font-weight: 700;
+  }
+  h3 {
+    font-size: 10.2pt;
+    color: #0a2540;
+    font-weight: 600;
+    margin-top: 8px;
+  }
+  h3 .meta {
+    color: #6b7785;
+    font-weight: 400;
+    font-size: 9pt;
+    font-style: italic;
+    margin-left: 6px;
+  }
+
+  p { margin-bottom: 4px; }
+
+  ul {
+    margin-left: 14px;
+    margin-top: 3px;
+    margin-bottom: 4px;
+  }
+  ul li {
+    margin-bottom: 2px;
+    padding-left: 2px;
+  }
+  ul li::marker { color: #2563a8; }
+
+  strong { color: #0a2540; font-weight: 600; }
+
+  /* PROFILE */
+  .profile {
+    text-align: justify;
+    color: #2c3e50;
+    margin-bottom: 4px;
+  }
+
+  /* HIGHLIGHTS */
+  .highlights {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4px 14px;
+    margin-top: 4px;
+  }
+  .highlights .h-item {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    font-size: 9.6pt;
+  }
+  .highlights .h-num {
+    color: #2563a8;
+    font-weight: 700;
+    min-width: 38px;
+    font-size: 11pt;
+  }
+
+  /* SKILLS */
+  .skills-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .skills-table td {
+    padding: 3px 0;
+    vertical-align: top;
+    font-size: 9.7pt;
+  }
+  .skills-table td.label {
+    color: #0a2540;
+    font-weight: 600;
+    width: 130px;
+    padding-right: 10px;
+  }
+  .skills-table td.values {
+    color: #2c3e50;
+  }
+
+  /* EXPERIENCE */
+  .exp-item { margin-bottom: 7px; }
+  .exp-item ul { margin-top: 2px; }
+
+  /* CERTS TABLE */
+  .certs-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 6px;
+    font-size: 9.6pt;
+  }
+  .certs-table th, .certs-table td {
+    text-align: left;
+    padding: 3px 6px;
+    border-bottom: 1px solid #e5e9ee;
+  }
+  .certs-table th {
+    color: #6b7785;
+    font-weight: 600;
+    font-size: 8.4pt;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    border-bottom: 1.5px solid #0a2540;
+  }
+  .certs-table td.status {
+    color: #b45309;
+  }
+
+  /* JOB */
+  .job-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .job-line .when {
+    color: #6b7785;
+    font-size: 9pt;
+    font-style: italic;
+    white-space: nowrap;
+    margin-left: 10px;
+  }
+  .job-detail {
+    color: #2c3e50;
+    margin-top: 1px;
+    font-size: 9.7pt;
+  }
+
+  .footer-stamp {
+    margin-top: 14px;
+    text-align: right;
+    font-size: 8pt;
+    color: #98a2b1;
+    font-style: italic;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <h1>Josef Roland Basner</h1>
+    <div class="role">Penetration Tester · Red Team Operator · Security Researcher</div>
+  </div>
+  <div class="header-right">
+    <div><span class="label">E-Mail</span><a href="mailto:josefbasner@proton.me">josefbasner@proton.me</a></div>
+    <div><span class="label">Telefon</span>+49 151 4495 7240</div>
+    <div><span class="label">GitHub</span><a href="https://github.com/JBMTP07">github.com/JBMTP07</a></div>
+    <div><span class="label">Web</span><a href="https://jbmtp07.github.io">jbmtp07.github.io</a></div>
+    <div><span class="label">Standort</span>Deutschland · Remote weltweit</div>
+  </div>
+</div>
+
+<h2>Profil</h2>
+<p class="profile">
+Offensive-Security-Spezialist mit über 5 Jahren praktischer Erfahrung in Bug Bounty, Web- und API-Pentesting sowie Active-Directory-Angriffen. Seit 2020 aktiv in privaten Programmen auf HackerOne und Bugcrowd mit über 20 bestätigten Schwachstellen (RCE, SQLi, XSS, IDOR, Auth-Bypass). Eigenes Security-Lab, dokumentierte Methodik, laufender Zertifizierungspfad (CompTIA, EC-Council CEH v13). Zusätzlicher Background als ausgebildeter Mechatroniker (Siemens S7, SCADA) — direkter Zugang zu OT/ICS-Security. Hält ehrenamtliche Vorträge an Schulen zu KI-Sicherheit und Cybersecurity.
+</p>
+
+<h2>Highlights</h2>
+<div class="highlights">
+  <div class="h-item"><span class="h-num">20+</span><span>bestätigte Schwachstellen seit 2020 (HackerOne, Bugcrowd)</span></div>
+  <div class="h-item"><span class="h-num">5+</span><span>Jahre offensive Security-Praxis</span></div>
+  <div class="h-item"><span class="h-num">5–10</span><span>Schulen mit ehrenamtlichen Talks erreicht</span></div>
+  <div class="h-item"><span class="h-num">2x</span><span>Doppelqualifikation: Offensive Security + OT/ICS</span></div>
+</div>
+
+<h2>Technische Schwerpunkte</h2>
+<table class="skills-table">
+  <tr><td class="label">Offensive Security</td><td class="values">Penetration Testing · Web- &amp; API-Testing · Bug Bounty Research · Recon &amp; Enumeration · Privilege Escalation · AD Attacks (Kerberoasting, AS-REP Roasting, Lateral Movement) · Post-Exploitation · Reporting</td></tr>
+  <tr><td class="label">Tools</td><td class="values">Burp Suite Pro · Metasploit · Nmap · Wireshark · Hydra · Nessus · BloodHound · CrackMapExec · Impacket · ffuf · sqlmap · gobuster</td></tr>
+  <tr><td class="label">Scripting</td><td class="values">Python · Bash · PowerShell · JavaScript</td></tr>
+  <tr><td class="label">Netzwerke</td><td class="values">TCP/IP · DNS · DHCP · Subnetting · ARP · Routing · Firewalls · Netzwerkanalyse</td></tr>
+  <tr><td class="label">Betriebssysteme</td><td class="values">Kali Linux · Parrot OS · Ubuntu · Windows Server · Active Directory</td></tr>
+  <tr><td class="label">OT / ICS</td><td class="values">Siemens S7 (SPS) · SCADA · Industriesteuerungen · Feldbusse · IT/OT-Schnittstellen</td></tr>
+</table>
+
+<h2>Praktische Security-Erfahrung</h2>
+
+<div class="exp-item">
+  <h3>Bug Bounty Researcher <span class="meta">seit 2020 · HackerOne, Bugcrowd</span></h3>
+  <ul>
+    <li>Aktiv in privaten / invite-only Programmen auf <strong>HackerOne</strong> und <strong>Bugcrowd</strong></li>
+    <li><strong>20+ bestätigte Schwachstellen</strong>: RCE, SQL-Injection, Stored/Reflected XSS, IDOR, Auth-Bypass, Business-Logic-Flaws</li>
+    <li>Schwerpunkt auf Web- und API-Schwachstellen, Recon-Automatisierung, Token- und Session-Analyse</li>
+    <li>Vollständige Einhaltung von NDAs und Responsible-Disclosure-Richtlinien · saubere, reproduzierbare PoC-Reports</li>
+  </ul>
+</div>
+
+<div class="exp-item">
+  <h3>HackTheBox &amp; Security Research Lab <span class="meta">laufend</span></h3>
+  <ul>
+    <li>Regelmäßige Bearbeitung von Machines, Pro Labs und Challenges</li>
+    <li>Öffentliche deutschsprachige Writeups für retired Machines (github.com/JBMTP07/HTB-Writeups)</li>
+    <li>Eigenes Testlabor: Raspberry Pi · Metasploitable · isoliertes AD · Vulnerable VMs</li>
+    <li>Etablierter Workflow: Recon → Enumerate → Exploit → Escalate → Report</li>
+  </ul>
+</div>
+
+<div class="exp-item">
+  <h3>Veröffentlichte Studienmaterialien</h3>
+  <ul>
+    <li>Strukturierte Methodik-Sammlung: Linux Privilege Escalation · AD-Angriffe · Nmap-Enumeration · Burp-Workflow (github.com/JBMTP07/Study-Notes)</li>
+  </ul>
+</div>
+
+<h2>Security Awareness &amp; Bildung</h2>
+<div class="exp-item">
+  <h3>Gastredner – KI &amp; Cybersecurity <span class="meta">seit 2024</span></h3>
+  <ul>
+    <li>Ehrenamtliche Vorträge an <strong>5–10 Schulen</strong> für Schüler:innen und Lehrkräfte</li>
+    <li>Themen: Large Language Models (LLMs), KI-Sicherheitsrisiken, Phishing, Cybersecurity-Grundlagen</li>
+    <li>Eigeninitiative · wachsendes Netzwerk an Schulkooperationen · zielgruppengerechte Kommunikation</li>
+  </ul>
+</div>
+
+<h2>Zertifizierungen <span style="font-weight:400;font-size:8.5pt;color:#6b7785;text-transform:none;letter-spacing:0;">— Kurse abgeschlossen über New Horizons, Prüfungen ab Mai 2026</span></h2>
+<table class="certs-table">
+  <tr><th>Zertifizierung</th><th>Anbieter</th><th>Status</th></tr>
+  <tr><td>Network+</td><td>CompTIA</td><td class="status">In Vorbereitung</td></tr>
+  <tr><td>Security+</td><td>CompTIA</td><td class="status">In Vorbereitung</td></tr>
+  <tr><td>Linux+</td><td>CompTIA</td><td class="status">In Vorbereitung</td></tr>
+  <tr><td>PenTest+</td><td>CompTIA</td><td class="status">In Vorbereitung</td></tr>
+  <tr><td>CEH v13</td><td>EC-Council</td><td class="status">In Vorbereitung</td></tr>
+</table>
+
+<h2>Berufserfahrung</h2>
+
+<div class="exp-item">
+  <div class="job-line"><h3 style="margin-top:0;">Selbstständiger Tätowierer</h3><span class="when">seit 01/2025</span></div>
+  <p class="job-detail">Freiberufliche Tätigkeit parallel zur kontinuierlichen Weiterbildung in Cybersecurity und aktiven Bug-Bounty-Aktivitäten.</p>
+</div>
+
+<div class="exp-item">
+  <div class="job-line"><h3 style="margin-top:0;">Mechatroniker · Rotan GmbH</h3><span class="when">2023</span></div>
+  <p class="job-detail">Wartung, Instandhaltung und Fehlerdiagnose industrieller Anlagen · praktische Berührungspunkte mit OT-Systemen.</p>
+</div>
+
+<div class="exp-item">
+  <div class="job-line"><h3 style="margin-top:0;">Stellv. Teamleiter · Avedo Rostock</h3><span class="when">2023</span></div>
+  <p class="job-detail">Operative Führung, Teamkoordination, Qualitätssicherung, Eskalationsmanagement.</p>
+</div>
+
+<div class="exp-item">
+  <div class="job-line"><h3 style="margin-top:0;">Ausbildung Mechatroniker · Consun Beet Company</h3><span class="when">2018 – 2022</span></div>
+  <p class="job-detail">SPS-Programmierung (Siemens S7), SCADA-Systeme, Industrieautomation, Elektroanlagen, Messtechnik · direkter Bezug zu OT/ICS-Security.</p>
+</div>
+
+<h2>Sprachen</h2>
+<p>Deutsch <em>(Muttersprache)</em> &nbsp;·&nbsp; Englisch <em>(fließend, technisch)</em> &nbsp;·&nbsp; Russisch <em>(Grundkenntnisse)</em></p>
+
+<h2>Soft Skills</h2>
+<p>Strukturiertes Arbeiten · Eigeninitiative · Reporting &amp; Dokumentation · Kommunikation auf technischer und nicht-technischer Ebene · Zuverlässigkeit unter NDA · ausgeprägtes Sicherheitsbewusstsein</p>
+
+<div class="footer-stamp">Stand: Mai 2026</div>
+
+</body>
+</html>

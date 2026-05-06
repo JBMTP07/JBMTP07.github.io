@@ -503,6 +503,25 @@ section { padding: 6rem 2.5rem; }
   margin-top: 0.3rem;
   line-height: 1.65;
 }
+.t-list {
+  list-style: none;
+  padding-left: 1.3rem;
+  margin-top: 0.4rem;
+}
+.t-list li {
+  position: relative;
+  padding-left: 1.1rem;
+  color: var(--text-dim);
+  font-size: 0.82rem;
+  line-height: 1.6;
+  margin-bottom: 0.25rem;
+}
+.t-list li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--cyan);
+}
 .blink-cursor {
   color: var(--cyan);
   animation: blink 1s step-end infinite;
@@ -580,9 +599,87 @@ section { padding: 6rem 2.5rem; }
 }
 
 /* ================================================================
+   EXPERIENCE / TIMELINE
+================================================================ */
+
+.timeline {
+  position: relative;
+  padding-left: 1.4rem;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 6px;
+  bottom: 6px;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--cyan-mid), var(--border) 30%, var(--border) 70%, transparent);
+}
+
+.tl-item {
+  position: relative;
+  padding-bottom: 2rem;
+}
+.tl-item:last-child { padding-bottom: 0; }
+
+.tl-dot {
+  position: absolute;
+  left: -1.4rem;
+  top: 8px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid var(--cyan);
+  box-shadow: 0 0 0 3px rgba(0, 207, 255, 0.08);
+}
+
+.tl-when {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--cyan);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+  opacity: 0.85;
+}
+.tl-content h3 {
+  font-family: var(--mono);
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 0.2rem;
+}
+.tl-content > p {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-bottom: 0.7rem;
+  letter-spacing: 0.2px;
+}
+.tl-points {
+  list-style: none;
+  padding: 0;
+}
+.tl-points li {
+  position: relative;
+  padding-left: 1rem;
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  line-height: 1.65;
+  margin-bottom: 0.3rem;
+}
+.tl-points li::before {
+  content: '▹';
+  position: absolute;
+  left: 0;
+  color: var(--cyan);
+  font-size: 0.85rem;
+}
+
+/* ================================================================
    PROJECTS
 ================================================================ */
-#projects { background: var(--bg-2); }
 
 .projects-grid {
   display: grid;

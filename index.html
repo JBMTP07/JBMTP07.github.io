@@ -3,8 +3,48 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Josef Basner – Penetration Tester & Security Researcher" />
-  <title>Josef Basner | Penetration Tester</title>
+  <meta name="description" content="Josef Basner – Penetration Tester, Red Team Operator & Security Researcher. 5+ Jahre offensive Security, 20+ bestätigte Schwachstellen. Offen für Positionen weltweit." />
+  <meta name="keywords" content="Penetration Tester, Pentest, Red Team, Bug Bounty, Security Researcher, OSCP, CEH, OT Security, ICS Security, Cybersecurity, Deutschland, Remote" />
+  <meta name="author" content="Josef Basner" />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#06090f" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://jbmtp07.github.io/" />
+  <meta property="og:title" content="Josef Basner | Penetration Tester & Red Team Operator" />
+  <meta property="og:description" content="Offensive Security · Bug Bounty · Red Team · OT/ICS. 5+ Jahre Praxis, 20+ bestätigte Schwachstellen. Offen für neue Positionen." />
+  <meta property="og:site_name" content="Josef Basner" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Josef Basner | Penetration Tester" />
+  <meta name="twitter:description" content="Penetration Tester · Red Team · Bug Bounty · OT/ICS Security." />
+
+  <!-- Schema.org -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Josef Roland Basner",
+    "url": "https://jbmtp07.github.io/",
+    "jobTitle": "Penetration Tester",
+    "email": "mailto:josefbasner@proton.me",
+    "sameAs": [
+      "https://github.com/JBMTP07"
+    ],
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "DE"
+    },
+    "knowsAbout": ["Penetration Testing", "Bug Bounty", "Red Team", "Active Directory", "Web Application Security", "OT/ICS Security", "SCADA", "Siemens S7"],
+    "knowsLanguage": ["de", "en", "ru"]
+  }
+  </script>
+
+  <title>Josef Basner | Penetration Tester · Red Team · Bug Bounty</title>
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%2306090f'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-family='monospace' font-size='28' font-weight='700' fill='%2300cfff'%3EJB%3C/text%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
@@ -19,6 +59,7 @@
     <div class="nav-links">
       <a href="#about" data-i18n="nav_about">Über mich</a>
       <a href="#skills" data-i18n="nav_skills">Skills</a>
+      <a href="#experience" data-i18n="nav_experience">Erfahrung</a>
       <a href="#projects" data-i18n="nav_projects">Projekte</a>
       <a href="#contact" data-i18n="nav_contact">Kontakt</a>
     </div>
@@ -37,6 +78,7 @@
   <div class="mobile-menu" id="mobile-menu">
     <a href="#about" data-i18n="nav_about">Über mich</a>
     <a href="#skills" data-i18n="nav_skills">Skills</a>
+    <a href="#experience" data-i18n="nav_experience">Erfahrung</a>
     <a href="#projects" data-i18n="nav_projects">Projekte</a>
     <a href="#contact" data-i18n="nav_contact">Kontakt</a>
   </div>
@@ -58,9 +100,9 @@
         <p class="hero-tagline" data-i18n="hero_tagline">Ich breche Systeme. Bevor es andere tun.</p>
         <div class="hero-cta">
           <a href="#contact" class="btn btn-primary" data-i18n="cta_contact">Kontakt</a>
-          <a href="Josef_Basner_CV.pdf" download class="btn btn-outline">
+          <a href="Josef_Basner_CV.pdf" download="Josef_Basner_CV.pdf" class="btn btn-outline">
             <i class="fa-solid fa-file-arrow-down"></i>
-            <span data-i18n="cta_cv">Lebenslauf</span>
+            <span data-i18n="cta_cv">Lebenslauf (PDF)</span>
           </a>
           <a href="https://github.com/JBMTP07" target="_blank" rel="noopener" class="btn btn-ghost">
             <i class="fab fa-github"></i> GitHub
@@ -139,6 +181,11 @@
           <p class="t-output" data-i18n="about_whoami"></p>
           <div class="terminal-line mt">
             <span class="t-prompt">❯</span>
+            <span class="t-cmd">cat strengths.txt</span>
+          </div>
+          <ul class="t-list" data-i18n-list="about_strengths"></ul>
+          <div class="terminal-line mt">
+            <span class="t-prompt">❯</span>
             <span class="t-cmd">cat focus.txt</span>
           </div>
           <p class="t-output" data-i18n="about_focus"></p>
@@ -173,6 +220,8 @@
             <span>Recon &amp; Enumeration</span>
             <span>Privilege Escalation</span>
             <span>AD Attacks</span>
+            <span>Lateral Movement</span>
+            <span>Post-Exploitation</span>
           </div>
         </div>
 
@@ -182,13 +231,17 @@
             <h3 data-i18n="sk_tools">Tools</h3>
           </div>
           <div class="skill-tags">
-            <span>Burp Suite</span>
+            <span>Burp Suite Pro</span>
             <span>Metasploit</span>
             <span>Nmap</span>
             <span>Wireshark</span>
             <span>Hydra</span>
             <span>Nessus</span>
             <span>BloodHound</span>
+            <span>CrackMapExec</span>
+            <span>Impacket</span>
+            <span>ffuf</span>
+            <span>sqlmap</span>
           </div>
         </div>
 
@@ -200,8 +253,8 @@
           <div class="skill-tags">
             <span>Python</span>
             <span>Bash</span>
-            <span>JavaScript</span>
             <span>PowerShell</span>
+            <span>JavaScript</span>
           </div>
         </div>
 
@@ -216,6 +269,8 @@
             <span>DHCP</span>
             <span>Subnetting</span>
             <span>ARP</span>
+            <span>Routing</span>
+            <span>Firewalls</span>
           </div>
         </div>
 
@@ -226,8 +281,9 @@
           </div>
           <div class="skill-tags">
             <span>Kali Linux</span>
+            <span>Parrot OS</span>
             <span>Ubuntu</span>
-            <span>Windows</span>
+            <span>Windows Server</span>
             <span>Active Directory</span>
           </div>
         </div>
@@ -242,6 +298,61 @@
             <span>SCADA</span>
             <span>SPS-Programmierung</span>
             <span>Feldbusse</span>
+            <span>IT/OT-Schnittstellen</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE / TIMELINE -->
+  <section id="experience">
+    <div class="section-inner fade-in">
+      <div class="section-header">
+        <span class="section-num">03.</span>
+        <h2 data-i18n="exp_title">Erfahrung</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="timeline">
+
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-content">
+            <div class="tl-when">2020 — present</div>
+            <h3 data-i18n="exp_bb_title">Bug Bounty Researcher</h3>
+            <p data-i18n="exp_bb_org">HackerOne · Bugcrowd · invite-only</p>
+            <ul class="tl-points" data-i18n-list="exp_bb_points"></ul>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-content">
+            <div class="tl-when">2024 — present</div>
+            <h3 data-i18n="exp_talks_title">Gastredner – KI &amp; Cybersecurity</h3>
+            <p data-i18n="exp_talks_org">Schulen · ehrenamtlich</p>
+            <ul class="tl-points" data-i18n-list="exp_talks_points"></ul>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-content">
+            <div class="tl-when">2023</div>
+            <h3 data-i18n="exp_mecha_title">Mechatroniker</h3>
+            <p data-i18n="exp_mecha_org">Rotan GmbH</p>
+            <ul class="tl-points" data-i18n-list="exp_mecha_points"></ul>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-content">
+            <div class="tl-when">2018 — 2022</div>
+            <h3 data-i18n="exp_appr_title">Ausbildung Mechatroniker</h3>
+            <p data-i18n="exp_appr_org">Consun Beet Company</p>
+            <ul class="tl-points" data-i18n-list="exp_appr_points"></ul>
           </div>
         </div>
 
@@ -253,7 +364,7 @@
   <section id="projects">
     <div class="section-inner fade-in">
       <div class="section-header">
-        <span class="section-num">03.</span>
+        <span class="section-num">04.</span>
         <h2 data-i18n="projects_title">Projekte</h2>
         <div class="section-line"></div>
       </div>
@@ -292,11 +403,11 @@
             <i class="fa-solid fa-flask-vial"></i>
           </div>
           <h3 data-i18n="proj_lab_title">Security Homelab</h3>
-          <p data-i18n="proj_lab_desc">Raspberry Pi-basiertes Testlabor mit Metasploitable und weiteren Vulnerable-Machine-Umgebungen für praktische Übungen.</p>
+          <p data-i18n="proj_lab_desc">Raspberry Pi-basiertes Testlabor mit Metasploitable, isoliertem Active Directory und weiteren Vulnerable-Machine-Umgebungen.</p>
           <div class="project-tags">
             <span>Raspberry Pi</span>
             <span>Metasploitable</span>
-            <span>Lab</span>
+            <span>AD Lab</span>
           </div>
         </div>
 
@@ -305,7 +416,7 @@
             <i class="fa-solid fa-bug"></i>
           </div>
           <h3 data-i18n="proj_bb_title">Bug Bounty</h3>
-          <p data-i18n="proj_bb_desc">Aktive Teilnahme an privaten / invite-only Programmen via HackerOne und Bugcrowd seit 2020. Details unter NDA.</p>
+          <p data-i18n="proj_bb_desc">Aktive Teilnahme an privaten / invite-only Programmen via HackerOne und Bugcrowd seit 2020. 20+ bestätigte Findings. Details unter NDA.</p>
           <div class="project-tags">
             <span>HackerOne</span>
             <span>Bugcrowd</span>
@@ -321,7 +432,7 @@
   <section id="talks">
     <div class="section-inner fade-in">
       <div class="section-header">
-        <span class="section-num">04.</span>
+        <span class="section-num">05.</span>
         <h2 data-i18n="talks_title">Talks &amp; Bildung</h2>
         <div class="section-line"></div>
       </div>
@@ -331,7 +442,7 @@
         </div>
         <div class="talks-content">
           <h3 data-i18n="talks_heading">Gastredner – KI &amp; Cybersecurity</h3>
-          <p data-i18n="talks_desc">Ehrenamtliche Vorträge an bisher 5–10 Schulen für Schüler und Lehrkräfte. Themen: Large Language Models (LLMs), KI-Sicherheitsrisiken und Grundlagen der Cybersecurity. Eigeninitiative, wachsendes Netzwerk an Schulkooperationen.</p>
+          <p data-i18n="talks_desc">Ehrenamtliche Vorträge an bisher 5–10 Schulen für Schüler:innen und Lehrkräfte. Themen: Large Language Models (LLMs), KI-Sicherheitsrisiken, Phishing und Grundlagen der Cybersecurity. Eigeninitiative, wachsendes Netzwerk an Schulkooperationen.</p>
           <div class="talks-tags">
             <span data-i18n="talks_tag1">5–10 Schulen</span>
             <span>LLMs</span>
@@ -347,7 +458,7 @@
   <section id="certs">
     <div class="section-inner fade-in">
       <div class="section-header">
-        <span class="section-num">05.</span>
+        <span class="section-num">06.</span>
         <h2 data-i18n="certs_title">Zertifizierungen</h2>
         <div class="section-line"></div>
       </div>
@@ -386,11 +497,11 @@
   <section id="contact">
     <div class="section-inner fade-in">
       <div class="section-header">
-        <span class="section-num">06.</span>
+        <span class="section-num">07.</span>
         <h2 data-i18n="contact_title">Kontakt</h2>
         <div class="section-line"></div>
       </div>
-      <p class="contact-sub" data-i18n="contact_sub">Offen für Positionen im Bereich Penetration Testing, Red Team und Security Research.</p>
+      <p class="contact-sub" data-i18n="contact_sub">Offen für Positionen im Bereich Penetration Testing, Red Team und Security Research. Antworte zuverlässig binnen 24 Stunden.</p>
       <div class="contact-links">
         <a href="mailto:josefbasner@proton.me" class="contact-item">
           <i class="fa-solid fa-envelope"></i>
@@ -399,6 +510,10 @@
         <a href="https://github.com/JBMTP07" target="_blank" rel="noopener" class="contact-item">
           <i class="fab fa-github"></i>
           <span>github.com/JBMTP07</span>
+        </a>
+        <a href="Josef_Basner_CV.pdf" download="Josef_Basner_CV.pdf" class="contact-item">
+          <i class="fa-solid fa-file-arrow-down"></i>
+          <span data-i18n="contact_cv">Lebenslauf als PDF herunterladen</span>
         </a>
         <div class="contact-item contact-location">
           <i class="fa-solid fa-location-dot"></i>
