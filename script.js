@@ -67,6 +67,8 @@ const t = {
     ],
 
     projects_title:    'Projekte',
+    proj_bbreports_title: 'Bug Bounty Reports',
+    proj_bbreports_desc:  'Sanitisierte Public-Reports realer Findings — inklusive einer Chained-Exploit-Kette (SQLi → Stored XSS → SSTI → RCE, CVSS 9.9) und unauthenticated Command Injection (CVSS 9.8). Nach Coordinated Disclosure veröffentlicht.',
     proj_htb_title:    'HTB Writeups',
     proj_htb_desc:     'Deutschsprachige Writeups für retired HackTheBox Machines. Dokumentierte Methodik von Recon bis Post-Exploitation.',
     proj_notes_title:  'Study Notes',
@@ -159,6 +161,8 @@ const t = {
     ],
 
     projects_title:    'Projects',
+    proj_bbreports_title: 'Bug Bounty Reports',
+    proj_bbreports_desc:  'Sanitized public reports from real findings — including a chained exploit (SQLi → Stored XSS → SSTI → RCE, CVSS 9.9) and an unauthenticated Command Injection (CVSS 9.8). Released after Coordinated Disclosure.',
     proj_htb_title:    'HTB Writeups',
     proj_htb_desc:     'German-language writeups for retired HackTheBox machines. Documented methodology from recon to post-exploitation.',
     proj_notes_title:  'Study Notes',
