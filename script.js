@@ -21,7 +21,7 @@ const t = {
     stat_schools:   'Schulen',
 
     about_title:    'Über mich',
-    about_whoami:   'Offensive-Security-Spezialist mit über 5 Jahren praktischer Erfahrung in Bug Bounty, Web- und API-Pentesting sowie Active-Directory-Angriffen. Seit 2020 aktiv in privaten Programmen auf HackerOne und Bugcrowd mit über 20 bestätigten Schwachstellen. Ausgebildeter Mechatroniker mit OT/ICS-Hintergrund (Siemens S7, SCADA) — direkter Zugang zu industrieller Security.',
+    about_whoami:   'Offensive-Security-Spezialist mit über 5 Jahren praktischer Erfahrung in Bug Bounty, Web- und API-Pentesting sowie Active-Directory-Angriffen. Seit 2020 aktiv in privaten Programmen auf HackerOne und Bugcrowd mit über 20 bestätigten Schwachstellen. Betreibt seit 2026 [JB] Security (jbmtp07.github.io/jb-security) als eigene Freelance-Pentest-Praxis. Ausgebildeter Mechatroniker mit OT/ICS-Hintergrund (Siemens S7, SCADA) — direkter Zugang zu industrieller Security.',
     about_strengths: [
       '20+ bestätigte Findings unter NDA · saubere, reproduzierbare Reports',
       'Strukturierte Methodik: Recon → Enumerate → Exploit → Escalate → Report',
@@ -95,8 +95,12 @@ const t = {
     talks_tag3:    'Ehrenamtlich',
 
     certs_title:   'Zertifizierungen',
-    certs_sub:     'Kurse abgeschlossen über New Horizons (zertifizierter Bildungsträger). Prüfungen ab Mai 2026.',
-    cert_status:   'In Vorbereitung',
+    certs_sub:     'Kurse abgeschlossen über New Horizons (gefördert durch Arbeitsagentur / Bildungsgutschein). Prüfungen laufend.',
+    cert_status_netplus:    'Kurs abgeschlossen',
+    cert_status_secplus:    'Prüfung: 30.05.2026',
+    cert_status_linuxplus:  'Kurs abgeschlossen',
+    cert_status_pentestplus:'Prüfung: Juni 2026',
+    cert_status_ceh:        'Prüfung: Juni 2026',
 
     contact_title:    'Kontakt',
     contact_sub:      'Offen für Positionen im Bereich Penetration Testing, Red Team und Security Research. Antworte zuverlässig binnen 24 Stunden.',
@@ -124,7 +128,7 @@ const t = {
     stat_schools:   'Schools',
 
     about_title:    'About Me',
-    about_whoami:   'Offensive security specialist with 5+ years of hands-on experience in bug bounty, web and API pentesting, and Active Directory attacks. Active in private HackerOne and Bugcrowd programs since 2020 with 20+ confirmed vulnerabilities. Trained mechatronics engineer with OT/ICS background (Siemens S7, SCADA) — direct path into industrial security.',
+    about_whoami:   'Offensive security specialist with 5+ years of hands-on experience in bug bounty, web and API pentesting, and Active Directory attacks. Active in private HackerOne and Bugcrowd programs since 2020 with 20+ confirmed vulnerabilities. Runs [JB] Security (jbmtp07.github.io/jb-security) since 2026 as an independent freelance pentest practice. Trained mechatronics engineer with OT/ICS background (Siemens S7, SCADA) — direct path into industrial security.',
     about_strengths: [
       '20+ confirmed findings under NDA · clean, reproducible reports',
       'Structured methodology: Recon → Enumerate → Exploit → Escalate → Report',
@@ -198,8 +202,12 @@ const t = {
     talks_tag3:    'Volunteer',
 
     certs_title:   'Certifications',
-    certs_sub:     'Courses completed via New Horizons (certified training provider). Exams scheduled from May 2026.',
-    cert_status:   'In Progress',
+    certs_sub:     'Courses completed via New Horizons (funded through the German employment agency). Exams in progress.',
+    cert_status_netplus:    'Course completed',
+    cert_status_secplus:    'Exam: 2026-05-30',
+    cert_status_linuxplus:  'Course completed',
+    cert_status_pentestplus:'Exam: June 2026',
+    cert_status_ceh:        'Exam: June 2026',
 
     contact_title:    'Contact',
     contact_sub:      'Open to positions in penetration testing, red team and security research. Reliable response within 24 hours.',
