@@ -39,6 +39,13 @@ const t = {
     sk_ot:          'OT / ICS',
 
     exp_title:        'Erfahrung',
+    exp_jbsec_title:  '[JB] Security — Inhaber & Freelance Pentester',
+    exp_jbsec_org:    'Eigene Offensive-Security-Praxis · jbmtp07.github.io/jb-security',
+    exp_jbsec_points: [
+      'Eigenes Pentest-Angebot: Web Application, Active Directory, OT/ICS',
+      'Manuelle Tiefenprüfung nach OWASP WSTG, PTES, NIST SP 800-115, MITRE ATT&CK',
+      'Verschlüsselte Reports · NDA / AVV / TOM-konform · 2 Mio. € IT-Berufshaftpflicht',
+    ],
     exp_bb_title:     'Bug Bounty Researcher',
     exp_bb_org:       'HackerOne · Bugcrowd · invite-only',
     exp_bb_points:    [
@@ -67,6 +74,8 @@ const t = {
     ],
 
     projects_title:    'Projekte',
+    proj_jbsec_title:  '[JB] Security — Freelance Pentest Service',
+    proj_jbsec_desc:   'Eigenes Offensive-Security-Angebot für Web-, Active-Directory- und OT/ICS-Pentests. Strukturierte Reports nach OWASP WSTG, PTES, NIST SP 800-115 und MITRE ATT&CK. 2 Mio. € IT-Berufshaftpflicht. Q3 2026 verfügbar.',
     proj_bbreports_title: 'Bug Bounty Reports',
     proj_bbreports_desc:  'Sanitisierte Public-Reports realer Findings — inklusive einer Chained-Exploit-Kette (SQLi → Stored XSS → SSTI → RCE, CVSS 9.9) und unauthenticated Command Injection (CVSS 9.8). Nach Coordinated Disclosure veröffentlicht.',
     proj_htb_title:    'HTB Writeups',
@@ -133,6 +142,13 @@ const t = {
     sk_ot:          'OT / ICS',
 
     exp_title:        'Experience',
+    exp_jbsec_title:  '[JB] Security — Owner & Freelance Pentester',
+    exp_jbsec_org:    'Independent offensive-security practice · jbmtp07.github.io/jb-security',
+    exp_jbsec_points: [
+      'Independent pentest service: web applications, Active Directory, OT/ICS',
+      'Manual deep testing per OWASP WSTG, PTES, NIST SP 800-115, MITRE ATT&CK',
+      'Encrypted reports · NDA / DPA / TOM compliant · €2M IT professional liability',
+    ],
     exp_bb_title:     'Bug Bounty Researcher',
     exp_bb_org:       'HackerOne · Bugcrowd · invite-only',
     exp_bb_points:    [
@@ -161,6 +177,8 @@ const t = {
     ],
 
     projects_title:    'Projects',
+    proj_jbsec_title:  '[JB] Security — Freelance Pentest Service',
+    proj_jbsec_desc:   'Independent offensive-security practice for web, Active Directory and OT/ICS pentests. Structured reports per OWASP WSTG, PTES, NIST SP 800-115 and MITRE ATT&CK. €2M IT professional liability. Available Q3 2026.',
     proj_bbreports_title: 'Bug Bounty Reports',
     proj_bbreports_desc:  'Sanitized public reports from real findings — including a chained exploit (SQLi → Stored XSS → SSTI → RCE, CVSS 9.9) and an unauthenticated Command Injection (CVSS 9.8). Released after Coordinated Disclosure.',
     proj_htb_title:    'HTB Writeups',
