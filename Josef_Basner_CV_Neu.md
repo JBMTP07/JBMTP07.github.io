@@ -12,7 +12,7 @@
 
 ## Profil
 
-Offensive-Security-Spezialist mit über 5 Jahren praktischer Erfahrung in Bug Bounty, Web- und API-Pentesting sowie Active-Directory-Angriffen. Seit 2020 aktiv in privaten Programmen auf HackerOne und Bugcrowd mit über 20 bestätigten Schwachstellen (RCE, SQLi, XSS, IDOR, Auth-Bypass). Eigenes Security-Lab, dokumentierte Methodik, laufender Zertifizierungspfad (CompTIA, EC-Council CEH v13). Zusätzlicher Background als ausgebildeter Mechatroniker (Siemens S7, SCADA) — direkter Zugang zu OT/ICS-Security. Hält ehrenamtliche Vorträge an Schulen zu KI-Sicherheit und Cybersecurity.
+Offensive-Security-Spezialist mit über 5 Jahren praktischer Erfahrung in Bug Bounty, Web- und API-Pentesting sowie Active-Directory-Angriffen. Seit 2020 aktiv in privaten Programmen auf HackerOne und Bugcrowd mit über 20 bestätigten Schwachstellen (RCE, SQLi, XSS, IDOR, Auth-Bypass). **CompTIA Security+ (SY0-701) zertifiziert** · Mai 2026. Eigenes Security-Lab, dokumentierte Methodik, weiterführender Zertifizierungspfad (PenTest+, EC-Council CEH v13). Zusätzlicher Background als ausgebildeter Mechatroniker (Siemens S7, SCADA) — direkter Zugang zu OT/ICS-Security. Hält ehrenamtliche Vorträge an Schulen zu KI-Sicherheit und Cybersecurity.
 
 ---
 
@@ -78,17 +78,17 @@ Siemens S7 (SPS) · SCADA-Systeme · Industriesteuerungen · Feldbusse · IT/OT-
 
 ---
 
-## Zertifizierungen *(in Vorbereitung)*
+## Zertifizierungen
 
-Kurse abgeschlossen über **New Horizons** (zertifizierter Bildungsträger). Prüfungen ab Mai 2026.
+Kurse abgeschlossen über **New Horizons** (zertifizierter Bildungsträger). Security+ als erste Prüfung bestanden, weitere folgen 2026.
 
-| Zertifizierung       | Anbieter    | Status          |
-|----------------------|-------------|-----------------|
-| Network+             | CompTIA     | In Vorbereitung |
-| Security+            | CompTIA     | In Vorbereitung |
-| Linux+               | CompTIA     | In Vorbereitung |
-| PenTest+             | CompTIA     | In Vorbereitung |
-| CEH v13              | EC-Council  | In Vorbereitung |
+| Zertifizierung       | Anbieter    | Status                |
+|----------------------|-------------|-----------------------|
+| Security+ (SY0-701)  | CompTIA     | **Bestanden 05/2026** |
+| Network+             | CompTIA     | In Vorbereitung       |
+| Linux+               | CompTIA     | In Vorbereitung       |
+| PenTest+             | CompTIA     | In Vorbereitung       |
+| CEH v13              | EC-Council  | In Vorbereitung       |
 
 ---
 

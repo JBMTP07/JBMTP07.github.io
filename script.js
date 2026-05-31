@@ -95,9 +95,9 @@ const t = {
     talks_tag3:    'Ehrenamtlich',
 
     certs_title:   'Zertifizierungen',
-    certs_sub:     'Kurse abgeschlossen über New Horizons (gefördert durch Arbeitsagentur / Bildungsgutschein). Prüfungen laufend.',
+    certs_sub:     'Security+ bestanden. Kurse abgeschlossen über New Horizons (gefördert durch Arbeitsagentur / Bildungsgutschein). Weitere Prüfungen laufend.',
     cert_status_netplus:    'Kurs abgeschlossen',
-    cert_status_secplus:    'Prüfung: 30.05.2026',
+    cert_status_secplus:    'Bestanden · 05/2026',
     cert_status_linuxplus:  'Kurs abgeschlossen',
     cert_status_pentestplus:'Prüfung: Juni 2026',
     cert_status_ceh:        'Prüfung: Juni 2026',
@@ -202,9 +202,9 @@ const t = {
     talks_tag3:    'Volunteer',
 
     certs_title:   'Certifications',
-    certs_sub:     'Courses completed via New Horizons (funded through the German employment agency). Exams in progress.',
+    certs_sub:     'Security+ passed. Courses completed via New Horizons (funded through the German employment agency). Further exams in progress.',
     cert_status_netplus:    'Course completed',
-    cert_status_secplus:    'Exam: 2026-05-30',
+    cert_status_secplus:    'Passed · 05/2026',
     cert_status_linuxplus:  'Course completed',
     cert_status_pentestplus:'Exam: June 2026',
     cert_status_ceh:        'Exam: June 2026',
