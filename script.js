@@ -1,334 +1,206 @@
-// ================================================================
-// TRANSLATIONS
-// ================================================================
-const t = {
-  de: {
-    nav_about:      'Über mich',
-    nav_skills:     'Skills',
-    nav_experience: 'Erfahrung',
-    nav_projects:   'Projekte',
-    nav_contact:    'Kontakt',
+/* [JB] portfolio — vanilla JS, no deps, no tracking */
+(() => {
+  "use strict";
+  const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    hero_available: 'Offen für Positionen',
-    hero_tagline:   'Ich breche Systeme. Bevor es andere tun.',
-    hero_roles:     ['Penetration Tester', 'Red Team Operator', 'Bug Bounty Researcher', 'Security Researcher'],
+  /* ---------- boot sequence (once per session) ---------- */
+  const boot = document.getElementById("boot");
+  const bootLog = document.getElementById("bootLog");
+  const killBoot = () => boot && boot.classList.add("boot--off");
+  if (boot && !reduced && !sessionStorage.getItem("booted")) {
+    const lines = [
+      ["jb@sec:~$ ./init_portfolio.sh", 0],
+      ["[ OK ] loading modules: web · ad · ot-ics", 220],
+      ["[ OK ] certs: security+ verified (05/2026)", 420],
+      ["[ OK ] findings: 20+ (private · nda)", 600],
+      ["[ OK ] access granted_", 800],
+    ];
+    lines.forEach(([t, d]) =>
+      setTimeout(() => {
+        bootLog.innerHTML += (t.startsWith("[ OK ]")
+          ? '<span class="ok">[ OK ]</span>' + t.slice(6) : t) + "\n";
+      }, d)
+    );
+    setTimeout(() => { killBoot(); sessionStorage.setItem("booted", "1"); }, 1250);
+    boot.addEventListener("click", killBoot);
+  } else killBoot();
 
-    cta_contact:    'Kontakt aufnehmen',
-    cta_cv:         'Lebenslauf (PDF)',
-
-    stat_years:     'Jahre Erfahrung',
-    stat_vulns:     'Schwachstellen',
-    stat_schools:   'Schulen',
-
-    about_title:    'Über mich',
-    about_whoami:   'Offensive-Security-Spezialist mit über 5 Jahren praktischer Erfahrung in Bug Bounty, Web- und API-Pentesting sowie Active-Directory-Angriffen. Seit 2020 aktiv in privaten Programmen auf HackerOne und Bugcrowd mit über 20 bestätigten Schwachstellen. Betreibt seit 2026 [JB] Security (jbmtp07.github.io/jb-security) als eigene Freelance-Pentest-Praxis. Ausgebildeter Mechatroniker mit OT/ICS-Hintergrund (Siemens S7, SCADA) — direkter Zugang zu industrieller Security.',
-    about_strengths: [
-      '20+ bestätigte Findings unter NDA · saubere, reproduzierbare Reports',
-      'Strukturierte Methodik: Recon → Enumerate → Exploit → Escalate → Report',
-      'Doppelqualifikation Offensive Security + OT/ICS · zweisprachig DE/EN',
-      'Eigeninitiative — Schul-Talks, eigenes Lab, dokumentierte Writeups',
-    ],
-    about_focus:    'Bug Bounty · HackTheBox · Web & API Testing · Red Team · OT/ICS Security',
-
-    skills_title:   'Skills',
-    sk_offensive:   'Offensive Security',
-    sk_tools:       'Tools',
-    sk_scripting:   'Scripting',
-    sk_networks:    'Netzwerke',
-    sk_os:          'Betriebssysteme',
-    sk_ot:          'OT / ICS',
-
-    exp_title:        'Erfahrung',
-    exp_jbsec_title:  '[JB] Security — Inhaber & Freelance Pentester',
-    exp_jbsec_org:    'Eigene Offensive-Security-Praxis · jbmtp07.github.io/jb-security',
-    exp_jbsec_points: [
-      'Eigenes Pentest-Angebot: Web Application, Active Directory, OT/ICS',
-      'Manuelle Tiefenprüfung nach OWASP WSTG, PTES, NIST SP 800-115, MITRE ATT&CK',
-      'Verschlüsselte Reports · NDA / AVV / TOM-konform · 2 Mio. € IT-Berufshaftpflicht',
-    ],
-    exp_bb_title:     'Bug Bounty Researcher',
-    exp_bb_org:       'HackerOne · Bugcrowd · invite-only',
-    exp_bb_points:    [
-      '20+ bestätigte Schwachstellen: RCE, SQLi, XSS, IDOR, Auth-Bypass, Business-Logic-Flaws',
-      'Schwerpunkt Web- & API-Schwachstellen, Recon-Automatisierung, Token-Analyse',
-      'Saubere PoC-Reports · vollständige NDA- und Responsible-Disclosure-Compliance',
-    ],
-    exp_talks_title:  'Gastredner – KI & Cybersecurity',
-    exp_talks_org:    'Schulen · ehrenamtlich',
-    exp_talks_points: [
-      'Vorträge an 5–10 Schulen für Schüler:innen und Lehrkräfte',
-      'LLMs, KI-Sicherheitsrisiken, Phishing, Cybersecurity-Grundlagen',
-      'Eigeninitiative · zielgruppengerechte Kommunikation',
-    ],
-    exp_mecha_title:  'Mechatroniker',
-    exp_mecha_org:    'Rotan GmbH',
-    exp_mecha_points: [
-      'Wartung, Instandhaltung und Fehlerdiagnose industrieller Anlagen',
-      'Praktische Berührungspunkte mit OT-Systemen',
-    ],
-    exp_appr_title:   'Ausbildung Mechatroniker',
-    exp_appr_org:     'Consun Beet Company',
-    exp_appr_points:  [
-      'Schwerpunkte: SPS-Programmierung (Siemens S7), SCADA, Industrieautomation',
-      'Direkter Bezug zu OT/ICS-Security · vollständig abgeschlossene Ausbildung',
-    ],
-
-    projects_title:    'Projekte',
-    proj_jbsec_title:  '[JB] Security — Freelance Pentest Service',
-    proj_jbsec_desc:   'Eigenes Offensive-Security-Angebot für Web-, Active-Directory- und OT/ICS-Pentests. Strukturierte Reports nach OWASP WSTG, PTES, NIST SP 800-115 und MITRE ATT&CK. 2 Mio. € IT-Berufshaftpflicht. Q3 2026 verfügbar.',
-    proj_bbreports_title: 'Bug Bounty Reports',
-    proj_bbreports_desc:  'Sanitisierte Public-Reports realer Findings — inklusive einer Chained-Exploit-Kette (SQLi → Stored XSS → SSTI → RCE, CVSS 9.9) und unauthenticated Command Injection (CVSS 9.8). Nach Coordinated Disclosure veröffentlicht.',
-    proj_htb_title:    'HTB Writeups',
-    proj_htb_desc:     'Deutschsprachige Writeups für retired HackTheBox Machines. Dokumentierte Methodik von Recon bis Post-Exploitation.',
-    proj_notes_title:  'Study Notes',
-    proj_notes_desc:   'Strukturierte Methodik-Sammlung: Linux Privesc, AD-Angriffe, Nmap-Enumeration, Burp-Workflow und mehr.',
-    proj_lab_title:    'Security Homelab',
-    proj_lab_desc:     'Raspberry Pi-basiertes Testlabor mit Metasploitable, isoliertem Active Directory und weiteren Vulnerable-Machine-Umgebungen.',
-    proj_bb_title:     'Bug Bounty',
-    proj_bb_desc:      'Aktive Teilnahme an privaten / invite-only Programmen via HackerOne und Bugcrowd seit 2020. 20+ bestätigte Findings. Details unter NDA.',
-
-    talks_title:   'Talks & Bildung',
-    talks_heading: 'Gastredner – KI & Cybersecurity',
-    talks_desc:    'Ehrenamtliche Vorträge an bisher 5–10 Schulen für Schüler:innen und Lehrkräfte. Themen: Large Language Models (LLMs), KI-Sicherheitsrisiken, Phishing und Grundlagen der Cybersecurity. Eigeninitiative, wachsendes Netzwerk an Schulkooperationen.',
-    talks_tag1:    '5–10 Schulen',
-    talks_tag2:    'KI-Sicherheit',
-    talks_tag3:    'Ehrenamtlich',
-
-    certs_title:   'Zertifizierungen',
-    certs_sub:     'Security+ bestanden. Kurse abgeschlossen über New Horizons (gefördert durch Arbeitsagentur / Bildungsgutschein). Weitere Prüfungen laufend.',
-    cert_status_netplus:    'Kurs abgeschlossen',
-    cert_status_secplus:    'Bestanden · 05/2026',
-    cert_status_linuxplus:  'Kurs abgeschlossen',
-    cert_status_pentestplus:'Prüfung: Juni 2026',
-    cert_status_ceh:        'Prüfung: Juni 2026',
-
-    contact_title:    'Kontakt',
-    contact_sub:      'Offen für Positionen im Bereich Penetration Testing, Red Team und Security Research. Antworte zuverlässig binnen 24 Stunden.',
-    contact_cv:       'Lebenslauf als PDF herunterladen',
-    contact_location: 'Deutschland · Remote weltweit',
-
-    footer_text: 'Gebaut mit HTML, CSS & JS',
-  },
-  en: {
-    nav_about:      'About',
-    nav_skills:     'Skills',
-    nav_experience: 'Experience',
-    nav_projects:   'Projects',
-    nav_contact:    'Contact',
-
-    hero_available: 'Open to Opportunities',
-    hero_tagline:   'I break systems. Before others do.',
-    hero_roles:     ['Penetration Tester', 'Red Team Operator', 'Bug Bounty Researcher', 'Security Researcher'],
-
-    cta_contact:    'Get in Touch',
-    cta_cv:         'Resume (PDF)',
-
-    stat_years:     'Years Experience',
-    stat_vulns:     'Vulnerabilities',
-    stat_schools:   'Schools',
-
-    about_title:    'About Me',
-    about_whoami:   'Offensive security specialist with 5+ years of hands-on experience in bug bounty, web and API pentesting, and Active Directory attacks. Active in private HackerOne and Bugcrowd programs since 2020 with 20+ confirmed vulnerabilities. Runs [JB] Security (jbmtp07.github.io/jb-security) since 2026 as an independent freelance pentest practice. Trained mechatronics engineer with OT/ICS background (Siemens S7, SCADA) — direct path into industrial security.',
-    about_strengths: [
-      '20+ confirmed findings under NDA · clean, reproducible reports',
-      'Structured methodology: Recon → Enumerate → Exploit → Escalate → Report',
-      'Dual qualification Offensive Security + OT/ICS · bilingual DE/EN',
-      'Self-driven — school talks, custom lab, public writeups',
-    ],
-    about_focus:    'Bug Bounty · HackTheBox · Web & API Testing · Red Team · OT/ICS Security',
-
-    skills_title:   'Skills',
-    sk_offensive:   'Offensive Security',
-    sk_tools:       'Tools',
-    sk_scripting:   'Scripting',
-    sk_networks:    'Networks',
-    sk_os:          'Operating Systems',
-    sk_ot:          'OT / ICS',
-
-    exp_title:        'Experience',
-    exp_jbsec_title:  '[JB] Security — Owner & Freelance Pentester',
-    exp_jbsec_org:    'Independent offensive-security practice · jbmtp07.github.io/jb-security',
-    exp_jbsec_points: [
-      'Independent pentest service: web applications, Active Directory, OT/ICS',
-      'Manual deep testing per OWASP WSTG, PTES, NIST SP 800-115, MITRE ATT&CK',
-      'Encrypted reports · NDA / DPA / TOM compliant · €2M IT professional liability',
-    ],
-    exp_bb_title:     'Bug Bounty Researcher',
-    exp_bb_org:       'HackerOne · Bugcrowd · invite-only',
-    exp_bb_points:    [
-      '20+ confirmed vulnerabilities: RCE, SQLi, XSS, IDOR, auth bypass, business-logic flaws',
-      'Focus on web & API issues, recon automation, token analysis',
-      'Clean PoC reports · full NDA and responsible-disclosure compliance',
-    ],
-    exp_talks_title:  'Guest Speaker – AI & Cybersecurity',
-    exp_talks_org:    'Schools · volunteer',
-    exp_talks_points: [
-      'Talks at 5–10 schools for students and teachers',
-      'LLMs, AI security risks, phishing, cybersecurity fundamentals',
-      'Self-initiated · audience-tailored communication',
-    ],
-    exp_mecha_title:  'Mechatronics Engineer',
-    exp_mecha_org:    'Rotan GmbH',
-    exp_mecha_points: [
-      'Maintenance, servicing and troubleshooting of industrial systems',
-      'Hands-on contact with OT systems',
-    ],
-    exp_appr_title:   'Apprenticeship · Mechatronics',
-    exp_appr_org:     'Consun Beet Company',
-    exp_appr_points:  [
-      'Focus: PLC programming (Siemens S7), SCADA, industrial automation',
-      'Direct bridge into OT/ICS security · fully completed apprenticeship',
-    ],
-
-    projects_title:    'Projects',
-    proj_jbsec_title:  '[JB] Security — Freelance Pentest Service',
-    proj_jbsec_desc:   'Independent offensive-security practice for web, Active Directory and OT/ICS pentests. Structured reports per OWASP WSTG, PTES, NIST SP 800-115 and MITRE ATT&CK. €2M IT professional liability. Available Q3 2026.',
-    proj_bbreports_title: 'Bug Bounty Reports',
-    proj_bbreports_desc:  'Sanitized public reports from real findings — including a chained exploit (SQLi → Stored XSS → SSTI → RCE, CVSS 9.9) and an unauthenticated Command Injection (CVSS 9.8). Released after Coordinated Disclosure.',
-    proj_htb_title:    'HTB Writeups',
-    proj_htb_desc:     'German-language writeups for retired HackTheBox machines. Documented methodology from recon to post-exploitation.',
-    proj_notes_title:  'Study Notes',
-    proj_notes_desc:   'Structured methodology collection: Linux PrivEsc, AD attacks, Nmap enumeration, Burp workflow, and more.',
-    proj_lab_title:    'Security Homelab',
-    proj_lab_desc:     'Raspberry Pi-based test lab running Metasploitable, isolated Active Directory and other vulnerable machines.',
-    proj_bb_title:     'Bug Bounty',
-    proj_bb_desc:      'Active participation in private / invite-only programs via HackerOne and Bugcrowd since 2020. 20+ confirmed findings. Details under NDA.',
-
-    talks_title:   'Talks & Education',
-    talks_heading: 'Guest Speaker – AI & Cybersecurity',
-    talks_desc:    'Voluntary talks at 5–10 schools for students and teachers. Topics: Large Language Models (LLMs), AI security risks, phishing, and cybersecurity fundamentals. Self-initiated, growing network of school partnerships.',
-    talks_tag1:    '5–10 Schools',
-    talks_tag2:    'AI Security',
-    talks_tag3:    'Volunteer',
-
-    certs_title:   'Certifications',
-    certs_sub:     'Security+ passed. Courses completed via New Horizons (funded through the German employment agency). Further exams in progress.',
-    cert_status_netplus:    'Course completed',
-    cert_status_secplus:    'Passed · 05/2026',
-    cert_status_linuxplus:  'Course completed',
-    cert_status_pentestplus:'Exam: June 2026',
-    cert_status_ceh:        'Exam: June 2026',
-
-    contact_title:    'Contact',
-    contact_sub:      'Open to positions in penetration testing, red team and security research. Reliable response within 24 hours.',
-    contact_cv:       'Download Resume as PDF',
-    contact_location: 'Germany · Remote worldwide',
-
-    footer_text: 'Built with HTML, CSS & JS',
+  /* ---------- katakana rain (subtle, cheap) ---------- */
+  const canvas = document.getElementById("rain");
+  if (canvas && !reduced) {
+    const ctx = canvas.getContext("2d");
+    const glyphs = "アイウエオカキクケコサシスセソタチツテトナニヌネノ01<>/{}";
+    let cols, drops, fs = 15, w, h;
+    const size = () => {
+      w = canvas.width = innerWidth;
+      h = canvas.height = innerHeight;
+      cols = Math.floor(w / (fs * 2.2));
+      drops = Array.from({ length: cols }, () => Math.random() * -h / fs);
+    };
+    size(); addEventListener("resize", size);
+    let last = 0;
+    const tick = (ts) => {
+      requestAnimationFrame(tick);
+      if (ts - last < 70) return; // ~14fps is plenty for ambience
+      last = ts;
+      ctx.fillStyle = "rgba(6,6,9,0.18)";
+      ctx.fillRect(0, 0, w, h);
+      ctx.font = fs + "px 'IBM Plex Mono', monospace";
+      drops.forEach((y, i) => {
+        const x = i * fs * 2.2;
+        ctx.fillStyle = Math.random() < 0.06 ? "#fcee0a" : "#00f0ff";
+        ctx.fillText(glyphs[(Math.random() * glyphs.length) | 0], x, y * fs);
+        drops[i] = y * fs > h && Math.random() > 0.985 ? 0 : y + 0.5;
+      });
+    };
+    requestAnimationFrame(tick);
   }
-};
 
-// ================================================================
-// STATE
-// ================================================================
-let lang = localStorage.getItem('lang') || 'de';
-let roleIdx = 0, charIdx = 0, deleting = false;
-let typingTimer = null;
-
-// ================================================================
-// I18N
-// ================================================================
-function applyLang(l) {
-  lang = l;
-  document.documentElement.lang = l;
-  localStorage.setItem('lang', l);
-
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.getAttribute('data-i18n');
-    if (t[l][key] !== undefined) el.textContent = t[l][key];
+  /* ---------- mobile nav ---------- */
+  const burger = document.getElementById("burger");
+  const navLinks = document.getElementById("navLinks");
+  burger?.addEventListener("click", () => {
+    const open = navLinks.classList.toggle("is-open");
+    burger.classList.toggle("is-open", open);
+    burger.setAttribute("aria-expanded", String(open));
   });
+  navLinks?.querySelectorAll("a").forEach(a =>
+    a.addEventListener("click", () => {
+      navLinks.classList.remove("is-open");
+      burger?.classList.remove("is-open");
+    })
+  );
 
-  document.querySelectorAll('[data-i18n-list]').forEach(el => {
-    const key = el.getAttribute('data-i18n-list');
-    const items = t[l][key];
-    if (Array.isArray(items)) {
-      el.innerHTML = items.map(s => `<li>${s}</li>`).join('');
+  /* ---------- reveal on scroll ---------- */
+  const io = new IntersectionObserver(
+    es => es.forEach(e => e.isIntersecting && (e.target.classList.add("is-in"), io.unobserve(e.target))),
+    { threshold: 0.12 }
+  );
+  document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+
+  /* ---------- counters (real values live in HTML — JS only animates) ---------- */
+  const cio = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    cio.unobserve(e.target);
+    if (reduced) return;
+    const el = e.target, target = +el.dataset.count, t0 = performance.now(), dur = 900;
+    const step = (now) => {
+      const p = Math.min((now - t0) / dur, 1);
+      el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
+      if (p < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }), { threshold: 0.6 });
+  document.querySelectorAll(".count").forEach(el => cio.observe(el));
+
+  /* ---------- typed terminal ---------- */
+  const term = document.getElementById("term");
+  const termScript = () => [
+    ['<span class="p">jb@sec</span>:~$ whoami', "josef_basner"],
+    ['<span class="p">jb@sec</span>:~$ cat focus.txt',
+     '<span class="y">web · api · active-directory · ot-ics</span>'],
+    ['<span class="p">jb@sec</span>:~$ ls certs/',
+     'security+.<span class="y">passed</span>  network+  linux+  pentest+  ceh_v13  <span class="r">oscp.q4</span>'],
+    ['<span class="p">jb@sec</span>:~$ ./status --hiring',
+     '<span class="y">open_to_work: junior_pentest · trainee</span>'],
+  ];
+  if (term) {
+    let html = "", queue = [];
+    termScript().forEach(([cmd, out]) => queue.push({ cmd, out }));
+    const typeCmd = (cmd, out, done) => {
+      // strip tags for typing, then swap in styled version
+      const plain = cmd.replace(/<[^>]+>/g, "");
+      let i = 0;
+      const prefix = html;
+      if (reduced) { html = prefix + cmd + "\n" + out + "\n"; term.innerHTML = html + '<span class="c"> </span>'; done(); return; }
+      const t = setInterval(() => {
+        i++;
+        term.innerHTML = prefix + plain.slice(0, i) + '<span class="c"> </span>';
+        if (i >= plain.length) {
+          clearInterval(t);
+          html = prefix + cmd + "\n";
+          setTimeout(() => {
+            html += out + "\n";
+            term.innerHTML = html + '<span class="c"> </span>';
+            setTimeout(done, 320);
+          }, 200);
+        }
+      }, 34);
+    };
+    const tio = new IntersectionObserver(es => es.forEach(e => {
+      if (!e.isIntersecting) return;
+      tio.unobserve(term);
+      const next = () => { const it = queue.shift(); if (it) typeCmd(it.cmd, it.out, next); };
+      next();
+    }), { threshold: 0.4 });
+    tio.observe(term);
+  }
+
+  /* ---------- nav active state ---------- */
+  const sections = [...document.querySelectorAll("section[id]")];
+  const navA = [...document.querySelectorAll('.nav__links a[href^="#"]')];
+  const sio = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    navA.forEach(a => a.classList.toggle("is-active", a.getAttribute("href") === "#" + e.target.id));
+  }), { rootMargin: "-40% 0px -55% 0px" });
+  sections.forEach(s => sio.observe(s));
+
+  /* ---------- i18n DE / EN ---------- */
+  const T = {
+    en: {
+      "nav.about": "About", "nav.skills": "Skills", "nav.projects": "Projects",
+      "nav.certs": "Certifications", "nav.talks": "Talks", "nav.contact": "Contact", "nav.cv": "CV",
+      "hero.status": "OPEN TO WORK — Junior Pentest · Trainee",
+      "hero.eyebrow": "// SECURITY RESEARCHER · GERMANY · REMOTE",
+      "hero.tag1": "I break systems.", "hero.tag2": "Before someone else does.",
+      "hero.sub": "Penetration testing · Web & API · Active Directory · OT/ICS. Bug bounty since 2020 — 20+ confirmed findings in private programs.",
+      "hero.cta1": "Get in touch", "hero.cta2": "View résumé", "hero.scroll": "scroll",
+      "hud.findings": "Confirmed findings<br>private · NDA",
+      "hud.since": "Bug bounty<br>active since",
+      "hud.talks": "School talks<br>AI & security",
+      "hud.ot": "Mechatronics background<br>Siemens S7 · SCADA",
+      "about.h": "About me",
+      "about.p1": "Career changer with momentum: trained mechatronics technician (Siemens S7, SCADA), active in offensive security since 2020 — bug bounty on HackerOne and Bugcrowd, exclusively private / invite-only programs. 20+ confirmed vulnerabilities: RCE, SQLi, XSS, IDOR, auth bypass. Details under NDA.",
+      "about.p2": "The OT/ICS background isn't résumé decoration: I know how a PLC behaves, why you don't just scan production systems, and where IT meets OT. Exactly the interface where industry gets burned.",
+      "about.p3": "Currently: certification track via New Horizons — Security+ passed, four more exams within the next two months, OSCP planned for Q4 2026. I'm looking for a junior position or trainee program in penetration testing.",
+      "sk.off": "Offensive Security", "sk.tools": "Tools", "sk.script": "Scripting",
+      "sk.net": "Networking", "sk.os": "Systems",
+      "sk.ot1": "Industrial control systems", "sk.ot2": "IT/OT interfaces", "sk.ot3": "Fieldbuses",
+      "pr.h": "Projects",
+      "pr.htb": "German-language writeups for retired HackTheBox machines. Documented methodology from recon to post-exploitation.",
+      "pr.notes": "Structured methodology collection: Linux privesc, AD attacks, Nmap enumeration, Burp workflows and more.",
+      "pr.lab": "Raspberry-Pi-based test lab with Metasploitable, vulnerable VMs and an isolated Active Directory for hands-on practice.",
+      "pr.bb": "20+ confirmed findings in private / invite-only programs via HackerOne and Bugcrowd since 2020. Vulnerability classes: RCE, SQLi, XSS, IDOR, auth bypass. Details under NDA.",
+      "ce.h": "Certifications",
+      "ce.intro": "Courses completed via New Horizons (certified training provider). Security+ passed — the remaining exams follow within the next two months.",
+      "ce.done": "PASSED", "ce.sched": "EXAM", "ce.sched2": "EXAM", "ce.sched3": "EXAM", "ce.sched4": "EXAM",
+      "ce.plan": "PLANNED",
+      "ta.h": "Talks & Education",
+      "ta.t": "Guest speaker — AI & Cybersecurity",
+      "ta.p": "Volunteer talks at 8 schools so far, for students and teachers. Topics: large language models, AI security risks, phishing and cybersecurity fundamentals. Self-initiated since 2024 — growing network of school partnerships.",
+      "ta.tag1": "8 schools", "ta.tag2": "AI security", "ta.tag3": "Volunteer",
+      "co.h": "Contact",
+      "co.lead": "Open to junior positions, trainee programs and security projects. Usually replying within 48 hours.",
+      "co.loc": "Germany · Remote worldwide", "co.cta": "Send an email",
+      "ft.built": "Built with HTML, CSS & vanilla JS — no tracking, no cookies",
+      "ft.freelance": "Freelance pentests:",
     }
-  });
-
-  document.getElementById('lang-btn').textContent = l === 'de' ? 'EN' : 'DE';
-
-  clearTimeout(typingTimer);
-  charIdx = 0;
-  deleting = false;
-  document.querySelector('.typing-text').textContent = '';
-  tick();
-}
-
-// ================================================================
-// TYPING ANIMATION
-// ================================================================
-function tick() {
-  const roles = t[lang].hero_roles;
-  const word  = roles[roleIdx % roles.length];
-  const el    = document.querySelector('.typing-text');
-
-  if (deleting) {
-    el.textContent = word.slice(0, --charIdx);
-  } else {
-    el.textContent = word.slice(0, ++charIdx);
-  }
-
-  if (!deleting && charIdx === word.length) {
-    typingTimer = setTimeout(() => { deleting = true; tick(); }, 2400);
-    return;
-  }
-  if (deleting && charIdx === 0) {
-    deleting = false;
-    roleIdx++;
-  }
-
-  typingTimer = setTimeout(tick, deleting ? 42 : 90);
-}
-
-// ================================================================
-// NAV SCROLL SHADOW
-// ================================================================
-const navbar = document.getElementById('navbar');
-window.addEventListener('scroll', () => {
-  navbar.classList.toggle('scrolled', window.scrollY > 30);
-}, { passive: true });
-
-// ================================================================
-// HAMBURGER
-// ================================================================
-const hamburger  = document.getElementById('hamburger');
-const mobileMenu = document.getElementById('mobile-menu');
-
-hamburger.addEventListener('click', () => {
-  hamburger.classList.toggle('active');
-  mobileMenu.classList.toggle('open');
-});
-
-mobileMenu.querySelectorAll('a').forEach(a =>
-  a.addEventListener('click', () => {
-    hamburger.classList.remove('active');
-    mobileMenu.classList.remove('open');
-  })
-);
-
-// ================================================================
-// LANGUAGE SWITCH
-// ================================================================
-document.getElementById('lang-btn').addEventListener('click', () => {
-  applyLang(lang === 'de' ? 'en' : 'de');
-});
-
-// ================================================================
-// FADE IN ON SCROLL
-// ================================================================
-const io = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.classList.add('visible');
-      io.unobserve(e.target);
-    }
-  });
-}, { threshold: 0.08 });
-
-document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
-
-// ================================================================
-// INIT
-// ================================================================
-applyLang(lang);
+  };
+  const de = {}; // captured from DOM as default
+  document.querySelectorAll("[data-i18n]").forEach(el => de[el.dataset.i18n] = el.innerHTML);
+  T.de = de;
+  const langBtn = document.getElementById("langBtn");
+  const langLabel = document.querySelector("[data-lang-label]");
+  const apply = (lang) => {
+    document.documentElement.lang = lang;
+    document.querySelectorAll("[data-i18n]").forEach(el => {
+      const v = T[lang][el.dataset.i18n];
+      if (v !== undefined) el.innerHTML = v;
+    });
+    langLabel.textContent = lang === "de" ? "EN" : "DE";
+    localStorage.setItem("lang", lang);
+  };
+  let lang = localStorage.getItem("lang") || "de";
+  if (lang !== "de") apply(lang);
+  langBtn?.addEventListener("click", () => { lang = lang === "de" ? "en" : "de"; apply(lang); });
+})();
