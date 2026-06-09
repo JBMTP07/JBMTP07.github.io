@@ -72,7 +72,7 @@ Siemens S7 (SPS) · SCADA-Systeme · Industriesteuerungen · Feldbusse · IT/OT-
 ## Security Awareness & Bildung
 
 ### Gastredner – KI & Cybersecurity · *seit 2024*
-- Ehrenamtliche Vorträge an **5–10 Schulen** für Schüler:innen und Lehrkräfte
+- Ehrenamtliche Vorträge an **8 Schulen** für Schüler:innen und Lehrkräfte
 - Themen: Large Language Models (LLMs), KI-Sicherheitsrisiken, Phishing, Cybersecurity-Grundlagen
 - Eigeninitiative · wachsendes Netzwerk an Schulkooperationen · zielgruppengerechte Kommunikation
 

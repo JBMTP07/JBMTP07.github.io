@@ -71,7 +71,36 @@
     })
   );
 
-  /* ---------- reveal on scroll ---------- */
+  /* ---------- scroll progress bar ---------- */
+  const progress = document.getElementById("progress");
+  if (progress) {
+    let ticking = false;
+    const update = () => {
+      const max = document.documentElement.scrollHeight - innerHeight;
+      progress.style.width = (max > 0 ? (scrollY / max) * 100 : 0) + "%";
+      ticking = false;
+    };
+    addEventListener("scroll", () => {
+      if (!ticking) { ticking = true; requestAnimationFrame(update); }
+    }, { passive: true });
+    update();
+  }
+
+  /* ---------- card glow follows cursor ---------- */
+  if (!reduced && matchMedia("(hover:hover)").matches) {
+    document.querySelectorAll(".card").forEach(card => {
+      card.addEventListener("pointermove", (e) => {
+        const r = card.getBoundingClientRect();
+        card.style.setProperty("--mx", ((e.clientX - r.left) / r.width * 100) + "%");
+        card.style.setProperty("--my", ((e.clientY - r.top) / r.height * 100) + "%");
+      });
+    });
+  }
+
+  /* ---------- reveal on scroll (staggered within grids) ---------- */
+  document.querySelectorAll(".grid").forEach(grid =>
+    [...grid.children].forEach((el, i) => el.style.setProperty("--rd", (i * 0.08).toFixed(2) + "s"))
+  );
   const io = new IntersectionObserver(
     es => es.forEach(e => e.isIntersecting && (e.target.classList.add("is-in"), io.unobserve(e.target))),
     { threshold: 0.12 }
@@ -159,18 +188,19 @@
       "hud.since": "Bug bounty<br>active since",
       "hud.talks": "School talks<br>AI & security",
       "hud.ot": "Mechatronics background<br>Siemens S7 · SCADA",
+      "skip": "Skip to content",
       "about.h": "About me",
-      "about.p1": "Career changer with momentum: trained mechatronics technician (Siemens S7, SCADA), active in offensive security since 2020 — bug bounty on HackerOne and Bugcrowd, exclusively private / invite-only programs. 20+ confirmed vulnerabilities: RCE, SQLi, XSS, IDOR, auth bypass. Details under NDA.",
-      "about.p2": "The OT/ICS background isn't résumé decoration: I know how a PLC behaves, why you don't just scan production systems, and where IT meets OT. Exactly the interface where industry gets burned.",
-      "about.p3": "Currently: certification track via New Horizons — Security+ passed, four more exams within the next two months, OSCP planned for Q4 2026. I'm looking for a junior position or trainee program in penetration testing.",
+      "about.p1": "Offensive security since 2020: bug bounty on HackerOne and Bugcrowd, exclusively in private / invite-only programs — 20+ confirmed vulnerabilities, from RCE via SQLi and IDOR to auth bypass. Found with methodology, not scanners: recon, business logic, exploit chains.",
+      "about.p2": "Plus a background few pentesters bring: trained mechatronics technician (Siemens S7, SCADA). I know how a PLC behaves, why you don't just scan production systems, and where IT meets OT — exactly the interface where industry gets burned.",
+      "about.p3": "Currently: Security+ passed, four more exams by 07/2026, OSCP planned for Q4 2026. I'm looking for a junior position or trainee program in penetration testing — bringing hands-on practice from day one.",
       "sk.off": "Offensive Security", "sk.tools": "Tools", "sk.script": "Scripting",
       "sk.net": "Networking", "sk.os": "Systems",
       "sk.ot1": "Industrial control systems", "sk.ot2": "IT/OT interfaces", "sk.ot3": "Fieldbuses",
       "pr.h": "Projects",
-      "pr.htb": "German-language writeups for retired HackTheBox machines. Documented methodology from recon to post-exploitation.",
-      "pr.notes": "Structured methodology collection: Linux privesc, AD attacks, Nmap enumeration, Burp workflows and more.",
-      "pr.lab": "Raspberry-Pi-based test lab with Metasploitable, vulnerable VMs and an isolated Active Directory for hands-on practice.",
-      "pr.bb": "20+ confirmed findings in private / invite-only programs via HackerOne and Bugcrowd since 2020. Vulnerability classes: RCE, SQLi, XSS, IDOR, auth bypass. Details under NDA.",
+      "pr.htb": "Fully documented attack chains for retired HackTheBox machines — in German, from recon to root, with every command reproducible.",
+      "pr.notes": "My pentest playbook, public: Linux privesc, AD attack paths, Nmap enumeration and Burp workflows — the way I actually use them.",
+      "pr.lab": "Isolated test lab on a Raspberry Pi base: Metasploitable, vulnerable VMs and my own AD domain — where attacks get rehearsed before they hit real targets.",
+      "pr.bb": "Active since 2020 in private / invite-only programs on HackerOne and Bugcrowd. 20+ confirmed findings — RCE, SQLi, XSS, IDOR, auth bypass — focused on business logic and exploit chains. Details under NDA.",
       "ce.h": "Certifications",
       "ce.intro": "Courses completed via New Horizons (certified training provider). Security+ passed — the remaining exams follow within the next two months.",
       "ce.done": "PASSED", "ce.sched": "EXAM", "ce.sched2": "EXAM", "ce.sched3": "EXAM", "ce.sched4": "EXAM",

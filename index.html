@@ -11,6 +11,34 @@
 <meta property="og:description" content="Offensive Security · Security+ zertifiziert · 20+ Findings (privat/NDA) seit 2020 · OT/ICS-Background">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://jbmtp07.github.io/">
+<meta property="og:site_name" content="Josef Basner — Portfolio">
+<meta property="og:locale" content="de_DE">
+<meta property="og:image" content="https://jbmtp07.github.io/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Josef Basner — Penetration Tester">
+<meta name="twitter:description" content="Offensive Security · Security+ zertifiziert · 20+ Findings (privat/NDA) seit 2020 · OT/ICS-Background">
+<meta name="twitter:image" content="https://jbmtp07.github.io/og.png">
+<link rel="canonical" href="https://jbmtp07.github.io/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%23060609'/%3E%3Ctext x='32' y='42' font-family='monospace' font-size='28' font-weight='700' fill='%23fcee0a' text-anchor='middle'%3EJB%3C/text%3E%3Cpath d='M50 54h8v4h-8z' fill='%2300f0ff'/%3E%3C/svg%3E">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Josef Roland Basner",
+  "url": "https://jbmtp07.github.io/",
+  "email": "mailto:josefbasner@proton.me",
+  "jobTitle": "Penetration Tester · Security Researcher",
+  "knowsAbout": ["Penetration Testing", "Web Application Security", "Active Directory Security", "OT/ICS Security", "Bug Bounty"],
+  "hasCredential": {
+    "@type": "EducationalOccupationalCredential",
+    "name": "CompTIA Security+ (SY0-701)",
+    "credentialCategory": "certification"
+  },
+  "sameAs": ["https://github.com/JBMTP07", "https://jb-security.de"]
+}
+</script>
 <link rel="preconnect" href="https://fonts.bunny.net">
 <link href="https://fonts.bunny.net/css?family=chakra-petch:400,600,700|saira:300,400,500,600|ibm-plex-mono:400,500,600" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
@@ -22,10 +50,14 @@
   <pre class="boot__log" id="bootLog"></pre>
 </div>
 
+<a class="skip" href="#about" data-i18n="skip">Zum Inhalt springen</a>
+
 <!-- AMBIENT LAYERS -->
 <canvas id="rain" class="rain" aria-hidden="true"></canvas>
+<div class="aurora" aria-hidden="true"></div>
 <div class="scanlines" aria-hidden="true"></div>
 <div class="vignette" aria-hidden="true"></div>
+<div class="progress" id="progress" aria-hidden="true"></div>
 
 <!-- NAV -->
 <header class="nav" id="nav">
@@ -108,7 +140,7 @@
 
   <!-- ============ ABOUT ============ -->
   <section class="section" id="about">
-    <div class="section__head reveal">
+    <div class="section__head reveal" data-ghost="01">
       <span class="section__num">01</span>
       <h2 data-i18n="about.h">Über mich</h2>
     </div>
@@ -122,21 +154,22 @@
       </div>
       <div class="about__text">
         <p data-i18n="about.p1">
-          Quereinsteiger mit Anlauf: ausgebildeter Mechatroniker (Siemens S7, SCADA),
-          seit 2020 parallel in der Offensive Security — Bug Bounty auf HackerOne und
-          Bugcrowd, ausschließlich private / invite-only Programme. 20+ bestätigte
-          Schwachstellen: RCE, SQLi, XSS, IDOR, Auth-Bypass. Details unter NDA.
+          Offensive Security seit 2020: Bug Bounty auf HackerOne und Bugcrowd,
+          ausschließlich in privaten / invite-only Programmen — 20+ bestätigte
+          Schwachstellen, von RCE über SQLi und IDOR bis Auth-Bypass. Gefunden
+          mit Methodik statt Scanner: Recon, Business-Logic, Exploit-Chains.
         </p>
         <p data-i18n="about.p2">
-          Der OT/ICS-Background ist kein Lebenslauf-Schmuck: Ich weiß, wie eine SPS
-          tickt, warum man Produktionsanlagen nicht einfach scannt und wo IT auf OT
-          trifft. Genau die Schnittstelle, an der es in der Industrie brennt.
+          Dazu ein Background, den kaum ein Pentester mitbringt: ausgebildeter
+          Mechatroniker (Siemens S7, SCADA). Ich weiß, wie eine SPS tickt, warum
+          man Produktionsanlagen nicht einfach scannt und wo IT auf OT trifft —
+          genau die Schnittstelle, an der es in der Industrie brennt.
         </p>
         <p data-i18n="about.p3">
-          Aktuell: Zertifizierungspfad über New Horizons — Security+ bestanden,
-          vier weitere Prüfungen in den nächsten zwei Monaten, OSCP für Q4 2026
-          geplant. Ich suche eine Junior-Position oder ein Trainee-Programm im
-          Bereich Penetration Testing.
+          Aktuell: Security+ bestanden, vier weitere Prüfungen bis 07/2026,
+          OSCP für Q4 2026 geplant. Ich suche eine Junior-Position oder ein
+          Trainee-Programm im Penetration Testing — und bringe vom ersten Tag
+          an Praxis mit.
         </p>
       </div>
     </div>
@@ -144,7 +177,7 @@
 
   <!-- ============ SKILLS ============ -->
   <section class="section" id="skills">
-    <div class="section__head reveal">
+    <div class="section__head reveal" data-ghost="02">
       <span class="section__num">02</span>
       <h2>Skills</h2>
     </div>
@@ -197,29 +230,29 @@
 
   <!-- ============ PROJECTS ============ -->
   <section class="section" id="projects">
-    <div class="section__head reveal">
+    <div class="section__head reveal" data-ghost="03">
       <span class="section__num">03</span>
       <h2 data-i18n="pr.h">Projekte</h2>
     </div>
     <div class="grid grid--projects">
       <a class="card card--link reveal" href="https://github.com/JBMTP07/HTB-Writeups" target="_blank" rel="noopener">
         <h3 class="card__title">HTB Writeups <span class="card__arrow">↗</span></h3>
-        <p data-i18n="pr.htb">Deutschsprachige Writeups für retired HackTheBox-Machines. Dokumentierte Methodik von Recon bis Post-Exploitation.</p>
+        <p data-i18n="pr.htb">Vollständig dokumentierte Angriffsketten für retired HackTheBox-Machines — auf Deutsch, von Recon bis Root, mit jedem Befehl zum Nachvollziehen.</p>
         <ul class="tags tags--mini"><li>Markdown</li><li>HackTheBox</li><li>Pentest</li></ul>
       </a>
       <a class="card card--link reveal" href="https://github.com/JBMTP07/Study-Notes" target="_blank" rel="noopener">
         <h3 class="card__title">Study Notes <span class="card__arrow">↗</span></h3>
-        <p data-i18n="pr.notes">Strukturierte Methodik-Sammlung: Linux Privesc, AD-Angriffe, Nmap-Enumeration, Burp-Workflows und mehr.</p>
+        <p data-i18n="pr.notes">Mein Pentest-Playbook, öffentlich einsehbar: Linux PrivEsc, AD-Angriffspfade, Nmap-Enumeration und Burp-Workflows — so, wie ich sie tatsächlich einsetze.</p>
         <ul class="tags tags--mini"><li>AD Attacks</li><li>Linux Privesc</li><li>Methodology</li></ul>
       </a>
       <article class="card reveal">
         <h3 class="card__title">Security Homelab</h3>
-        <p data-i18n="pr.lab">Raspberry-Pi-basiertes Testlabor mit Metasploitable, Vulnerable VMs und isoliertem Active Directory für praktische Übungen.</p>
+        <p data-i18n="pr.lab">Eigenes isoliertes Testlabor auf Raspberry-Pi-Basis: Metasploitable, Vulnerable VMs und eine eigene AD-Domäne — hier werden Angriffe geprobt, bevor sie auf echte Ziele treffen.</p>
         <ul class="tags tags--mini"><li>Raspberry Pi</li><li>Metasploitable</li><li>Isolated AD</li></ul>
       </article>
       <article class="card card--nda reveal">
         <h3 class="card__title card__title--red">Bug Bounty <span class="nda-badge">NDA</span></h3>
-        <p data-i18n="pr.bb">20+ bestätigte Findings in privaten / invite-only Programmen via HackerOne und Bugcrowd seit 2020. Vulnerability-Klassen: RCE, SQLi, XSS, IDOR, Auth-Bypass. Details unter NDA.</p>
+        <p data-i18n="pr.bb">Seit 2020 in privaten / invite-only Programmen auf HackerOne und Bugcrowd. 20+ bestätigte Findings — RCE, SQLi, XSS, IDOR, Auth-Bypass — mit Schwerpunkt Business-Logic und Exploit-Chains. Details unter NDA.</p>
         <ul class="tags tags--mini"><li>HackerOne</li><li>Bugcrowd</li><li>Private</li><li>RCE</li><li>SQLi</li><li>XSS</li></ul>
       </article>
     </div>
@@ -227,7 +260,7 @@
 
   <!-- ============ CERTS ============ -->
   <section class="section" id="certs">
-    <div class="section__head reveal">
+    <div class="section__head reveal" data-ghost="04">
       <span class="section__num">04</span>
       <h2 data-i18n="ce.h">Zertifizierungen</h2>
     </div>
@@ -283,7 +316,7 @@
 
   <!-- ============ TALKS ============ -->
   <section class="section" id="talks">
-    <div class="section__head reveal">
+    <div class="section__head reveal" data-ghost="05">
       <span class="section__num">05</span>
       <h2 data-i18n="ta.h">Talks & Bildung</h2>
     </div>
@@ -304,7 +337,7 @@
 
   <!-- ============ CONTACT ============ -->
   <section class="section section--contact" id="contact">
-    <div class="section__head reveal">
+    <div class="section__head reveal" data-ghost="06">
       <span class="section__num">06</span>
       <h2 data-i18n="co.h">Kontakt</h2>
     </div>

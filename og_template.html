@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.bunny.net/css?family=chakra-petch:600,700|ibm-plex-mono:400,500" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:1200px;height:630px;background:#060609;overflow:hidden;position:relative;
+     font-family:"Chakra Petch",sans-serif;color:#e9e9ee}
+.grid{position:absolute;inset:0;
+  background-image:linear-gradient(rgba(0,240,255,.05) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(0,240,255,.05) 1px,transparent 1px);
+  background-size:64px 64px}
+.glow1{position:absolute;width:700px;height:700px;left:-200px;top:-300px;border-radius:50%;
+  background:radial-gradient(circle,rgba(0,240,255,.13),transparent 65%)}
+.glow2{position:absolute;width:700px;height:700px;right:-220px;bottom:-320px;border-radius:50%;
+  background:radial-gradient(circle,rgba(252,238,10,.09),transparent 65%)}
+.hazard{position:absolute;top:0;left:0;right:0;height:10px;
+  background:repeating-linear-gradient(-45deg,#fcee0a 0 14px,transparent 14px 28px);opacity:.85}
+.frame{position:absolute;inset:46px;border:1px solid rgba(0,240,255,.22)}
+.corner{position:absolute;right:60px;bottom:60px;width:48px;height:48px;
+  border-right:3px solid #00f0ff;border-bottom:3px solid #00f0ff;opacity:.8}
+.inner{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:0 110px}
+.eyebrow{font-family:"IBM Plex Mono",monospace;font-size:24px;letter-spacing:.22em;color:#00f0ff;margin-bottom:18px}
+h1{font-size:104px;font-weight:700;text-transform:uppercase;line-height:.98;letter-spacing:.01em;
+   text-shadow:4px 0 0 rgba(255,0,60,.55),-4px 0 0 rgba(0,240,255,.55)}
+.tag{font-size:38px;font-weight:600;margin-top:22px}
+.tag .y{color:#fcee0a}
+.chips{display:flex;gap:18px;margin-top:42px;font-family:"IBM Plex Mono",monospace;font-size:21px}
+.chip{padding:10px 22px;letter-spacing:.08em;white-space:nowrap}
+.chip.c1{border:1.5px solid rgba(252,238,10,.6);color:#fcee0a;background:rgba(252,238,10,.08)}
+.chip.c2{border:1.5px solid rgba(0,240,255,.5);color:#00f0ff;background:rgba(0,240,255,.06)}
+.chip.c3{border:1.5px solid rgba(255,0,60,.5);color:#ff3b6b;background:rgba(255,0,60,.06)}
+.url{position:absolute;bottom:62px;left:110px;font-family:"IBM Plex Mono",monospace;font-size:23px;color:#9c9caa;letter-spacing:.1em}
+</style>
+</head>
+<body>
+<div class="grid"></div><div class="glow1"></div><div class="glow2"></div>
+<div class="hazard"></div><div class="frame"></div><div class="corner"></div>
+<div class="inner">
+  <div class="eyebrow">// PENETRATION TESTER · SECURITY RESEARCHER</div>
+  <h1>Josef Basner</h1>
+  <div class="tag">Ich breche Systeme. <span class="y">Bevor es andere tun.</span></div>
+  <div class="chips">
+    <span class="chip c1">SECURITY+ ZERTIFIZIERT</span>
+    <span class="chip c2">20+ FINDINGS · SEIT 2020</span>
+    <span class="chip c3">WEB · AD · OT/ICS</span>
+  </div>
+</div>
+<div class="url">jbmtp07.github.io</div>
+</body>
+</html>

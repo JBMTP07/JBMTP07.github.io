@@ -14,7 +14,7 @@
   --cyan:      #00f0ff;
   --red:       #ff003c;
   --text:      #e9e9ee;
-  --dim:       #93939f;
+  --dim:       #9c9caa;
   --line:      rgba(0,240,255,.16);
   --line-soft: rgba(233,233,238,.08);
   --notch:     14px;
@@ -38,8 +38,40 @@ body{
 a{color:var(--cyan);text-decoration:none}
 :focus-visible{outline:2px solid var(--yellow);outline-offset:3px}
 
+/* custom scrollbar */
+::-webkit-scrollbar{width:10px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:#1d1d2a;border:2px solid var(--bg)}
+::-webkit-scrollbar-thumb:hover{background:rgba(252,238,10,.5)}
+
+/* skip link */
+.skip{
+  position:fixed;top:-60px;left:1rem;z-index:300;
+  font-family:var(--font-m);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--yellow);color:#000;padding:.6rem 1rem;transition:top .2s;
+}
+.skip:focus{top:.6rem}
+
 /* ---------- ambient layers ---------- */
 .rain{position:fixed;inset:0;z-index:0;opacity:.16;pointer-events:none}
+.aurora{
+  position:fixed;inset:-20%;z-index:0;pointer-events:none;filter:blur(60px);
+  background:
+    radial-gradient(38% 30% at 18% 22%, rgba(0,240,255,.07), transparent 70%),
+    radial-gradient(34% 28% at 82% 12%, rgba(252,238,10,.05), transparent 70%),
+    radial-gradient(40% 34% at 70% 85%, rgba(255,0,60,.045), transparent 70%);
+  animation:aurora 26s ease-in-out infinite alternate;
+}
+@keyframes aurora{
+  0%{transform:translate3d(0,0,0) rotate(0deg)}
+  50%{transform:translate3d(2%,-2%,0) rotate(1.5deg)}
+  100%{transform:translate3d(-2%,1.5%,0) rotate(-1.5deg)}
+}
+.progress{
+  position:fixed;top:0;left:0;height:2px;width:0;z-index:120;
+  background:linear-gradient(90deg,var(--yellow),var(--cyan));
+  box-shadow:0 0 12px rgba(0,240,255,.55);
+}
 .scanlines{
   position:fixed;inset:0;z-index:50;pointer-events:none;
   background:repeating-linear-gradient(0deg,
@@ -119,7 +151,13 @@ a{color:var(--cyan);text-decoration:none}
 /* ---------- shared ---------- */
 main{position:relative;z-index:2}
 .section{max-width:1080px;margin:0 auto;padding:clamp(4rem,9vh,7rem) clamp(1.1rem,5vw,3rem)}
-.section__head{display:flex;align-items:baseline;gap:1rem;margin-bottom:2.2rem}
+.section__head{display:flex;align-items:baseline;gap:1rem;margin-bottom:2.2rem;position:relative}
+.section__head::before{
+  content:attr(data-ghost);position:absolute;right:0;top:-1.2em;
+  font-family:var(--font-d);font-weight:700;font-size:clamp(3.4rem,9vw,6rem);
+  line-height:1;color:transparent;-webkit-text-stroke:1px rgba(0,240,255,.09);
+  pointer-events:none;user-select:none;letter-spacing:.04em;
+}
 .section__num{
   font-family:var(--font-m);font-size:.85rem;color:var(--red);
   border:1px solid rgba(255,0,60,.4);padding:.15rem .5rem;
@@ -141,8 +179,8 @@ main{position:relative;z-index:2}
 }
 .accent{color:var(--yellow)}
 
-/* reveal on scroll */
-.reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+/* reveal on scroll (stagger delay set per-element by JS via --rd) */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease var(--rd,0s),transform .6s ease var(--rd,0s)}
 .reveal.is-in{opacity:1;transform:none}
 
 /* ---------- hero ---------- */
@@ -216,8 +254,15 @@ h1.glitch{
   font-family:var(--font-d);font-weight:600;font-size:.92rem;
   letter-spacing:.08em;text-transform:uppercase;
   padding:.75rem 1.5rem;display:inline-block;transition:.2s;
+  position:relative;overflow:hidden;
   clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px));
 }
+.btn::before{ /* shine sweep */
+  content:"";position:absolute;top:0;bottom:0;left:-80%;width:50%;
+  background:linear-gradient(105deg,transparent,rgba(255,255,255,.35),transparent);
+  transform:skewX(-20deg);transition:left .45s ease;pointer-events:none;
+}
+.btn:hover::before{left:130%}
 .btn--primary{background:var(--yellow);color:#000}
 .btn--primary:hover{background:#fff;box-shadow:0 0 24px rgba(252,238,10,.35)}
 .btn--ghost{border:1px solid var(--cyan);color:var(--cyan);background:rgba(0,240,255,.04)}
@@ -289,16 +334,24 @@ h1.glitch{
 .card{
   background:linear-gradient(165deg,var(--panel-2),var(--panel));
   border:1px solid var(--line-soft);
-  padding:1.4rem 1.4rem 1.5rem;position:relative;
+  padding:1.4rem 1.4rem 1.5rem;position:relative;overflow:hidden;
   clip-path:polygon(0 0,calc(100% - var(--notch)) 0,100% var(--notch),100% 100%,0 100%);
   transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease;
 }
 .card::before{
   content:"";position:absolute;top:0;left:0;width:34px;height:3px;
-  background:var(--cyan);opacity:.7;transition:width .3s;
+  background:var(--cyan);opacity:.7;transition:width .3s;z-index:1;
+}
+.card::after{ /* cursor-tracked glow, --mx/--my set by JS */
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:0;
+  background:radial-gradient(220px circle at var(--mx,50%) var(--my,50%),rgba(0,240,255,.09),transparent 65%);
+  transition:opacity .3s;
 }
 .card:hover{transform:translateY(-4px);border-color:var(--line);box-shadow:0 10px 36px rgba(0,240,255,.08)}
 .card:hover::before{width:70px}
+.card:hover::after{opacity:1}
+.card--nda:hover::after{background:radial-gradient(220px circle at var(--mx,50%) var(--my,50%),rgba(255,0,60,.09),transparent 65%)}
+.card > *{position:relative;z-index:2}
 .card--link{display:block;color:inherit}
 .card--link p{color:var(--dim)}
 .card--wide{max-width:760px}
@@ -402,6 +455,7 @@ h1.glitch{
   .hud{grid-template-columns:1fr 1fr}
   .hud__item:nth-child(odd){border-left:none}
   .hero__cta .btn{width:100%;text-align:center}
+  .section__head::before{display:none}
 }
 
 /* ---------- reduced motion ---------- */
